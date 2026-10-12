@@ -1,0 +1,45 @@
+{
+  "_about": "Editorial life periods for Theodore Roosevelt, in four facets. Periods within a facet may not overlap; periods in different facets do. Dates are anchored to the day entries in the TRA Chronological Record (cited in 'anchor'). 'verified': false means an editor has not yet confirmed the boundary against a second source.",
+  "facets": {
+    "life_stage": "Broad chapters of TR's life (every day belongs to exactly one)",
+    "office": "Public offices and military service (days outside any office have none)",
+    "journey": "Major extended trips and expeditions",
+    "campaign": "Election campaigns in which TR was a candidate"
+  },
+  "periods": [
+    {"id": "childhood", "facet": "life_stage", "label": "Childhood in New York", "start": "1858-10-27", "end": "1869-05-11", "anchor": "Born at 28 East 20th Street, New York City", "verified": false},
+    {"id": "youth-travels", "facet": "life_stage", "label": "Youth and Grand Tours", "start": "1869-05-12", "end": "1876-09-26", "anchor": "1869-05-12 sails for Europe; 1876-09-27 enters Harvard", "verified": false},
+    {"id": "harvard", "facet": "life_stage", "label": "Harvard Years", "start": "1876-09-27", "end": "1880-06-30", "anchor": "1876-09-27 enters Harvard; 1880-06-30 graduates", "verified": false},
+    {"id": "young-politician", "facet": "life_stage", "label": "Marriage, Law School and the Assembly", "start": "1880-07-01", "end": "1884-02-14", "anchor": "1880-10-27 marries Alice Lee; 1884-02-14 deaths of Alice and Mittie", "verified": false},
+    {"id": "badlands-years", "facet": "life_stage", "label": "Badlands Rancher and Author", "start": "1884-02-15", "end": "1889-05-12", "anchor": "After 1884-02-14; 1889-05-13 arrives in Washington as Civil Service Commissioner", "verified": false},
+    {"id": "reformer", "facet": "life_stage", "label": "Reformer in Washington and New York", "start": "1889-05-13", "end": "1898-05-05", "anchor": "Civil Service, Police Board, Navy Department", "verified": false},
+    {"id": "rough-rider-governor", "facet": "life_stage", "label": "Rough Rider and Governor", "start": "1898-05-06", "end": "1901-03-03", "anchor": "1898-05-06 commissioned Lt. Col.; through governorship", "verified": false},
+    {"id": "national-office", "facet": "life_stage", "label": "Vice President and President", "start": "1901-03-04", "end": "1909-03-03", "anchor": "1901-03-04 VP inauguration; 1909-03-04 Taft inaugurated", "verified": false},
+    {"id": "post-presidency", "facet": "life_stage", "label": "Expeditions and the Bull Moose", "start": "1909-03-04", "end": "1914-05-19", "anchor": "Africa, Europe, 1912 campaign, River of Doubt", "verified": false},
+    {"id": "final-years", "facet": "life_stage", "label": "The Great War and Final Years", "start": "1914-05-20", "end": "1919-01-06", "anchor": "1919-01-06 dies at Sagamore Hill", "verified": false},
+
+    {"id": "ny-assembly", "facet": "office", "label": "New York State Assemblyman", "start": "1882-01-02", "end": "1884-12-31", "anchor": "1881-11-08 elected; 1882-01-02 takes seat in Albany; three one-year terms", "verified": false},
+    {"id": "civil-service-commissioner", "facet": "office", "label": "U.S. Civil Service Commissioner", "start": "1889-05-13", "end": "1895-05-05", "anchor": "1889-05-07 commission signed; 1889-05-13 arrives in Washington", "verified": false},
+    {"id": "police-commissioner", "facet": "office", "label": "President, New York City Board of Police Commissioners", "start": "1895-05-06", "end": "1897-04-17", "anchor": "1895-05-06 sworn in; 1897-04-17 last board meeting", "verified": false},
+    {"id": "asst-secretary-navy", "facet": "office", "label": "Assistant Secretary of the Navy", "start": "1897-04-19", "end": "1898-05-05", "anchor": "1897-04-19 takes office; 1898-05-06 commissioned Lt. Col.", "verified": false},
+    {"id": "rough-riders", "facet": "office", "label": "1st U.S. Volunteer Cavalry (Rough Riders)", "start": "1898-05-06", "end": "1898-09-15", "anchor": "1898-05-06 commissioned; 1898-09-15 regiment mustered out at Montauk", "verified": false},
+    {"id": "governor-ny", "facet": "office", "label": "Governor of New York", "start": "1899-01-01", "end": "1900-12-31", "anchor": "1899-01-02 inaugural ceremony; 1900-12-31 tenure ends", "verified": false},
+    {"id": "vice-president", "facet": "office", "label": "Vice President of the United States", "start": "1901-03-04", "end": "1901-09-13", "anchor": "1901-03-04 inauguration", "verified": false},
+    {"id": "president", "facet": "office", "label": "26th President of the United States", "start": "1901-09-14", "end": "1909-03-04", "anchor": "1901-09-14 sworn in at the Ansley Wilcox house, Buffalo", "verified": false},
+
+    {"id": "grand-tour-europe", "facet": "journey", "label": "Family Grand Tour of Europe", "start": "1869-05-12", "end": "1870-05-25", "anchor": "1869-05-12 sails on the Scotia; return date from place index", "verified": false},
+    {"id": "egypt-holy-land-dresden", "facet": "journey", "label": "Egypt, the Holy Land and Dresden", "start": "1872-10-16", "end": "1873-11-05", "anchor": "1872-10-16 sails on the Russia; return date from place index", "verified": false},
+    {"id": "european-honeymoon", "facet": "journey", "label": "European Honeymoon with Alice", "start": "1881-05-12", "end": "1881-10-02", "anchor": "Dates from place index", "verified": false},
+    {"id": "first-dakota-hunt", "facet": "journey", "label": "First Buffalo Hunt in Dakota", "start": "1883-09-03", "end": "1883-09-30", "anchor": "1883-09-08 hires Joe Ferris as guide", "verified": false},
+    {"id": "african-expedition", "facet": "journey", "label": "Smithsonian-Roosevelt African Expedition", "start": "1909-03-23", "end": "1910-03-14", "anchor": "1909-03-23 sails on the Hamburg; 1910-03-14 reaches Khartoum", "verified": false},
+    {"id": "european-tour-1910", "facet": "journey", "label": "European Speaking Tour", "start": "1910-03-15", "end": "1910-06-18", "anchor": "1910-06-18 arrives New York on the Kaiserin Auguste Victoria", "verified": false},
+    {"id": "south-america-river-of-doubt", "facet": "journey", "label": "South America and the River of Doubt", "start": "1913-10-04", "end": "1914-05-19", "anchor": "1913-10-04 sails on the Vandyck; 1914-05-19 returns on the Aidan", "verified": false},
+
+    {"id": "campaign-1881-assembly", "facet": "campaign", "label": "Campaign for the State Assembly", "start": "1881-10-28", "end": "1881-11-08", "anchor": "1881-11-08 elected", "verified": false},
+    {"id": "campaign-1886-mayor", "facet": "campaign", "label": "Campaign for Mayor of New York", "start": "1886-10-15", "end": "1886-11-02", "anchor": "Election day 1886-11-02", "verified": false},
+    {"id": "campaign-1898-governor", "facet": "campaign", "label": "Campaign for Governor of New York", "start": "1898-09-27", "end": "1898-11-08", "anchor": "1898-11-08 elected", "verified": false},
+    {"id": "campaign-1900-vice-president", "facet": "campaign", "label": "Campaign for Vice President", "start": "1900-06-21", "end": "1900-11-06", "anchor": "1900-06-21 nominated; 1900-11-06 elected", "verified": false},
+    {"id": "campaign-1904-president", "facet": "campaign", "label": "Campaign for President", "start": "1904-06-23", "end": "1904-11-08", "anchor": "1904-11-08 elected", "verified": false},
+    {"id": "campaign-1912-progressive", "facet": "campaign", "label": "Progressive (Bull Moose) Campaign", "start": "1912-02-24", "end": "1912-11-05", "anchor": "1912-11-05 election", "verified": false}
+  ]
+}

@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Place | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="A place in the life of Theodore Roosevelt.">
+<meta property="og:title" content="Place | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="A place in the life of Theodore Roosevelt.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="people.html">People</a><a href="places.html" aria-current="page">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+
+<main class="wrap" style="padding:36px 20px 60px"><div id="p"></div></main>
+<footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985). <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
+<script src="assets/app.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script>
+(async () => {
+  const id = DBD.param("id");
+  const el = document.getElementById("p");
+  try {
+    const p = await DBD.get(`places/${encodeURIComponent(id)}.json`);
+    document.title = `${p.name} | Theodore Roosevelt Day by Day`;
+    const parent = p.parent ? await DBD.get(`places/${encodeURIComponent(p.parent)}.json`).catch(() => null) : null;
+    const region = p.historic_region && p.historic_region !== p.region ? `${p.region} (then ${p.historic_region})` : p.region;
+    const where = [region, p.country].filter(Boolean).join(", ");
+    el.innerHTML = `<h1 style="color:var(--night)">${DBD.esc(p.name)}</h1>
+      <p style="font-size:20px">${DBD.esc(where)}</p>
+      <p class="small">Theodore Roosevelt was here on ${p.days_present.toLocaleString()} days${p.first ? `, first on ${DBD.fmtDate(p.first)} and last on ${DBD.fmtDate(p.last)}` : ""}.${parent ? ` Part of ${DBD.placeLink(parent)}.` : ""}</p>
+      ${p.lat != null ? `<div id="map" style="height:320px;margin:18px 0"></div>` : ""}
+      <h2 style="margin-top:20px;color:var(--night)">Days here</h2>
+      <table class="list-table"><thead><tr><th>Date</th><th>What happened</th></tr></thead><tbody>
+      ${p.days.slice(0, 2000).map(d => `<tr><td class="d"><a href="day.html?date=${d.date}">${DBD.fmtDate(d.date)}</a></td><td>${DBD.esc(d.headline || "No entry in the record")}</td></tr>`).join("")}
+      </tbody></table>${p.days.length > 2000 ? `<p class="small">Showing the first 2,000 of ${p.days.length.toLocaleString()} days. The full list is in the API.</p>` : ""}`;
+    if (p.lat != null) {
+      const m = L.map("map", { scrollWheelZoom: false }).setView([p.lat, p.lon], p.kind === "country" ? 4 : 9);
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; OpenStreetMap contributors", maxZoom: 18 }).addTo(m);
+      L.circleMarker([p.lat, p.lon], { radius: 9, color: "#092A4D", fillColor: "#FC924E", fillOpacity: 1, weight: 2 }).addTo(m);
+    }
+  } catch (e) { el.innerHTML = `<p>No place matches “${DBD.esc(id)}”. <a href="places.html">Browse every place</a>.</p>`; }
+})();
+</script>
+</body></html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Where he was | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="Follow Theodore Roosevelt across the map, day by day, from New York City to the Badlands, Cuba, Africa and the Amazon.">
+<meta property="og:title" content="Where he was | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="Follow Theodore Roosevelt across the map, day by day.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  body.embed .bar, body.embed footer.site, body.embed .intro { display: none; }
+  body.embed main { padding: 0 !important; }
+  .now { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: baseline; margin-top: 12px; }
+  .now .when { font: 700 34px/1 var(--display); color: var(--night); text-transform: uppercase; }
+  .jumps { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html" aria-current="page">Where he was</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+<main class="wrap" style="padding:30px 20px 50px">
+  <div class="intro">
+    <h1 style="color:var(--night)">Where he was</h1>
+    <p style="max-width:62ch;font-size:19px">Drag through Theodore Roosevelt's life and watch him move. Each stop is a run of days he spent in one place; the trail shows where he had just been.</p>
+  </div>
+  <div class="mapctl">
+    <button class="btn" id="play" aria-pressed="false">Play</button>
+    <label for="t" class="small">Date</label>
+    <input type="range" id="t" min="0" value="0" aria-describedby="nowName">
+    <label class="small"><input type="checkbox" id="trail" checked> Show trail</label>
+  </div>
+  <div class="jumps" id="jumps"></div>
+  <div class="now"><div class="when" id="nowWhen"></div><div><div class="stay-now" id="nowName"></div><div class="small" id="nowMeta"></div></div></div>
+  <div id="map" style="margin-top:14px"></div>
+  <p class="small" style="margin-top:10px">Locations come from the Theodore Roosevelt Association's place-names index and the day entries. Days with no record carry forward his last known place. Map data &copy; OpenStreetMap contributors.</p>
+</main>
+<footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i>. <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(async () => {
+  if (DBD.param("embed")) document.body.classList.add("embed");
+  const stays = (await DBD.get("stays.json")).filter(s => s.lat != null);
+  const map = L.map("map", { worldCopyJump: true }).setView([40.7, -74], 4);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors", maxZoom: 18 }).addTo(map);
+  const trail = L.polyline([], { color: "#E7805D", weight: 2, opacity: .7 }).addTo(map);
+  const dots = L.layerGroup().addTo(map);
+  const here = L.circleMarker([0, 0], { radius: 10, color: "#092A4D", weight: 3, fillColor: "#F9D635", fillOpacity: 1 }).addTo(map);
+  const slider = document.getElementById("t");
+  slider.max = stays.length - 1;
+  const TRAIL = 25;
+  function show(i, pan) {
+    const s = stays[i];
+    here.setLatLng([s.lat, s.lon]);
+    dots.clearLayers();
+    const pts = [];
+    if (document.getElementById("trail").checked) {
+      for (let k = Math.max(0, i - TRAIL); k <= i; k++) {
+        const t = stays[k];
+        pts.push([t.lat, t.lon]);
+        if (k < i) L.circleMarker([t.lat, t.lon], { radius: 4, stroke: false, fillColor: "#FC924E", fillOpacity: .35 + .6 * (k - (i - TRAIL)) / TRAIL }).addTo(dots);
+      }
+    }
+    trail.setLatLngs(pts);
+    document.getElementById("nowWhen").textContent = s.start.slice(0, 4);
+    document.getElementById("nowName").innerHTML = `<a href="place.html?id=${encodeURIComponent(s.place)}">${DBD.esc(s.name)}</a>`;
+    document.getElementById("nowMeta").innerHTML = `${DBD.fmtDate(s.start)}${s.days > 1 ? ` to ${DBD.fmtDate(s.end)} (${s.days} days)` : ""} &nbsp;|&nbsp; <a href="day.html?date=${s.start}">Read the day</a>`;
+    if (pan) map.panTo([s.lat, s.lon], { animate: true, duration: .4 });
+  }
+  slider.addEventListener("input", () => show(+slider.value, true));
+  document.getElementById("trail").addEventListener("change", () => show(+slider.value));
+  let timer = null;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  document.getElementById("play").addEventListener("click", e => {
+    if (timer) { clearInterval(timer); timer = null; e.target.textContent = "Play"; e.target.setAttribute("aria-pressed", "false"); return; }
+    e.target.textContent = "Pause"; e.target.setAttribute("aria-pressed", "true");
+    timer = setInterval(() => {
+      if (+slider.value >= stays.length - 1) { document.getElementById("play").click(); return; }
+      slider.value = +slider.value + 1; show(+slider.value, !reduce);
+    }, 180);
+  });
+  const JUMPS = [["Born", "1858-10-27"], ["Harvard", "1876-09-27"], ["Badlands", "1883-09-08"], ["Rough Riders", "1898-06-22"],
+                 ["President", "1901-09-14"], ["Africa", "1909-04-21"], ["River of Doubt", "1914-02-27"], ["Final days", "1918-12-25"]];
+  document.getElementById("jumps").innerHTML = JUMPS.map(([l, d]) => `<button class="chip" style="color:var(--night);border-color:var(--sky)" data-d="${d}">${l}</button>`).join("");
+  function jumpTo(date) {
+    let i = stays.findIndex(s => s.end >= date); if (i < 0) i = stays.length - 1;
+    slider.value = i; show(i); map.setView([stays[i].lat, stays[i].lon], 6);
+  }
+  document.getElementById("jumps").addEventListener("click", e => { const b = e.target.closest("button"); if (b) jumpTo(b.dataset.d); });
+  jumpTo(DBD.param("date") || "1858-10-27");
+})();
+</script>
+</body>
+</html>

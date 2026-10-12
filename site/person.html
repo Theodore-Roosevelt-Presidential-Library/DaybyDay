@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Person | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="A person in the life of Theodore Roosevelt.">
+<meta property="og:title" content="Person | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="A person in the life of Theodore Roosevelt.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="people.html" aria-current="page">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+
+<main class="wrap" style="padding:36px 20px 60px"><div id="p"></div></main>
+<footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985). <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
+<script src="assets/app.js"></script>
+<script>
+(async () => {
+  const id = DBD.param("id");
+  const el = document.getElementById("p");
+  try {
+    const p = await DBD.get(`people/${encodeURIComponent(id)}.json`);
+    document.title = `${p.name} | Theodore Roosevelt Day by Day`;
+    const years = {}; p.days.forEach(d => { const y = d.date.slice(0,4); years[y] = (years[y] || 0) + 1; });
+    const max = Math.max(1, ...Object.values(years));
+    const spark = p.days.length ? `<div role="img" aria-label="Days in the record by year" style="display:flex;align-items:flex-end;gap:2px;height:60px;margin:14px 0 4px">` +
+      Array.from({length: 1919 - 1858 + 1}, (_, i) => 1858 + i).map(y => `<span title="${y}: ${years[y] || 0} days" style="flex:1;background:${years[y] ? "var(--s3)" : "var(--sand-2)"};height:${years[y] ? 8 + 52 * years[y] / max : 3}px"></span>`).join("") +
+      `</div><div class="small" style="display:flex;justify-content:space-between"><span>1858</span><span>1919</span></div>` : "";
+    el.innerHTML = `<h1 style="color:var(--night)">${DBD.esc(p.name)}</h1>
+      <p style="font-size:20px;max-width:60ch">${DBD.esc(p.description || p.relation || "")}</p>
+      <p class="small">Appears on ${p.mentions.toLocaleString()} days${p.first ? `, from ${DBD.fmtDate(p.first)} to ${DBD.fmtDate(p.last)}` : ""}.${p.uncertain ? " Identification uncertain." : ""}</p>
+      ${spark}
+      ${p.top_companions.length ? `<h3 style="margin-top:20px">Often with</h3><p>${p.top_companions.map(DBD.personLink).join(", ")}</p>` : ""}
+      ${p.top_places.length ? `<h3>Usually at</h3><p>${p.top_places.map(DBD.placeLink).join(", ")}</p>` : ""}
+      <h2 style="margin-top:28px;color:var(--night)">Every day in the record</h2>
+      <table class="list-table"><thead><tr><th>Date</th><th>What happened</th><th>Role</th></tr></thead><tbody>
+      ${p.days.map(d => `<tr><td class="d"><a href="day.html?date=${d.date}">${DBD.fmtDate(d.date)}</a></td><td>${DBD.esc(d.headline || "")}</td><td>${DBD.esc(d.role || "")}</td></tr>`).join("")}
+      </tbody></table>`;
+  } catch (e) { el.innerHTML = `<p>No person matches “${DBD.esc(id)}”. <a href="people.html">Browse everyone</a>.</p>`; }
+})();
+</script>
+</body></html>

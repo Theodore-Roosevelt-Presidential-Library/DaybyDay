@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>API and widgets | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="Free JSON API, downloads and embeddable widgets for every day of Theodore Roosevelt's life.">
+<meta property="og:title" content="API and widgets | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="Free JSON API, downloads and embeddable widgets for every day of Theodore Roosevelt's life.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .doc { max-width: 860px; }
+  .doc h2 { color: var(--night); margin-top: 40px; }
+  .doc p, .doc li { max-width: 70ch; }
+  .demo { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 24px; margin: 16px 0; }
+  .ep td:first-child { white-space: nowrap; }
+  .counts { font: 15px var(--sans); }
+</style>
+<script src="widgets/daybyday.js" defer></script>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html" aria-current="page">API &amp; widgets</a></nav>
+</header>
+<main class="wrap doc" style="padding:36px 20px 60px">
+  <h1 style="color:var(--night)">Use the data</h1>
+  <p style="font-size:19px">Every day of Theodore Roosevelt's life is available as open JSON: where he was, who he was with, what he did, the letters he wrote, and his own words from his diary. Build a timeline, a map, a classroom exercise or a daily post. No key, no sign-up.</p>
+  <p class="counts" id="counts"></p>
+
+  <h2>Widgets</h2>
+  <p>Add one script tag to any page, then drop in a widget. Widgets pick up the page's fonts through the <code>--dbd-display</code>, <code>--dbd-serif</code> and <code>--dbd-sans</code> CSS variables, and accept <code>theme="dark"</code> and <code>cta="off"</code>.</p>
+<pre>&lt;script src="https://daybyday.labs.trlibrary.com/widgets/daybyday.js" defer&gt;&lt;/script&gt;
+
+&lt;trpl-on-this-day count="3"&gt;&lt;/trpl-on-this-day&gt;
+&lt;trpl-where-was-tr&gt;&lt;/trpl-where-was-tr&gt;
+&lt;trpl-day date="1884-06-25"&gt;&lt;/trpl-day&gt;</pre>
+  <div class="demo">
+    <trpl-on-this-day count="2"></trpl-on-this-day>
+    <trpl-day date="1884-06-25"></trpl-day>
+    <trpl-where-was-tr count="5" theme="dark"></trpl-where-was-tr>
+  </div>
+  <h3>The map, embedded</h3>
+<pre>&lt;iframe src="https://daybyday.labs.trlibrary.com/map.html?embed=1&amp;date=1884-06-25"
+        width="100%" height="640" style="border:0" title="Where Theodore Roosevelt was"&gt;&lt;/iframe&gt;</pre>
+
+  <h2>JSON API</h2>
+  <p>Base URL: <code>https://daybyday.labs.trlibrary.com/api/v1/</code>. Every endpoint is a static file, cached at the edge and open to cross-site requests.</p>
+  <table class="list-table ep">
+    <thead><tr><th>Endpoint</th><th>Returns</th></tr></thead>
+    <tbody>
+      <tr><td><a href="api/v1/index.json">index.json</a></td><td>Dataset metadata, counts and the endpoint list</td></tr>
+      <tr><td><a href="api/v1/days/1884-06-25.json">days/{YYYY-MM-DD}.json</a></td><td>One day: headline, summary, events, people, places, letters, TR quotes, tags, life periods, TRA page citations</td></tr>
+      <tr><td><a href="api/v1/on-this-day/10-27.json">on-this-day/{MM-DD}.json</a></td><td>That calendar date in every year of his life, most significant first</td></tr>
+      <tr><td><a href="api/v1/months/1898-07.json">months/{YYYY-MM}.json</a></td><td>Compact records for a month</td></tr>
+      <tr><td><a href="api/v1/years/1909.json">years/{YYYY}.json</a></td><td>Compact records for a year</td></tr>
+      <tr><td><a href="api/v1/people/index.json">people/index.json</a></td><td>Everyone in the record, with group, description and day counts</td></tr>
+      <tr><td><a href="api/v1/people/henry-cabot-lodge.json">people/{id}.json</a></td><td>One person, every day they appear, frequent companions and places</td></tr>
+      <tr><td><a href="api/v1/places/index.json">places/index.json</a></td><td>Every place, with coordinates and days present</td></tr>
+      <tr><td><a href="api/v1/places/medora-nd.json">places/{id}.json</a></td><td>One place and every day he was there</td></tr>
+      <tr><td><a href="api/v1/stays.json">stays.json</a></td><td>Runs of consecutive days in one place, for maps and journeys</td></tr>
+      <tr><td><a href="api/v1/periods.json">periods.json</a></td><td>Life stages, offices, journeys and campaigns, with dates</td></tr>
+      <tr><td><a href="api/v1/tags/index.json">tags/index.json</a>, tags/{tag}.json</td><td>Topic tags and the dates carrying each</td></tr>
+      <tr><td><a href="api/v1/highlights.json">highlights.json</a></td><td>The days rated major or history-making</td></tr>
+      <tr><td><a href="api/v1/grid.json">grid.json</a>, <a href="api/v1/search.json">search.json</a></td><td>Compact per-day rows for visualizations and client-side search</td></tr>
+    </tbody>
+  </table>
+<pre>fetch("https://daybyday.labs.trlibrary.com/api/v1/on-this-day/10-27.json")
+  .then(r =&gt; r.json())
+  .then(d =&gt; console.log(d.days[0].headline));</pre>
+
+  <h2>Downloads</h2>
+  <ul>
+    <li><a href="data/days.csv">days.csv</a>, one row per day, for spreadsheets</li>
+    <li><a href="data/days.jsonl">days.jsonl</a>, the full dataset, one JSON day per line</li>
+    <li><a href="data/people.json">people.json</a>, <a href="data/places.json">places.json</a>, <a href="data/periods.json">periods.json</a></li>
+    <li><a href="data/events.jsonl">events.jsonl</a>, <a href="data/letters.jsonl">letters.jsonl</a>, <a href="data/quotes.jsonl">quotes.jsonl</a></li>
+  </ul>
+
+  <h2>How it was made</h2>
+  <p>The facts come from the Theodore Roosevelt Association's <i>Chronological Record</i>, a day-by-day calendar of Roosevelt's life compiled by Robert J. Moore Jr. in 1985 and held in the Theodore Roosevelt Collection at Harvard. Every day cites its pages in that record. The Library wrote each headline, summary and event description in its own words; the record's text is not reproduced.</p>
+  <p>Where he was comes from the record's place-names index, refined by the places named in each day. Days with no entry carry forward his last known location and are marked that way. Coordinates come from GeoNames and OpenStreetMap.</p>
+  <p>Roosevelt's own words (<code>tr_quotes</code>) are given as transcribed in the record and marked <code>"verified": false</code>. Check them against the original letter, diary or speech before quoting them in print.</p>
+  <h3>Credit</h3>
+  <p>Data: CC BY 4.0, Theodore Roosevelt Presidential Library. Please credit “Theodore Roosevelt Presidential Library, Day by Day” with a link to this site. Code: MIT. Geodata © OpenStreetMap contributors (ODbL) and GeoNames (CC BY 4.0).</p>
+</main>
+<footer class="site"><div class="wrap">Theodore Roosevelt Presidential Library, Medora, North Dakota. <a href="https://www.trlibrary.com/visit">Plan your visit</a></div></footer>
+<script src="assets/app.js"></script>
+<script>
+DBD.get("index.json").then(m => {
+  const c = m.counts;
+  document.getElementById("counts").textContent = `${c.days.toLocaleString()} days, ${c.days_with_entry.toLocaleString()} with entries | ${c.people.toLocaleString()} people | ${c.places.toLocaleString()} places | ${c.letters.toLocaleString()} letters | ${c.tr_quotes.toLocaleString()} passages in his own words`;
+});
+</script>
+</body>
+</html>

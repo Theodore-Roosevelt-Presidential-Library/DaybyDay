@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Theodore Roosevelt Day by Day | Theodore Roosevelt Presidential Library</title>
+<meta name="description" content="Every day of Theodore Roosevelt's life, from his birth in New York City in 1858 to his death at Sagamore Hill in 1919: where he was, who he was with, and what he did.">
+<meta property="og:title" content="Theodore Roosevelt Day by Day">
+<meta property="og:description" content="Every day of Theodore Roosevelt's life: where he was, who he was with, and what he did.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://daybyday.labs.trlibrary.com/">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html" aria-current="page">Explore</a><a href="map.html">Where he was</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <h1>Every day of Theodore Roosevelt's life</h1>
+    <p class="lede">From a brownstone on East 20th Street in 1858 to Sagamore Hill in 1919: 21,986 days, one square each. Each row is a year. The brighter the square, the bigger the day. Point at any square to see it; click to read it.</p>
+    <div class="legend" aria-hidden="true">
+      <span><i style="background:var(--none)"></i>No entry</span>
+      <span><i style="background:var(--s1)"></i>Ordinary day</span>
+      <span><i style="background:var(--s2)"></i>Notable</span>
+      <span><i style="background:var(--s3)"></i>Important</span>
+      <span><i style="background:var(--s4)"></i>Major</span>
+      <span><i style="background:var(--s5)"></i>History-making</span>
+    </div>
+    <div class="gridwrap" id="gridwrap">
+      <canvas class="lifegrid" id="grid" role="img" aria-label="Grid of every day of Theodore Roosevelt's life, one row per year, colored by significance"></canvas>
+      <div class="gridtip" id="tip"></div>
+    </div>
+    <div class="filters">
+      <label class="small" for="q" style="color:var(--sand)">Find days</label>
+      <input type="search" id="q" placeholder="Try “Elkhorn”, “Lodge” or “grizzly”" autocomplete="off">
+      <span id="chips"></span>
+      <span class="hits" id="hits" aria-live="polite"></span>
+    </div>
+  </div>
+</section>
+
+<main class="cols">
+  <section id="day" aria-live="polite"></section>
+  <aside class="side">
+    <h2 id="otdTitle">On this day</h2>
+    <ul class="otd" id="otd"></ul>
+  </aside>
+</main>
+
+<footer class="site">
+  <div class="wrap">
+    Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985), cited by page on every day. Roosevelt's own words are shown as transcribed and are not yet verified against the originals.
+    <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a>
+  </div>
+</footer>
+
+<script src="assets/app.js"></script>
+<script>
+(async () => {
+  const COLORS = ["#12385F", "#3B5F86", "#F9D635", "#FC924E", "#E7805D", "#F36079"];
+  const DIM = "#0F2F52";
+  const canvas = document.getElementById("grid"), tip = document.getElementById("tip");
+  const ctx = canvas.getContext("2d");
+  const grid = await DBD.get("grid.json");
+  const rows = grid.rows;                                  // [date, sig, loc, headline, tags]
+  const Y0 = 1858, Y1 = 1919, LABEL = 38;
+  let CW = 3, CH = 8, GAP = 1;
+  let match = null;                                        // Set of dates or null
+  const pos = new Map();
+  function doy(iso) { const d = new Date(iso + "T00:00:00Z"); return Math.floor((d - Date.UTC(d.getUTCFullYear(), 0, 1)) / 864e5); }
+  function layout() {
+    const w = Math.min(document.getElementById("gridwrap").clientWidth, 1140);
+    CW = Math.max(2, Math.floor((w - LABEL) / 366));
+    const dpr = window.devicePixelRatio || 1;
+    const W = LABEL + 366 * CW, H = (Y1 - Y0 + 1) * (CH + GAP) + 18;
+    canvas.width = W * dpr; canvas.height = H * dpr; canvas.style.width = W + "px"; canvas.style.height = H + "px";
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    draw();
+  }
+  function draw() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = "600 11px 'Source Sans 3', sans-serif"; ctx.fillStyle = "#99ADC5"; ctx.textBaseline = "middle";
+    for (let y = Y0; y <= Y1; y++) if (y === Y0 || y === Y1 || (y % 5 === 0 && y - Y0 > 2 && Y1 - y > 2)) ctx.fillText(y, 0, (y - Y0) * (CH + GAP) + CH / 2);
+    ["Jan", "Apr", "Jul", "Oct"].forEach((m, i) => { ctx.fillText(m, LABEL + [0, 90, 181, 273][i] * CW, (Y1 - Y0 + 1) * (CH + GAP) + 9); });
+    for (const r of rows) {
+      const y = +r[0].slice(0, 4), x = doy(r[0]);
+      const px = LABEL + x * CW, py = (y - Y0) * (CH + GAP);
+      pos.set(`${y}:${x}`, r);
+      let c = r[1] < 0 ? COLORS[0] : COLORS[Math.max(1, r[1])];
+      if (match && !match.has(r[0])) c = DIM;
+      ctx.fillStyle = c; ctx.fillRect(px, py, Math.max(1, CW - (CW > 2 ? 1 : 0)), CH);
+    }
+  }
+  function cellAt(ev) {
+    const b = canvas.getBoundingClientRect();
+    const x = Math.floor((ev.clientX - b.left - LABEL) / CW), y = Math.floor((ev.clientY - b.top) / (CH + GAP));
+    return pos.get(`${Y0 + y}:${x}`);
+  }
+  canvas.addEventListener("mousemove", ev => {
+    const r = cellAt(ev);
+    if (!r) { tip.style.display = "none"; return; }
+    tip.innerHTML = `<b>${DBD.esc(DBD.fmtDate(r[0]))}</b>${DBD.esc(r[3] || "No entry in the record")}`;
+    const wb = document.getElementById("gridwrap").getBoundingClientRect();
+    tip.style.display = "block";
+    tip.style.left = Math.min(ev.clientX - wb.left + 14, wb.width - 310) + "px";
+    tip.style.top = (ev.clientY - wb.top + 14) + "px";
+  });
+  canvas.addEventListener("mouseleave", () => tip.style.display = "none");
+  canvas.addEventListener("click", ev => { const r = cellAt(ev); if (r) showDay(r[0], true); });
+  window.addEventListener("resize", layout);
+  layout();
+
+  // day panel
+  async function showDay(date, push) {
+    const d = await DBD.get(`days/${date}.json`);
+    document.getElementById("day").innerHTML = DBD.renderDay(d);
+    if (push) history.pushState({ date }, "", `?date=${date}`);
+    document.querySelectorAll("#day .daynav a[data-date]").forEach(a => a.addEventListener("click", e => { e.preventDefault(); showDay(a.dataset.date, true); }));
+  }
+  window.addEventListener("popstate", e => e.state?.date && showDay(e.state.date));
+
+  // on this day
+  const today = new Date(), md = String(today.getMonth() + 1).padStart(2, "0") + "-" + String(today.getDate()).padStart(2, "0");
+  document.getElementById("otdTitle").textContent = `On ${DBD.MONTHS[today.getMonth()]} ${today.getDate()}`;
+  DBD.get(`on-this-day/${md}.json`).then(o => {
+    document.getElementById("otd").innerHTML = o.days.slice(0, 8).map(x => `<li><span class="yr">${x.date.slice(0, 4)}</span><button class="linkish" data-date="${x.date}">${DBD.esc(x.headline)}</button><div class="small">Age ${x.age}${x.location ? ` | ${DBD.esc(x.location)}` : ""}</div></li>`).join("");
+    document.querySelectorAll("#otd button").forEach(b => b.addEventListener("click", () => { showDay(b.dataset.date, true); document.getElementById("day").scrollIntoView({ behavior: "smooth" }); }));
+    if (!DBD.param("date") && o.days.length) showDay(o.days[0].date);
+  });
+  if (DBD.param("date")) showDay(DBD.param("date"));
+
+  // search + tag filter
+  const TAGS = ["badlands", "hunting", "conservation", "family", "presidency", "rough-riders", "writing", "africa", "south-america"];
+  const chips = document.getElementById("chips");
+  let activeTag = DBD.param("tag");
+  chips.innerHTML = TAGS.map(t => `<button class="chip" data-tag="${t}" aria-pressed="${t === activeTag}">${t.replace(/-/g, " ")}</button>`).join(" ");
+  let search = null;
+  async function apply() {
+    const q = document.getElementById("q").value.trim().toLowerCase();
+    let set = null;
+    if (q.length > 1) {
+      search = search || await DBD.get("search.json");
+      set = new Set(search.filter(s => (s[1] + " " + s[2] + " " + (s[4] || "") + " " + s[3].join(" ")).toLowerCase().includes(q)).map(s => s[0]));
+    }
+    if (activeTag) {
+      const t = new Set(rows.filter(r => (r[4] || []).includes(activeTag)).map(r => r[0]));
+      set = set ? new Set([...set].filter(x => t.has(x))) : t;
+    }
+    match = set; draw();
+    document.getElementById("hits").textContent = set ? `${set.size.toLocaleString()} days match` : "";
+  }
+  let timer;
+  document.getElementById("q").addEventListener("input", () => { clearTimeout(timer); timer = setTimeout(apply, 220); });
+  chips.addEventListener("click", e => {
+    const b = e.target.closest("button[data-tag]"); if (!b) return;
+    activeTag = activeTag === b.dataset.tag ? null : b.dataset.tag;
+    chips.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x.dataset.tag === activeTag));
+    apply();
+  });
+  if (activeTag) apply();
+})();
+</script>
+</body>
+</html>

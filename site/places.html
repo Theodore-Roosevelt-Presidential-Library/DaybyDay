@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Places | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="Every place Theodore Roosevelt went, day by day.">
+<meta property="og:title" content="Places | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="Every place Theodore Roosevelt went, day by day.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="people.html">People</a><a href="places.html" aria-current="page">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+
+<main class="wrap" style="padding:36px 20px 60px">
+  <h1 style="color:var(--night)">Places</h1>
+  <div class="filters"><label class="small" for="f">Filter</label><input type="search" id="f" style="border:1px solid var(--sand)" placeholder="Type a name"><span class="small" id="n"></span></div>
+  <table class="list-table" style="margin-top:16px"><thead><tr><th>Name</th><th>Kind</th><th>Days there</th><th>First</th></tr></thead><tbody id="rows"></tbody></table>
+</main>
+<footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985). <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
+<script src="assets/app.js"></script>
+<script>
+(async () => {
+  const all = await DBD.get("places/index.json");
+  const [groupK, countK] = ["kind", "days_present"];
+  function render() {
+    const q = document.getElementById("f").value.trim().toLowerCase();
+    const list = all.filter(x => x[countK] > 0 && (!q || x.name.toLowerCase().includes(q)));
+    document.getElementById("n").textContent = `${list.length.toLocaleString()} shown`;
+    document.getElementById("rows").innerHTML = list.slice(0, 600).map(x => `<tr><td><a href="place.html?id=${encodeURIComponent(x.id)}">${DBD.esc(x.name)}</a>${x.description ? `<div class="small">${DBD.esc(x.description)}</div>` : ""}</td><td>${DBD.esc(x[groupK] || "")}</td><td>${x[countK].toLocaleString()}</td><td class="d">${x.first ? `<a href="day.html?date=${x.first}">${x.first.slice(0,4)}</a>` : ""}</td></tr>`).join("");
+  }
+  document.getElementById("f").addEventListener("input", render);
+  render();
+})();
+</script>
+</body></html>

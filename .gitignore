@@ -1,0 +1,8 @@
+# TRA Chronological Record text is copyrighted (c) 1985 Robert J. Moore Jr. and the
+# Theodore Roosevelt Association. It is a research input only and never committed.
+private/
+work/
+__pycache__/
+.DS_Store
+site/api/
+site/data/

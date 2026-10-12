@@ -1,0 +1,271 @@
+{
+ "moves": [
+  {
+   "from": "1901-10-10",
+   "to": "1901-10-23",
+   "shift_days": 7,
+   "reason": "the source parse placed this run of entries one week early (anchors: Booker T. Washington dinner Oct. 16, Yale degree Oct. 23, TR's birthday Oct. 27)."
+  },
+  {
+   "from": "1906-11-06",
+   "to": "1906-11-30",
+   "shift_days": -5,
+   "reason": "the source parse placed this run of entries five days late (anchors: Election Day Nov. 6, sailing for Panama Nov. 8, Colón Nov. 14)."
+  },
+  {
+   "from": "1898-04-10",
+   "to": "1898-04-12",
+   "shift_days": -1,
+   "reason": "the source parse placed these entries one day late (anchors: Archie's birthday Apr. 9, Easter Apr. 10, McKinley's war message Apr. 11)."
+  }
+ ],
+ "fixes": [
+  {
+   "date": "1860-02-29",
+   "uncertain": "Misdated in the source parse: Elliott Roosevelt was born February 28, 1860; this entry belongs to that date."
+  },
+  {
+   "date": "1862-02-25",
+   "uncertain": "Misdated in the source: Ellie's 2nd birthday falls on February 28, 1862; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1863-07-28",
+   "uncertain": "Misdated in the source: Alice Lee's 2nd birthday falls on July 29, 1863; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1864-07-09",
+   "uncertain": "Misdated in the source: Mittie's 29th birthday falls on July 8, 1864; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1869-10-28",
+   "uncertain": "Roosevelt turned 11 on October 27, 1869; the Cologne party may have been held a day late, but the birthday itself belongs to October 27."
+  },
+  {
+   "date": "1870-12-21",
+   "uncertain": "Misdated in the source parse: Theodore Sr. and Mittie married on December 22, 1853; this anniversary belongs to December 22."
+  },
+  {
+   "date": "1873-01-19",
+   "uncertain": "Misdated in the source: Bamie's 18th birthday falls on January 18, 1873; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1875-12-11",
+   "uncertain": "Misdated in the source parse: Theodore Sr. and Mittie's 22nd anniversary fell on December 22, 1875; only the quarter-mile run belongs here.",
+   "headline": "Timing the quarter mile",
+   "summary": "Roosevelt clocks himself over a quarter mile and over 400 yards."
+  },
+  {
+   "date": "1877-12-23",
+   "uncertain": "Misdated in the source parse: the museum's opening and the parents' 24th anniversary both fell on December 22, 1877; this entry belongs to that date."
+  },
+  {
+   "date": "1878-02-09",
+   "uncertain": "The source gives 1 a.m. on February 10 for the death; standard references date it to the night of February 9, 1878.",
+   "summary": "Summoned by urgent word that his father is gravely ill with a bowel tumor, Roosevelt boards the night train for New York. Theodore Sr., 46, dies late that night, hours before his son can reach him."
+  },
+  {
+   "date": "1881-07-30",
+   "uncertain": "Misdated in the source: Alice's 20th birthday falls on July 29, 1881; that part of this entry belongs to that date.",
+   "headline": "On to Zermatt",
+   "summary": "Alice rides and Roosevelt walks from Visp to Zermatt in the company of Charley Alexander, whom he finds a fine companion."
+  },
+  {
+   "date": "1881-08-04",
+   "uncertain": "Misdated in the source: Edith's 20th birthday falls on August 6, 1881; that part of this entry belongs to that date.",
+   "summary": "Roosevelt leaves the hut at 3:45 a.m., reaches the Matterhorn's summit at seven, and is back in Zermatt by 3:30 p.m., hard and risky going, but he is in top condition."
+  },
+  {
+   "date": "1882-09-27",
+   "uncertain": "The source names no one, but Corinne, born September 27, 1861, is the family member who turned 21 this day.",
+   "headline": "Corinne turns 21",
+   "summary": "Roosevelt's sister Corinne has her 21st birthday."
+  },
+  {
+   "date": "1883-09-07",
+   "uncertain": "Most accounts place this arrival in the small hours of September 8, 1883; the source logs it under September 7."
+  },
+  {
+   "date": "1886-11-02",
+   "uncertain": "Source error corrected: Hewitt's total was 90,552, not 70,522.",
+   "summary": "Democrat Abram Hewitt wins the mayor's race with 90,552 votes. Labor's Henry George finishes second at 68,110, and Roosevelt runs third with 60,435."
+  },
+  {
+   "date": "1887-04-28",
+   "uncertain": "Misdated in the source: Corinne's 5th anniversary falls on April 29, 1887; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1887-12-31",
+   "uncertain": "Date approximate: the club grew out of a dinner Roosevelt hosted in New York in December 1887 and was formally organized early in 1888; the source's Sagamore Hill setting is doubtful."
+  },
+  {
+   "date": "1889-10-01",
+   "uncertain": "Elliott Roosevelt Jr. is usually dated to September 29, 1889; the source logs his birth here."
+  },
+  {
+   "date": "1890-08-07",
+   "uncertain": "Misdated in the source: Edith's 29th birthday falls on August 6, 1890; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1892-10-26",
+   "uncertain": "Misdated in the source: TR's 34th birthday falls on October 27, 1892; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1894-01-19",
+   "uncertain": "Misdated in the source: Bamie's 39th birthday falls on January 18, 1894; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1894-04-06",
+   "uncertain": "Misdated in the source parse: Archie was born April 9, 1894; this entry belongs to that date.",
+   "headline": "Archie's birth, entered early",
+   "summary": "The chronology logs Archibald Bulloch Roosevelt's birth under this date, and again under April 16, but Archie was born on April 9, 1894. The entry describes a midnight delivery so easy and quiet that Roosevelt has to wake the nurse, Mame; he writes Bamie that Edith suffered less than ever, then brings Alice and Ted in to meet their brother."
+  },
+  {
+   "date": "1894-04-16",
+   "uncertain": "Misdated in the source parse: Archie was born April 9, 1894; this entry belongs to that date."
+  },
+  {
+   "date": "1896-06-02",
+   "uncertain": "Misdated: the Marquis de Mores was killed on June 9, 1896; the source logs his death here.",
+   "headline": "Doubts about Parker",
+   "summary": "In New York Roosevelt tells Bamie he cannot vouch for Commissioner Parker's honesty with money."
+  },
+  {
+   "date": "1896-06-09",
+   "uncertain": "The Marquis de Mores, founder of Medora, was killed in North Africa this day; the source places his death on June 2."
+  },
+  {
+   "date": "1896-10-26",
+   "uncertain": "Misdated in the source: TR's 38th birthday falls on October 27, 1896; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1897-01-19",
+   "uncertain": "Misdated in the source: Bamie's 42nd birthday falls on January 18, 1897; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1898-02-15",
+   "uncertain": "Source gives 262 dead; the usual count is 260 killed that night and six more who died later, 266 in all.",
+   "summary": "At 9:40 that night the battleship Maine explodes in Havana harbor; 260 of her crew die at once and six more later. The sensational papers clamor for war while much of the country seems unmoved. Roosevelt calls it treachery. He also writes Selous, wishing he could get away, and Edith writes her sister Emily Carow."
+  },
+  {
+   "date": "1898-04-23",
+   "uncertain": "Roosevelt was offered the post at this time; he resigned from the Navy and took his commission on May 6, 1898.",
+   "headline": "A volunteer cavalry post in sight",
+   "summary": "McKinley asks for 125,000 volunteers to bolster a regular army of about 28,000, among them three regiments of frontier horsemen and crack shots. Roosevelt is in line for second in command of the first of these cavalry regiments, under his friend Leonard Wood."
+  },
+  {
+   "date": "1900-04-28",
+   "uncertain": "Misdated in the source: Corinne's 18th anniversary falls on April 29, 1900; that part of this entry belongs to that date.",
+   "summary": "Roosevelt travels from Chicago back to Albany."
+  },
+  {
+   "date": "1901-09-13",
+   "uncertain": "McKinley died at about 2:15 a.m. on September 14, 1901, while Roosevelt was still on the road; his death belongs to that date.",
+   "summary": "On Ted's 14th birthday, Roosevelt and a guide climb Mount Marcy in cold, misty weather while the others turn back. Lunching at Lake Tear of the Clouds, he is handed a telegram at 1:25 p.m.: McKinley is failing. A frantic 50-mile night ride takes him to the North Creek rail station and on toward Albany. By early the next morning McKinley is dead."
+  },
+  {
+   "date": "1901-09-14",
+   "uncertain": "The source gives 3:15 p.m. for the oath; most accounts put it at about 3:30 p.m."
+  },
+  {
+   "date": "1902-02-19",
+   "uncertain": "Knox announced the suit on February 19; it was filed at St. Paul on March 10, 1902.",
+   "summary": "Roosevelt has Attorney General Knox announce a federal suit to break up the Northern Securities Company, the railroad holding company that Morgan and Kuhn, Loeb money built out of the Harriman and Hill lines; it will be filed at St. Paul in March. The Schley report is published. Ted falls ill with pneumonia at Groton and Edith hurries north to nurse him."
+  },
+  {
+   "date": "1902-10-13",
+   "uncertain": "The source puts Roosevelt aboard the Corsair; that meeting was Root's, on October 11. On this date Morgan and Bacon came to Roosevelt in Washington.",
+   "headline": "Morgan brings a plan to Jackson Place",
+   "summary": "Roosevelt asks General Schofield about having the Army run the mines and receives the Chief Justice and the Supreme Court. That evening J. P. Morgan and Robert Bacon, fresh from talks with Root aboard Morgan's yacht Corsair, call on the President at his temporary quarters on Jackson Place. They agree to push the operators to accept a commission of Roosevelt's choosing, with the threat of Army control of the mines in the background."
+  },
+  {
+   "date": "1902-10-16",
+   "uncertain": "Commissioners' roles corrected: Clark led the railway conductors' union; Gray was a federal judge from Delaware.",
+   "summary": "Roosevelt names a seven-man commission to settle the coal strike: retired Army engineer General John M. Wilson; Labor Commissioner Carroll Wright; federal Judge George Gray of Delaware; E. E. Clark, head of the railway conductors' union, seated under the label of \"eminent sociologist\"; mining engineer Edward Parker; coal man Thomas Watkins; and Bishop John Spalding. He thanks Morgan and Hanna, explains to Cleveland that the operators would not accept him, and sends Mitchell the names."
+  },
+  {
+   "date": "1903-02-03",
+   "uncertain": "The three measures did not all clear Congress this day; they became law on February 11 (Expedition Act), February 14 (Commerce and Labor) and February 19, 1903 (Elkins Act).",
+   "headline": "Trust-busting package nears passage"
+  },
+  {
+   "date": "1905-03-04",
+   "uncertain": "The source misquotes the Inaugural Address; the delivered line reads \"Much has been given us, and much will rightfully be expected from us.\" Check against the printed text before publishing.",
+   "summary": "Roosevelt takes the oath before a record crowd of about half a million, with his whole family looking on, and tells the nation, \"Much has been given us, and much will rightfully be expected from us.\" Cowboys, miners and Rough Riders march in a parade of three and a half hours, and that night he talks it all over with Corinne and Douglas in his room."
+  },
+  {
+   "date": "1905-06-10",
+   "uncertain": "Japan accepted on June 10; Russia's formal acceptance followed on June 12, 1905.",
+   "summary": "Roosevelt and Edith have Pine Knot to themselves. He cooks breakfast and chops firewood while she rests in a hammock, and they fry chickens for supper with biscuits, cornbread, cherries and wild strawberries. Word comes that Japan accepts his call for peace talks; Russia will follow two days later."
+  },
+  {
+   "date": "1906-01-27",
+   "uncertain": "The source places the muck-rake remarks here; Roosevelt's Gridiron Club muck-rake talk is dated March 17, 1906, and he repeated it in public on April 14.",
+   "headline": "A Gridiron Club evening",
+   "summary": "Roosevelt lunches with Dryden and Governor Stokes, sees C. E. Smith and Overstreet, and goes to the Gridiron Club's dinner at the Willard Hotel. He tells Ted he is glad his Harvard work has improved."
+  },
+  {
+   "date": "1906-03-17",
+   "uncertain": "This Gridiron dinner is where Roosevelt first compared certain reporters to the man with the muck-rake; the source credits that talk to January 27.",
+   "headline": "The muck-rake, first told at the Gridiron",
+   "summary": "Roosevelt meets Admiral Dewey, talks canal matters with Hepburn, and sees the German and French ambassadors. After dining with Speaker Cannon he goes on to the Gridiron Club's dinner at the New Willard, where he first compares a certain breed of journalist to the man with the muck-rake in Pilgrim's Progress. Dr. Rixey calls near midnight."
+  },
+  {
+   "date": "1906-04-14",
+   "uncertain": "The source logs Robert Barnwell Roosevelt's death here; he died on June 14, 1906.",
+   "headline": "The muck-rake speech goes public",
+   "summary": "Roosevelt lays the cornerstone of the new House Office Building and repeats in public his warning against writers who see only the muck. He calls for federal oversight of interstate corporations, presses Congress to pass the Hepburn bill, and backs a progressive inheritance tax. He also talks Indiana politics with Hemenway and ship subsidies with Taft and Humphrey."
+  },
+  {
+   "date": "1906-04-29",
+   "uncertain": "The 24th anniversary is Corinne's (married April 29, 1882), not Roosevelt and Edith's.",
+   "headline": "A lonely spot tied to Washington",
+   "summary": "Aboard the Sylph, Roosevelt and Edith visit a lonely spot linked to George Washington, then in ruins. At home it is his sister Corinne's 24th wedding anniversary."
+  },
+  {
+   "date": "1906-06-14",
+   "uncertain": "Roosevelt's uncle Robert Barnwell Roosevelt died this day; the source misplaces his death on April 14."
+  },
+  {
+   "date": "1906-06-29",
+   "uncertain": "The source swaps signings: the Hepburn Act became law June 29, 1906; the Pure Food and Drug Act and the agricultural appropriation with meat inspection were signed June 30. Panama Canal Act date per the source.",
+   "headline": "Hepburn Act signed; Mesa Verde created",
+   "summary": "A landmark day: Roosevelt signs the Hepburn railroad rate act. A Grand Canyon game preserve of nearly 1.5 million acres is authorized, and Platt and Mesa Verde national parks are created. He dines with Will Cowles, Root and Bacon."
+  },
+  {
+   "date": "1906-06-30",
+   "uncertain": "The source swaps signings: the Hepburn Act was signed June 29; the pure food and meat inspection laws belong to this day.",
+   "headline": "Pure food and meat inspection become law",
+   "summary": "As Congress adjourns, Roosevelt signs the Pure Food and Drug Act and the agricultural appropriation that carries the new meat inspection law, and sends Beveridge the pen used on the meat bill. He also approves a law on shooting in the District that makes three-quarters of it a wildlife refuge, and leaves at midnight for Oyster Bay. Alice and Nick head to Cincinnati before sailing for Europe."
+  },
+  {
+   "date": "1908-10-31",
+   "uncertain": "The Root-Takahira Agreement was concluded by an exchange of notes on November 30, 1908; at this point it was still under negotiation.",
+   "headline": "Art store, oil cases, and talks with Japan",
+   "summary": "Roosevelt stops at Fisher's art store after breakfast and goes over the Standard Oil prosecutions with Frank Kellogg. Talks go on toward what becomes the Root-Takahira Agreement, under which the United States and Japan pledge to respect each other's Pacific holdings."
+  },
+  {
+   "date": "1912-02-21",
+   "uncertain": "The 'hat in the ring' line was an informal remark to reporters; his formal declaration came in his February 24 reply to the governors.",
+   "summary": "Before the Ohio Legislature Roosevelt delivers \"A Charter of Democracy,\" backing popular recall of judicial decisions, a stand that alarms conservatives and business. Chatting with reporters along the way, he lets it be known that his hat is in the ring. His formal answer to the governors who urged him to run comes three days later."
+  },
+  {
+   "date": "1914-04-06",
+   "uncertain": "The Colombia treaty was signed at Bogota by the American minister, not in Washington.",
+   "summary": "As the party portages more rapids, Roosevelt urges his companions to go on without him so they can survive. Far away in Bogota, American and Colombian envoys sign a treaty, negotiated under Secretary of State Bryan, that voices regret over the 1903 loss of Panama and promises Colombia $25 million.",
+   "headline": "Roosevelt asks to be left behind"
+  },
+  {
+   "date": "1915-04-05",
+   "uncertain": "Misdated in the source: Easter Sunday falls on April 4, 1915; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1915-04-28",
+   "uncertain": "Misdated in the source: Corinne's 33rd anniversary falls on April 29, 1915; that part of this entry belongs to that date.",
+   "summary": "Roosevelt testifies about U.S. Steel's 1907 takeover of Tennessee Coal and Iron."
+  },
+  {
+   "date": "1916-08-07",
+   "uncertain": "Misdated in the source: Edith's 55th birthday falls on August 6, 1916; that part of this entry belongs to that date."
+  }
+ ]
+}

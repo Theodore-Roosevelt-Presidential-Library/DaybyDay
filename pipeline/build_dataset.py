@@ -1,0 +1,264 @@
+"""Assemble the canonical Day by Day dataset.
+
+Inputs (all committed, none contain TRA text):
+  data/enrich/*.jsonl      rewritten day records
+  data/places_index.json   TRA place-names index (place -> date ranges)
+  data/places.json         curated places (+ coordinates)
+  data/people.json         curated people
+  data/periods.json        editorial life periods
+Outputs:
+  data/days.jsonl          one record per calendar day of TR's life (1858-10-27 .. 1919-01-06)
+  data/people.json         + stats (mentions, first/last, top places/companions)
+  data/places.json         + stats (days present, first/last)
+  data/letters.jsonl, data/quotes.jsonl, data/events.jsonl   flattened tables
+  data/days.csv            flat table for spreadsheets
+"""
+import csv
+import datetime as dt
+import glob
+import json
+import re
+from collections import Counter, defaultdict
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+BIRTH = dt.date(1858, 10, 27)
+DEATH = dt.date(1919, 1, 6)
+LOCAL_KINDS = {"city", "town", "residence", "ranch", "camp", "ship", "train", "building", "institution",
+               "battlefield", "park", "mountain", "body_of_water", "region", "state", "country", "other"}
+SPECIFIC = {"residence": 0, "ranch": 0, "camp": 1, "ship": 1, "train": 1, "building": 2, "institution": 2,
+            "battlefield": 2, "park": 3, "mountain": 3, "body_of_water": 4, "town": 5, "city": 5,
+            "region": 7, "state": 8, "country": 9, "other": 6}
+
+
+def norm(s):
+    return re.sub(r"\s+", " ", (s or "").strip().lower())
+
+
+def age_on(d):
+    a = d.year - BIRTH.year - ((d.month, d.day) < (BIRTH.month, BIRTH.day))
+    return a
+
+
+def daterange(a, b):
+    d = a
+    while d <= b:
+        yield d
+        d += dt.timedelta(days=1)
+
+
+def main():
+    places = json.load(open(ROOT / "data/places.json"))
+    people = json.load(open(ROOT / "data/people.json"))
+    periods = json.load(open(ROOT / "data/periods.json"))["periods"]
+    pidx = json.load(open(ROOT / "data/places_index.json"))
+    place_by_id = {p["id"]: p for p in places}
+
+    # alias maps
+    place_alias = {}
+    index_to_place = {}
+    for p in places:
+        for a in p.get("aliases") or []:
+            place_alias[(norm(a["name"]), norm(a.get("region")))] = p["id"]
+        place_alias.setdefault((norm(p["name"]), norm(p.get("region"))), p["id"])
+        for i in p.get("index_ids") or []:
+            index_to_place[i] = p["id"]
+    person_alias = {}
+    for p in people:
+        person_alias[norm(p["name"])] = p["id"]
+        for a in p.get("aliases") or []:
+            person_alias.setdefault(norm(a), p["id"])
+
+    def place_id(name, region):
+        return place_alias.get((norm(name), norm(region))) or place_alias.get((norm(name), ""))
+
+    def flat(v):
+        out = []
+        for x in v or []:
+            if isinstance(x, list):
+                out += flat(x)
+            elif isinstance(x, dict):
+                out.append(x.get("name") or "")
+            elif x:
+                out.append(str(x))
+        return out
+
+    def event_place(n, day_places):
+        for pp in day_places:
+            if norm(place_by_id[pp]["name"]) == norm(n):
+                return pp
+        return place_id(n, None)
+
+    def person_id(name):
+        if isinstance(name, dict):
+            name = name.get("name") or ""
+        return person_alias.get(norm(name))
+
+    # where TR was, from the TRA place index
+    where = defaultdict(list)
+    for e in pidx:
+        pid = index_to_place.get(e["id"])
+        if not pid:
+            continue
+        for v in e["visits"]:
+            for d in daterange(dt.date.fromisoformat(v["start"]), dt.date.fromisoformat(v["end"])):
+                if pid not in [x[0] for x in where[d]]:
+                    where[d].append((pid, v.get("precision", "day")))
+
+    enrich = {}
+    for f in sorted(glob.glob(str(ROOT / "data/enrich/*.jsonl"))):
+        for line in open(f):
+            if line.strip():
+                r = json.loads(line)
+                enrich[r["date"]] = r
+
+    tra_pages = {}
+    try:   # page citations only (no text) — available when the private parse is present
+        for r in json.load(open(ROOT / "private/tra_chronology.json"))["records"]:
+            tra_pages[r["date"]] = r["source"]
+        json.dump(tra_pages, open(ROOT / "data/tra_pages.json", "w"))
+    except FileNotFoundError:
+        tra_pages = json.load(open(ROOT / "data/tra_pages.json"))
+
+    unresolved_people, unresolved_places = Counter(), Counter()
+    days, last_loc = [], None
+    stats_person = defaultdict(lambda: {"mentions": 0, "days": [], "places": Counter(), "with": Counter()})
+    stats_place = defaultdict(list)
+    letters_out, quotes_out, events_out = [], [], []
+
+    for d in daterange(BIRTH, DEATH):
+        ds = d.isoformat()
+        r = enrich.get(ds)
+        rec = {
+            "date": ds, "weekday": d.strftime("%a"), "year": d.year, "month": d.month, "day": d.day,
+            "age": age_on(d), "has_entry": r is not None,
+            "headline": None, "summary": None, "significance": 0,
+            "location": None, "places": [], "people": [], "events": [], "letters": [], "tr_quotes": [],
+            "works": [], "references": [], "guests": [], "tags": [], "film": False,
+            "periods": [p["id"] for p in periods if p["start"] <= ds <= p["end"]],
+            "sources": [{"work": "TRA Chronological Record (TRC-CR-1)", "pages": tra_pages.get((r or {}).get("moved_from") or ds, [])}],
+            "redated_from": (r or {}).get("moved_from"),
+            "uncertain": None,
+        }
+        day_places = []
+        if r:
+            rec.update({k: r.get(k) for k in ("headline", "summary", "significance", "film", "uncertain")})
+            rec["tags"] = r.get("tags") or []
+            rec["works"] = r.get("works") or []
+            rec["references"] = r.get("references") or []
+            for p in r.get("places") or []:
+                pid = place_id(p["name"], p.get("region"))
+                if pid:
+                    if pid not in day_places:
+                        day_places.append(pid)
+                else:
+                    unresolved_places[(p["name"], p.get("region"))] += 1
+            names = {}
+            for p in r.get("people") or []:
+                pid = person_id(p["name"])
+                if not pid:
+                    unresolved_people[p["name"]] += 1
+                    continue
+                if pid not in names:
+                    names[pid] = p.get("role")
+            rec["people"] = [{"id": k, "role": v} for k, v in names.items()]
+            rec["guests"] = [person_id(g) or g for g in r.get("guests") or []]
+            for i, e in enumerate(r.get("events") or []):
+                ev = {"seq": i + 1, "action": e["action"], "detail": e.get("detail"), "time": e.get("time"),
+                      "people": [x for x in (person_id(n) for n in flat(e.get("people"))) if x],
+                      "places": [x for x in (event_place(n, day_places) for n in flat(e.get("places"))) if x]}
+                rec["events"].append(ev)
+                events_out.append({"date": ds, **ev})
+            for l in r.get("letters") or []:
+                lid = person_id(l.get("correspondent") or "")
+                letter = {"direction": l["direction"], "correspondent": lid or l.get("correspondent"),
+                          "correspondent_resolved": bool(lid), "topic": l.get("topic")}
+                rec["letters"].append(letter)
+                letters_out.append({"date": ds, **letter})
+            for q in r.get("tr_quotes") or []:
+                qq = {"text": q["text"], "kind": q["kind"], "verified": False}
+                rec["tr_quotes"].append(qq)
+                quotes_out.append({"date": ds, **qq})
+
+        # location: TRA place index first, refined by a more specific place named that day
+        idx_places = [pid for pid, _ in where.get(d, [])]
+        loc, loc_source = None, None
+        refined = [pid for pid in day_places if place_by_id[pid].get("parent") in idx_places
+                   or place_by_id[pid].get("parent") and place_by_id.get(place_by_id[pid]["parent"], {}).get("parent") in idx_places]
+        if refined:
+            loc, loc_source = sorted(refined, key=lambda x: SPECIFIC.get(place_by_id[x]["kind"], 6))[0], "index+entry"
+        elif idx_places:
+            loc, loc_source = idx_places[0], "index"
+        elif day_places:
+            cands = [p for p in day_places if place_by_id[p]["kind"] in LOCAL_KINDS]
+            if cands:
+                loc, loc_source = sorted(cands, key=lambda x: SPECIFIC.get(place_by_id[x]["kind"], 6))[0], "entry"
+        if loc is None and last_loc:
+            loc, loc_source = last_loc, "carried"
+        for pid in idx_places:
+            if pid not in day_places:
+                day_places.append(pid)
+        rec["places"] = day_places
+        if loc:
+            p = place_by_id[loc]
+            rec["location"] = {"id": loc, "name": p["name"], "lat": p.get("lat"), "lon": p.get("lon"),
+                               "source": loc_source, "also": [x for x in idx_places if x != loc]}
+            if loc_source != "carried":
+                last_loc = loc
+        days.append(rec)
+        for pid in day_places:
+            stats_place[pid].append(ds)
+        for pp in rec["people"]:
+            s = stats_person[pp["id"]]
+            s["mentions"] += 1
+            s["days"].append(ds)
+            if loc:
+                s["places"][loc] += 1
+            for other in rec["people"]:
+                if other["id"] != pp["id"]:
+                    s["with"][other["id"]] += 1
+
+    with open(ROOT / "data/days.jsonl", "w") as f:
+        for rec in days:
+            f.write(json.dumps(rec, ensure_ascii=False) + "\n")
+    for name, rows in (("letters", letters_out), ("quotes", quotes_out), ("events", events_out)):
+        with open(ROOT / f"data/{name}.jsonl", "w") as f:
+            for x in rows:
+                f.write(json.dumps(x, ensure_ascii=False) + "\n")
+    with open(ROOT / "data/days.csv", "w", newline="") as f:
+        w = csv.writer(f)
+        w.writerow(["date", "weekday", "age", "has_entry", "significance", "headline", "summary", "location_id",
+                    "location_name", "lat", "lon", "location_source", "people", "places", "tags", "periods",
+                    "letters", "tr_quotes", "tra_pages"])
+        for r in days:
+            loc = r["location"] or {}
+            w.writerow([r["date"], r["weekday"], r["age"], int(r["has_entry"]), r["significance"], r["headline"] or "",
+                        r["summary"] or "", loc.get("id", ""), loc.get("name", ""), loc.get("lat", ""), loc.get("lon", ""),
+                        loc.get("source", ""), ";".join(p["id"] for p in r["people"]), ";".join(r["places"]),
+                        ";".join(r["tags"]), ";".join(r["periods"]), len(r["letters"]), len(r["tr_quotes"]),
+                        ";".join(r["sources"][0]["pages"])])
+
+    for p in people:
+        s = stats_person.get(p["id"])
+        p["mentions"] = s["mentions"] if s else 0
+        p["first"] = s["days"][0] if s else None
+        p["last"] = s["days"][-1] if s else None
+        p["top_places"] = [k for k, _ in s["places"].most_common(5)] if s else []
+        p["top_companions"] = [k for k, _ in s["with"].most_common(8)] if s else []
+    for p in places:
+        ds = stats_place.get(p["id"], [])
+        p["days_present"] = len(ds)
+        p["first"] = ds[0] if ds else None
+        p["last"] = ds[-1] if ds else None
+    json.dump(people, open(ROOT / "data/people.json", "w"), indent=1, ensure_ascii=False)
+    json.dump(places, open(ROOT / "data/places.json", "w"), indent=1, ensure_ascii=False)
+
+    n_loc = sum(1 for r in days if r["location"])
+    print(f"days {len(days)}  with entry {sum(r['has_entry'] for r in days)}  with location {n_loc} "
+          f"(carried {sum(1 for r in days if r['location'] and r['location']['source']=='carried')})")
+    print("unresolved people mentions:", sum(unresolved_people.values()), unresolved_people.most_common(10))
+    print("unresolved place mentions:", sum(unresolved_places.values()), unresolved_places.most_common(10))
+
+
+if __name__ == "__main__":
+    main()
