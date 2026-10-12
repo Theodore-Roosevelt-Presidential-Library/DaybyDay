@@ -207,7 +207,8 @@ def main():
             stays.append(cur)
     for s in stays:
         p = place_by_id.get(s["place"]) or {}
-        s.update({"name": p.get("name"), "lat": p.get("lat"), "lon": p.get("lon")})
+        s.update({"name": p.get("name"), "lat": p.get("lat"), "lon": p.get("lon"), "kind": p.get("kind"),
+                  "precise": p.get("coord_precision") == "exact"})
     dump(OUT / "stays.json", stays)
     # grid: [date, significance(-1 = no entry), location_id, headline]
     dump(OUT / "grid.json", {"fields": ["date", "significance", "location_id", "headline", "tags"],

@@ -64,7 +64,8 @@
         <button class="btn ghost" id="prev" aria-label="Previous stop">Previous stop</button>
         <button class="btn" id="play" aria-pressed="false">Play</button>
         <button class="btn ghost" id="next" aria-label="Next stop">Next stop</button>
-        <label class="small" for="speed" style="margin-left:auto">Pace</label>
+        <label class="small" style="margin-left:auto"><input type="checkbox" id="follow" checked> Zoom to each place</label>
+        <label class="small" for="speed">Pace</label>
         <select id="speed">
           <option value="9000">Slow</option>
           <option value="5000" selected>Steady</option>
@@ -96,15 +97,24 @@
   const stays = allStays.filter(s => s.lat != null);
   const rowByDate = new Map(grid.rows.map(r => [r[0], r]));   // [date, sig, loc, headline, tags]
 
-  const map = L.map("map", { worldCopyJump: true, scrollWheelZoom: false }).setView([40.7, -74], 5);
-  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors", maxZoom: 18 }).addTo(map);
+  const map = L.map("map", { worldCopyJump: true, scrollWheelZoom: false, maxZoom: 19 }).setView([40.7, -74], 5);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors", maxZoom: 19 }).addTo(map);
   const trail = L.polyline([], { color: "#E7805D", weight: 2.5, opacity: .75 }).addTo(map);
   const dots = L.layerGroup().addTo(map);
   const here = L.circleMarker([0, 0], { radius: 11, color: "#092A4D", weight: 3, fillColor: "#F9D635", fillOpacity: 1 }).addTo(map);
   const slider = document.getElementById("t");
   slider.max = stays.length - 1;
   const TRAIL = 12;
-  let cur = -1, curDate = null, timer = null;
+  let cur = -1, curDate = null, timer = null, followZoom = true;
+  // How close to zoom: street level for buildings and homes, closer for ranches and towns,
+  // wide for regions. Coordinates borrowed from the enclosing town never zoom past town level.
+  const ZOOM = { residence: 17, building: 17, institution: 16, battlefield: 14, camp: 13, ranch: 13, park: 11,
+                 town: 13, city: 12, mountain: 10, body_of_water: 8, region: 7, state: 6, country: 5, other: 9, ship: 5, train: 8 };
+  function zoomFor(s) {
+    let z = ZOOM[s.kind] ?? 10;
+    if (!s.precise) z = Math.min(z, 12);
+    return z;
+  }
 
   function daysOf(s) {
     const out = []; let d = new Date(s.start + "T00:00:00Z"); const e = new Date(s.end + "T00:00:00Z");
@@ -133,12 +143,12 @@
     }
     trail.setLatLngs(pts);
     if (fly) {
-      const prev = stays[Math.max(0, i - 1)];
-      const far = map.distance([prev.lat, prev.lon], [s.lat, s.lon]) > 600000;
+      const z = zoomFor(s);
       const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-      if (!map.getBounds().pad(-0.15).contains([s.lat, s.lon]) || far) {
-        reduce ? map.setView([s.lat, s.lon], far ? 4 : map.getZoom()) : map.flyTo([s.lat, s.lon], far ? 4 : Math.max(map.getZoom(), 5), { duration: 1.2 });
-      }
+      const prev = stays[Math.max(0, i - 1)];
+      const far = map.distance([prev.lat, prev.lon], [s.lat, s.lon]) > 300000;
+      if (reduce || !followZoom) map.setView([s.lat, s.lon], followZoom ? z : map.getZoom());
+      else map.flyTo([s.lat, s.lon], z, { duration: far ? 2.2 : 1.2 });
     }
   }
   function drawStop(i) {
@@ -188,6 +198,7 @@
     const a = e.target.closest(".daynav a[data-date]"); if (!a) return;
     e.preventDefault(); stop(); go(stayIndexFor(a.dataset.date), true, a.dataset.date);
   });
+  document.getElementById("follow").addEventListener("change", e => { followZoom = e.target.checked; });
   const playBtn = document.getElementById("play");
   function stop() { if (timer) { clearTimeout(timer); timer = null; } playBtn.textContent = "Play"; playBtn.setAttribute("aria-pressed", "false"); }
   function tick() {
@@ -216,11 +227,11 @@
   document.getElementById("jumps").innerHTML = JUMPS.map(([l, d]) => `<button class="chip" style="color:var(--night);border-color:var(--sky)" data-d="${d}">${l}</button>`).join("");
   document.getElementById("jumps").addEventListener("click", e => {
     const b = e.target.closest("button"); if (!b) return;
-    stop(); const i = stayIndexFor(b.dataset.d); go(i, false, b.dataset.d); map.setView([stays[i].lat, stays[i].lon], 6);
+    stop(); const i = stayIndexFor(b.dataset.d); go(i, false, b.dataset.d); map.setView([stays[i].lat, stays[i].lon], zoomFor(stays[i]));
   });
   const start = DBD.param("date") || "1858-10-27";
   const i0 = stayIndexFor(start);
-  map.setView([stays[i0].lat, stays[i0].lon], 6);
+  map.setView([stays[i0].lat, stays[i0].lon], zoomFor(stays[i0]));
   go(i0, false, start);
 })();
 </script>

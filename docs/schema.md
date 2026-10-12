@@ -39,9 +39,9 @@ All dates are ISO `YYYY-MM-DD` in the Gregorian calendar. IDs are lowercase slug
 
 ## Place (`data/places.json`)
 
-`{id, name, kind, region, country, historic_region, parent, geocode, lat, lon, coord_source, osm, aliases[], index_ids[], uncertain, days_present, first, last}`
+`{id, name, kind, region, country, historic_region, parent, geocode, lat, lon, coord_source, coord_precision, osm, aliases[], index_ids[], uncertain, days_present, first, last}`
 
-`kind`: city, town, ranch, residence, building, institution, region, state, country, body_of_water, mountain, ship, train, camp, battlefield, park, other. `parent` is the enclosing place (White House → washington-dc). `coord_source`: `nominatim`, `geonames`, or `parent` (inherited from the enclosing place). Ships, trains and vague regions have no coordinates.
+`kind`: city, town, ranch, residence, building, institution, region, state, country, body_of_water, mountain, ship, train, camp, battlefield, park, other. `parent` is the enclosing place (White House → washington-dc). `coord_source`: `nominatim`, `geonames`, or `parent` (inherited from the enclosing place). `coord_precision`: `exact` when the coordinates are the place itself (a geocoder match that names it or is its street address, near its town), `approximate` when they stand in for it (the town's point, or a doubtful match). The map zooms to street level only for `exact` buildings and residences. Ships, trains and vague regions have no coordinates.
 
 ## Period (`data/periods.json`)
 
@@ -49,4 +49,4 @@ All dates are ISO `YYYY-MM-DD` in the Gregorian calendar. IDs are lowercase slug
 
 ## Stay (`/api/v1/stays.json`)
 
-`{place, name, lat, lon, start, end, days}` — consecutive days at the same `location`.
+`{place, name, lat, lon, kind, precise, start, end, days}` — consecutive days at the same `location`.

@@ -72,9 +72,36 @@ def apply(places, cache):
         if hit:
             p["lat"], p["lon"], p["coord_source"] = hit["lat"], hit["lon"], hit.get("source", "nominatim")
             p["osm"] = f"{hit['osm_type']}/{hit['osm_id']}" if hit.get("osm_type") else None
+    # precision: "exact" only when the match plausibly is the place itself
+    import math, re as _re
+    def dist_km(a, b):
+        r = 6371
+        la1, lo1, la2, lo2 = map(math.radians, (a[0], a[1], b[0], b[1]))
+        h = math.sin((la2 - la1) / 2) ** 2 + math.cos(la1) * math.cos(la2) * math.sin((lo2 - lo1) / 2) ** 2
+        return 2 * r * math.asin(math.sqrt(h))
+    stop = {"the", "of", "and", "house", "hotel", "club", "street", "avenue", "new", "york", "city", "site", "historic"}
+    for p in places:
+        p["coord_precision"] = None
+        if p["lat"] is None:
+            continue
+        hit = cache.get(p.get("geocode") or "") or {}
+        if p["kind"] in ("city", "town", "state", "country", "region", "body_of_water", "mountain"):
+            p["coord_precision"] = "exact" if p["coord_source"] in ("nominatim", "geonames") else "approximate"
+            continue
+        exact = False
+        if p["coord_source"] == "nominatim":
+            first = (hit.get("display_name") or "").split(",")[0].lower()
+            words = {w for w in _re.findall(r"[a-z]+", p["name"].lower()) if len(w) > 3 and w not in stop}
+            is_address = bool(_re.match(r"^\d", (p.get("geocode") or "").strip())) or first.strip().isdigit()
+            exact = is_address or any(w in first for w in words)
+            par = by_id.get(p.get("parent") or "")
+            if exact and par and par.get("lat") is not None and dist_km((p["lat"], p["lon"]), (par["lat"], par["lon"])) > (80 if p["kind"] in ("ranch", "camp", "park", "battlefield") else 30):
+                exact = False
+        p["coord_precision"] = "exact" if exact else "approximate"
     for p in places:   # inherit from parent
         if p["lat"] is None and p.get("parent") in by_id and by_id[p["parent"]].get("lat") is not None:
             p["lat"], p["lon"], p["coord_source"] = by_id[p["parent"]]["lat"], by_id[p["parent"]]["lon"], "parent"
+            p["coord_precision"] = "approximate"
     json.dump(places, open(ROOT / "data/places.json", "w"), indent=1, ensure_ascii=False)
     n = sum(1 for p in places if p["lat"] is not None)
     print(f"coordinates for {n}/{len(places)} places")
