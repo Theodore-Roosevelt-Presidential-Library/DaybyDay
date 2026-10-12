@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Time and place | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="Where Theodore Roosevelt spent his time, year by year and in each chapter of his life: New York, Sagamore Hill, Washington, the Badlands, Africa and the Amazon.">
+<meta property="og:title" content="Time and place | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="Where Theodore Roosevelt spent his time, year by year and in each chapter of his life.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .g-nyc{--c:#092A4D} .g-ob{--c:#1B4532} .g-dc{--c:#E7805D} .g-alb{--c:#99ADC5} .g-cam{--c:#8C2D4F} .g-bad{--c:#F36079}
+  .g-us{--c:#BDB6A3} .g-eu{--c:#87BB41} .g-af{--c:#F9D635} .g-la{--c:#8FC895} .g-sea{--c:#5B7FA6}
+  .legend2 { display: flex; flex-wrap: wrap; gap: 6px 16px; font: 14px var(--sans); margin: 10px 0 16px; }
+  .legend2 button { all: unset; cursor: pointer; display: inline-flex; align-items: center; gap: 6px; padding: 2px 0; }
+  .legend2 i { width: 12px; height: 12px; border-radius: 2px; background: var(--c); }
+  .legend2 button[aria-pressed=true] { font-weight: 700; text-decoration: underline; }
+  .years { display: grid; grid-template-columns: 44px 1fr; gap: 2px 8px; align-items: center; font: 12px var(--sans); }
+  .years .y { color: var(--ink-2); text-align: right; }
+  .years .ybar { display: flex; height: 12px; cursor: pointer; border-radius: 2px; overflow: hidden; }
+  .years .ybar:hover, .years .ybar:focus-visible { outline: 2px solid var(--s3); outline-offset: 1px; }
+  .years .ybar.sel { outline: 3px solid var(--ink); outline-offset: 1px; }
+  .years .ybar span { background: var(--c); }
+  .years .ybar.dim span { opacity: .18; }
+  .years .ybar.dim span.on { opacity: 1; }
+  .split { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.35fr); gap: 32px; align-items: start; }
+  @media (max-width: 900px) { .split { grid-template-columns: 1fr; } }
+  .picker h3 { font: 600 14px var(--sans); color: var(--ink-2); margin: 14px 0 6px; }
+  .picker .chips { display: flex; flex-wrap: wrap; gap: 6px; }
+  .picker .chip { color: var(--night); border-color: var(--sky); }
+  .picker .chip[aria-pressed=true] { background: var(--night); color: #fff; border-color: var(--night); }
+  #tpmap { height: 460px; border-radius: var(--radius); }
+  .sum { font: 700 26px/1.1 var(--display); text-transform: uppercase; color: var(--night); margin: 16px 0 4px; }
+  .rank { list-style: none; padding: 0; margin: 10px 0 0; }
+  .rank li { display: grid; grid-template-columns: minmax(0, 1fr) 110px; gap: 10px; align-items: center; padding: 4px 0; font: 15px var(--sans); }
+  .rank .lbl { position: relative; padding: 3px 8px; z-index: 0; }
+  .rank .lbl::before { content: ""; position: absolute; inset: 0 auto 0 0; width: var(--w); background: var(--c); opacity: .28; z-index: -1; border-radius: 2px; }
+  .rank .n { text-align: right; color: var(--ink-2); font-variant-numeric: tabular-nums; }
+  .tip2 { position: fixed; pointer-events: none; background: #fff; border-radius: var(--radius); box-shadow: 0 6px 20px rgba(9,42,77,.3); padding: 8px 10px; font: 13px/1.4 var(--sans); display: none; z-index: 1000; max-width: 280px; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="timeplace.html" aria-current="page">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+<main class="wrap" style="padding:30px 20px 60px">
+  <h1 style="color:var(--night)">Time and place</h1>
+  <p style="max-width:64ch;font-size:19px">How Theodore Roosevelt's days divided between his homes, his offices and the road. Each bar is one year of his life, split by where he spent it. Choose a year or a chapter of his life to see it on the map.</p>
+  <div class="legend2" id="legend"></div>
+
+  <div class="split">
+    <section aria-label="Years of his life">
+      <div class="years" id="years"></div>
+    </section>
+    <section>
+      <div class="picker" id="picker"></div>
+      <div class="sum" id="sumTitle"></div>
+      <div class="small" id="sumMeta"></div>
+      <div id="tpmap" style="margin-top:12px"></div>
+      <ol class="rank" id="rank"></ol>
+      <p class="small" style="margin-top:10px">Days are counted at his most likely location each day. Buildings and ranches are grouped with their town (the White House with Washington, Elkhorn with Medora). Map data &copy; OpenStreetMap contributors.</p>
+    </section>
+  </div>
+</main>
+<div class="tip2" id="tip"></div>
+<footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i>. <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(async () => {
+  const CLS = { "new-york-city": "g-nyc", "oyster-bay": "g-ob", "washington": "g-dc", "albany": "g-alb", "cambridge": "g-cam", "badlands": "g-bad",
+                "us-other": "g-us", "europe": "g-eu", "africa": "g-af", "latin-america": "g-la", "at-sea": "g-sea" };
+  const HEX = { "g-nyc": "#092A4D", "g-ob": "#1B4532", "g-dc": "#E7805D", "g-alb": "#99ADC5", "g-cam": "#8C2D4F", "g-bad": "#F36079",
+                "g-us": "#BDB6A3", "g-eu": "#87BB41", "g-af": "#F9D635", "g-la": "#8FC895", "g-sea": "#5B7FA6" };
+  const [Y, P] = await Promise.all([DBD.get("time-and-place/years.json"), DBD.get("time-and-place/periods.json")]);
+  const groups = Y.groups;
+  const label = Object.fromEntries(groups.map(g => [g.id, g.label]));
+  let focusGroup = null;
+
+  // legend doubles as a highlighter
+  const legend = document.getElementById("legend");
+  legend.innerHTML = groups.map(g => `<button class="${CLS[g.id]}" data-g="${g.id}" aria-pressed="false"><i></i>${DBD.esc(g.label)}</button>`).join("");
+  legend.addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    focusGroup = focusGroup === b.dataset.g ? null : b.dataset.g;
+    legend.querySelectorAll("button").forEach(x => x.setAttribute("aria-pressed", x.dataset.g === focusGroup));
+    drawYears();
+  });
+
+  // year bars
+  const yearsEl = document.getElementById("years"), tip = document.getElementById("tip");
+  function drawYears() {
+    yearsEl.innerHTML = Y.years.map(y => {
+      const total = Object.values(y.counts).reduce((a, b) => a + b, 0);
+      const segs = groups.filter(g => y.counts[g.id]).map(g => `<span class="${CLS[g.id]}${g.id === focusGroup ? " on" : ""}" style="flex:${y.counts[g.id]}"></span>`).join("");
+      return `<div class="y">${y.year}</div><div class="ybar${focusGroup ? " dim" : ""}${sel.kind === "year" && sel.id == y.year ? " sel" : ""}" tabindex="0" role="button" data-y="${y.year}" aria-label="${y.year}">${segs}</div>`;
+    }).join("");
+  }
+  yearsEl.addEventListener("mousemove", e => {
+    const b = e.target.closest(".ybar"); if (!b) { tip.style.display = "none"; return; }
+    const y = Y.years.find(x => x.year == b.dataset.y);
+    const total = Object.values(y.counts).reduce((a, c) => a + c, 0);
+    const rows = groups.filter(g => y.counts[g.id]).sort((a, c) => y.counts[c.id] - y.counts[a.id]).slice(0, 5)
+      .map(g => `${DBD.esc(g.label)}: ${y.counts[g.id]} days`).join("<br>");
+    tip.innerHTML = `<b>${y.year}</b>${y.year > 1858 ? `, turned ${y.year - 1858} on Oct. 27` : ", born Oct. 27"}<br>${rows}<br><span style="color:#4A4F52">${y.distinct_places} places in all</span>`;
+    tip.style.display = "block"; tip.style.left = Math.min(e.clientX + 14, innerWidth - 290) + "px"; tip.style.top = (e.clientY + 14) + "px";
+  });
+  yearsEl.addEventListener("mouseleave", () => tip.style.display = "none");
+  const pickYear = el => { const b = el.closest(".ybar"); if (b) select({ kind: "year", id: +b.dataset.y }); };
+  yearsEl.addEventListener("click", e => pickYear(e.target));
+  yearsEl.addEventListener("keydown", e => { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); pickYear(e.target); } });
+
+  // period picker
+  const FACETS = [["life_stage", "Chapters of his life"], ["office", "Offices and service"], ["journey", "Journeys"], ["campaign", "Campaigns"]];
+  document.getElementById("picker").innerHTML = FACETS.map(([f, t]) => `<h3>${t}</h3><div class="chips">${P.periods.filter(p => p.facet === f)
+    .map(p => `<button class="chip" data-p="${p.id}" aria-pressed="false">${DBD.esc(p.label)}</button>`).join("")}</div>`).join("");
+  document.getElementById("picker").addEventListener("click", e => { const b = e.target.closest("button[data-p]"); if (b) select({ kind: "period", id: b.dataset.p }); });
+
+  // map
+  const map = L.map("tpmap", { scrollWheelZoom: false, worldCopyJump: true }).setView([40, -40], 2);
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; OpenStreetMap contributors", maxZoom: 18 }).addTo(map);
+  const layer = L.layerGroup().addTo(map);
+  let sel = { kind: "period", id: "badlands-years" };
+
+  function select(s) {
+    sel = s;
+    let title, meta, places, total;
+    if (s.kind === "year") {
+      const y = Y.years.find(x => x.year === s.id);
+      total = Object.values(y.counts).reduce((a, b) => a + b, 0);
+      places = y.places; title = String(y.year);
+      meta = `${total} days in ${y.distinct_places} places`;
+    } else {
+      const p = P.periods.find(x => x.id === s.id);
+      total = p.days; places = p.places; title = p.label;
+      meta = `${DBD.fmtDate(p.start)} to ${DBD.fmtDate(p.end)} | ${p.days.toLocaleString()} days in ${p.distinct_places} places`;
+    }
+    document.querySelectorAll("#picker button").forEach(b => b.setAttribute("aria-pressed", s.kind === "period" && b.dataset.p === s.id));
+    drawYears();
+    document.getElementById("sumTitle").textContent = title;
+    document.getElementById("sumMeta").textContent = meta;
+    const max = Math.max(...places.map(x => x.days));
+    document.getElementById("rank").innerHTML = places.slice(0, 12).map(x => `<li class="${CLS[x.group]}"><span class="lbl" style="--w:${(100 * x.days / max).toFixed(1)}%"><a href="place.html?id=${encodeURIComponent(x.id)}">${DBD.esc(x.name)}</a></span><span class="n">${x.days.toLocaleString()} days, ${Math.round(100 * x.days / total)}%</span></li>`).join("");
+    layer.clearLayers();
+    const pts = [];
+    for (const x of places.filter(x => x.lat != null).reverse()) {
+      const r = 4 + 26 * Math.sqrt(x.days / max);
+      L.circleMarker([x.lat, x.lon], { radius: r, color: "#fff", weight: 1, fillColor: HEX[CLS[x.group]], fillOpacity: .82 })
+        .bindTooltip(`<b>${DBD.esc(x.name)}</b><br>${x.days.toLocaleString()} days`).addTo(layer);
+      pts.push([x.lat, x.lon]);
+    }
+    if (pts.length) map.fitBounds(L.latLngBounds(pts).pad(.25), { maxZoom: 7 });
+  }
+  drawYears();
+  select(sel);
+})();
+</script>
+</body>
+</html>

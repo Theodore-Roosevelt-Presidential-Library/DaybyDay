@@ -42,6 +42,83 @@ def compact(r):
             "people": [p["id"] for p in r["people"]][:12]}
 
 
+GROUPS = [
+    ("new-york-city", "New York City"), ("oyster-bay", "Oyster Bay and Sagamore Hill"), ("washington", "Washington, D.C."),
+    ("albany", "Albany"), ("cambridge", "Cambridge and Harvard"), ("badlands", "Dakota Badlands"),
+    ("us-other", "Elsewhere in North America"), ("europe", "Europe and the Middle East"), ("africa", "Africa"),
+    ("latin-america", "Latin America and the Caribbean"), ("at-sea", "At sea"),
+]
+GROUP_OF_PLACE = {"new-york-ny": "new-york-city", "oyster-bay-ny": "oyster-bay", "washington-dc": "washington",
+                  "albany-ny": "albany", "cambridge-ma": "cambridge", "medora-nd": "badlands"}
+AFRICA = {"Kenya", "Uganda", "Sudan", "Egypt", "South Sudan", "Democratic Republic of the Congo", "Tanzania", "Ethiopia"}
+LATAM = {"Cuba", "Panama", "Puerto Rico", "Brazil", "Argentina", "Chile", "Paraguay", "Uruguay", "Mexico", "Jamaica",
+         "Haiti", "Colombia", "Venezuela", "Peru", "Bolivia", "Trinidad and Tobago", "Barbados", "Martinique"}
+NORTH_AMERICA = {"United States", "Canada"}
+
+
+def build_time_and_place(days, place_by_id, periods):
+    def up(pid):
+        n = 0
+        while place_by_id.get(pid, {}).get("parent") and n < 5:
+            pid = place_by_id[pid]["parent"]
+            n += 1
+        return pid
+
+    def group(pid):
+        top = up(pid)
+        if top in GROUP_OF_PLACE:
+            return GROUP_OF_PLACE[top]
+        p = place_by_id.get(top, {})
+        if p.get("kind") == "ship" or "crossing" in top or not p.get("country"):
+            return "at-sea" if p.get("kind") in ("ship", "body_of_water", "other") else "us-other"
+        c = p["country"]
+        if c in NORTH_AMERICA:
+            return "us-other"
+        if c in AFRICA:
+            return "africa"
+        if c in LATAM:
+            return "latin-america"
+        return "europe"
+
+    years = defaultdict(lambda: defaultdict(int))
+    top_by_year = defaultdict(lambda: defaultdict(int))
+    per_day = []
+    for r in days:
+        loc = (r["location"] or {}).get("id")
+        if not loc:
+            continue
+        g = group(loc)
+        y = int(r["date"][:4])
+        years[y][g] += 1
+        top_by_year[y][up(loc)] += 1
+        per_day.append((r["date"], up(loc), g))
+    year_rows = []
+    for y in sorted(years):
+        tops = sorted(top_by_year[y].items(), key=lambda x: -x[1])[:60]
+        year_rows.append({"year": y, "counts": dict(years[y]), "distinct_places": len(top_by_year[y]),
+                          "places": [{"id": k, "name": place_by_id.get(k, {}).get("name", k), "days": v,
+                                      "lat": place_by_id.get(k, {}).get("lat"), "lon": place_by_id.get(k, {}).get("lon"),
+                                      "group": group(k)} for k, v in tops]})
+    dump(OUT / "time-and-place/years.json", {"groups": [{"id": a, "label": b} for a, b in GROUPS], "years": year_rows})
+
+    out = []
+    for per in periods["periods"]:
+        counts, gcounts = defaultdict(int), defaultdict(int)
+        for d, top, g in per_day:
+            if per["start"] <= d <= per["end"]:
+                counts[top] += 1
+                gcounts[g] += 1
+        total = sum(counts.values())
+        places = []
+        for k, v in sorted(counts.items(), key=lambda x: -x[1])[:60]:
+            p = place_by_id.get(k, {})
+            places.append({"id": k, "name": p.get("name", k), "days": v, "lat": p.get("lat"), "lon": p.get("lon"),
+                           "kind": p.get("kind"), "group": group(k)})
+        out.append({**{k: per[k] for k in ("id", "facet", "label", "start", "end")}, "days": total,
+                    "groups": dict(gcounts), "distinct_places": len(counts), "places": places})
+    dump(OUT / "time-and-place/periods.json", {"groups": [{"id": a, "label": b} for a, b in GROUPS], "periods": out})
+
+
 def main():
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -141,6 +218,8 @@ def main():
                                for r in days if r["has_entry"]])
     dump(OUT / "highlights.json", [compact(r) for r in days if r["significance"] >= 4])
 
+    build_time_and_place(days, place_by_id, periods)
+
     meta = {
         "title": "Theodore Roosevelt Day by Day",
         "publisher": "Theodore Roosevelt Presidential Library",
@@ -149,12 +228,16 @@ def main():
         "coverage": {"start": days[0]["date"], "end": days[-1]["date"]},
         "counts": {"days": len(days), "days_with_entry": sum(r["has_entry"] for r in days),
                    "people": len(people), "places": len(places),
-                   "letters": sum(len(r["letters"]) for r in days), "tr_quotes": sum(len(r["tr_quotes"]) for r in days)},
+                   "letters": sum(len(r["letters"]) for r in days),
+                   "letters_linked_to_trc": sum(1 for r in days for l in r["letters"] if l.get("trc")),
+                   "days_with_archive_items": sum(1 for r in days if r.get("archive")), "tr_quotes": sum(len(r["tr_quotes"]) for r in days)},
         "source": "Facts are drawn from the Theodore Roosevelt Association's Chronological Record (TRC-CR-1, "
                   "compiled by Robert J. Moore Jr., 1985), cited by page on every day. All summaries and "
                   "descriptions are original writing by the Theodore Roosevelt Presidential Library.",
         "quotes_note": "tr_quotes are Theodore Roosevelt's own words as transcribed in the source record. "
                        "They are marked verified:false until checked against the original document.",
+        "archive": "Archive links point to the Theodore Roosevelt Center Digital Library at Dickinson State University "
+                   "(theodorerooseveltcenter.org). Items are matched by date; letters by date plus correspondent name.",
         "geodata": "Coordinates from OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL).",
         "license": "Data: CC BY 4.0, Theodore Roosevelt Presidential Library. Code: MIT.",
         "endpoints": {

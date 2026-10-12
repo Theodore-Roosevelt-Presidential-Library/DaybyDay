@@ -16,10 +16,10 @@
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
-  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
 </header>
 
-<main class="cols"><section id="day"></section><aside class="side"><h2 id="side-title">Same date, other years</h2><ul class="otd" id="otd"></ul></aside></main>
+<main class="cols"><section id="day"></section><aside class="side"><h2 id="side-title">Same date, other years</h2><div id="otdNote"></div><ul class="otd" id="otd"></ul></aside></main>
 <footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985). <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
 <script src="assets/app.js"></script>
 <script>
@@ -31,7 +31,9 @@
     document.getElementById("day").innerHTML = DBD.renderDay(d);
     document.getElementById("side-title").textContent = `Other ${DBD.fmtDate(date, { noYear: true })}s`;
     const o = await DBD.get(`on-this-day/${date.slice(5)}.json`).catch(() => ({ days: [] }));
-    document.getElementById("otd").innerHTML = o.days.filter(x => x.date !== date).slice(0, 10).map(x => `<li><span class="yr">${x.date.slice(0,4)}</span><a href="day.html?date=${x.date}">${DBD.esc(x.headline)}</a><div class="small">Age ${x.age}</div></li>`).join("");
+    const l = DBD.otdList(o.days.filter(x => x.date !== date), 10, x => `<a href="day.html?date=${x.date}">${DBD.esc(x.headline)}</a>`);
+    document.getElementById("otd").innerHTML = l.items;
+    document.getElementById("otdNote").innerHTML = l.note;
   } catch (e) {
     document.getElementById("day").innerHTML = `<p>No day matches “${DBD.esc(date)}”. Dates run from October 27, 1858 to January 6, 1919, written as YYYY-MM-DD.</p>`;
   }

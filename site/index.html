@@ -18,7 +18,7 @@
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
-  <nav><a href="index.html" aria-current="page">Explore</a><a href="map.html">Where he was</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+  <nav><a href="index.html" aria-current="page">Explore</a><a href="map.html">Where he was</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
 </header>
 
 <section class="hero">
@@ -50,6 +50,7 @@
   <section id="day" aria-live="polite"></section>
   <aside class="side">
     <h2 id="otdTitle">On this day</h2>
+    <div id="otdNote"></div>
     <ul class="otd" id="otd"></ul>
   </aside>
 </main>
@@ -130,7 +131,9 @@
   const today = new Date(), md = String(today.getMonth() + 1).padStart(2, "0") + "-" + String(today.getDate()).padStart(2, "0");
   document.getElementById("otdTitle").textContent = `On ${DBD.MONTHS[today.getMonth()]} ${today.getDate()}`;
   DBD.get(`on-this-day/${md}.json`).then(o => {
-    document.getElementById("otd").innerHTML = o.days.slice(0, 8).map(x => `<li><span class="yr">${x.date.slice(0, 4)}</span><button class="linkish" data-date="${x.date}">${DBD.esc(x.headline)}</button><div class="small">Age ${x.age}${x.location ? ` | ${DBD.esc(x.location)}` : ""}</div></li>`).join("");
+    const l = DBD.otdList(o.days, 8, x => `<button class="linkish" data-date="${x.date}">${DBD.esc(x.headline)}</button>`);
+    document.getElementById("otd").innerHTML = l.items;
+    document.getElementById("otdNote").innerHTML = l.note;
     document.querySelectorAll("#otd button").forEach(b => b.addEventListener("click", () => { showDay(b.dataset.date, true); document.getElementById("day").scrollIntoView({ behavior: "smooth" }); }));
     if (!DBD.param("date") && o.days.length) showDay(o.days[0].date);
   });

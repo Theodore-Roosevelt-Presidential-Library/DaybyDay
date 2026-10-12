@@ -120,6 +120,14 @@ def main():
     except FileNotFoundError:
         tra_pages = json.load(open(ROOT / "data/tra_pages.json"))
 
+    trc_day, trc_letters = {}, {}
+    if (ROOT / "data/trc_by_day.jsonl").exists():
+        for line in open(ROOT / "data/trc_by_day.jsonl"):
+            x = json.loads(line)
+            trc_day[x["date"]] = x
+        trc_letters = json.load(open(ROOT / "data/trc_letters.json"))
+    TRC_URL = "https://www.theodorerooseveltcenter.org/digital-library/{}/"
+
     unresolved_people, unresolved_places = Counter(), Counter()
     days, last_loc = [], None
     stats_person = defaultdict(lambda: {"mentions": 0, "days": [], "places": Counter(), "with": Counter()})
@@ -173,6 +181,9 @@ def main():
                 lid = person_id(l.get("correspondent") or "")
                 letter = {"direction": l["direction"], "correspondent": lid or l.get("correspondent"),
                           "correspondent_resolved": bool(lid), "topic": l.get("topic")}
+                hit = trc_letters.get(f"{ds}|{l['direction']}|{letter['correspondent']}")
+                if hit:
+                    letter["trc"] = [TRC_URL.format(i) for i in hit["trc"]]
                 rec["letters"].append(letter)
                 letters_out.append({"date": ds, **letter})
             for q in r.get("tr_quotes") or []:
@@ -205,6 +216,11 @@ def main():
                                "source": loc_source, "also": [x for x in idx_places if x != loc]}
             if loc_source != "carried":
                 last_loc = loc
+        t = trc_day.get(ds)
+        rec["archive"] = ({"source": "Theodore Roosevelt Center, Dickinson State University", "count": t["count"],
+                           "types": t["types"],
+                           "items": [{"title": i["title"], "type": i["type"], "url": TRC_URL.format(i["id"])} for i in t["items"]]}
+                          if t else None)
         days.append(rec)
         for pid in day_places:
             stats_place[pid].append(ds)

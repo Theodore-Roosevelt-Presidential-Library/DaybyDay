@@ -9,7 +9,8 @@ Every day of Theodore Roosevelt's life — 21,986 of them, from his birth on Oct
 | Days | 21,986 (14,552 with an entry in the record) |
 | People | 4,750 canonical people, every mention linked |
 | Places | 2,827 canonical places, most with coordinates |
-| Letters | 7,358 letters to and from TR, with correspondent and topic |
+| Letters | 7,358 letters to and from TR, with correspondent and topic; 4,725 linked to the letter itself at the Theodore Roosevelt Center |
+| Archive | 127,873 dated TRC Digital Library items attached to 8,296 days |
 | TR's own words | 3,179 diary, letter and speech passages (unverified transcriptions) |
 | Life periods | 30 periods across four facets: life stage, office, journey, campaign |
 

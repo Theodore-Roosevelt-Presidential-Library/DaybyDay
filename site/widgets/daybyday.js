@@ -71,7 +71,7 @@
       const n = Math.max(1, Math.min(10, +(this.getAttribute("count") || 3)));
       const o = await get(this.api, `on-this-day/${md}.json`);
       const [m, d] = md.split("-").map(Number);
-      const items = o.days.slice(0, n).map(x => `<li><span class="yr">${x.date.slice(0, 4)}</span><a class="h" href="${this.dayLink(x.date)}" target="_top">${esc(x.headline)}</a>
+      const items = o.days.slice(0, n).sort((a, b) => a.date.localeCompare(b.date)).map(x => `<li><span class="yr">${x.date.slice(0, 4)}</span><a class="h" href="${this.dayLink(x.date)}" target="_top">${esc(x.headline)}</a>
         <p class="s">${esc(x.summary)}</p><div class="m">Age ${x.age}${x.location ? ` | ${esc(x.location)}` : ""}</div></li>`).join("");
       this.paint(`<p class="kicker">${MONTHS[m - 1]} ${d} in Theodore Roosevelt's life</p><ul>${items || `<li class="m">No entries for this date.</li>`}</ul>`);
     }

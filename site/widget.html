@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Today in TR's life widget | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="A rotating widget that cycles through what Theodore Roosevelt was doing on today's date in every year of his life.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .doc { max-width: 1000px; }
+  .doc h2 { color: var(--night); margin-top: 44px; }
+  .doc p { max-width: 70ch; }
+  .demo { padding: 40px 32px; border-radius: var(--radius); margin: 14px 0; border: 1px solid transparent; }
+  .bg-white { background: #fff; border-color: var(--sand); }
+  .bg-sand { background: var(--sand-2); }
+  .bg-night { background: var(--night); }
+  .bg-forest { background: var(--forest); }
+  .bg-photo { background: url("https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Theodore_Roosevelt_National_Park_-_Painted_Canyon.jpg/1280px-Theodore_Roosevelt_National_Park_-_Painted_Canyon.jpg") center/cover, #5b4a3a; }
+  .two { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 16px; }
+</style>
+<script src="widgets/today.js" async></script>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html" aria-current="page">API &amp; widgets</a></nav>
+</header>
+<main class="wrap doc" style="padding:36px 20px 60px">
+  <h1 style="color:var(--night)">Today in TR's life</h1>
+  <p style="font-size:19px">A rotating widget for trlibrary.com. It cycles through what Roosevelt was doing on today's date across his life, biggest days first, shown in year order. Each slide links to the full day. It works the same way as the visitor-quotes widget: one tag, four layouts, and it reads its background to choose light or dark text.</p>
+<pre>&lt;div data-trpl-today data-layout="banner"&gt;&lt;/div&gt;
+&lt;script src="https://daybyday.labs.trlibrary.com/widgets/today.js" async&gt;&lt;/script&gt;</pre>
+
+  <h2>Banner</h2>
+  <p>One year at a time, centered, changing every nine seconds. It reserves the height of the longest entry, so rotation never moves the rest of the page. Rotation pauses on hover or keyboard focus, when scrolled out of view, in a background tab, and for visitors who ask for reduced motion.</p>
+  <div class="demo bg-sand"><div data-trpl-today data-layout="banner"></div></div>
+
+  <h2>Card</h2>
+  <p>The same rotation in a bordered panel, for a sidebar or column.</p>
+  <div class="demo bg-white" style="max-width:460px"><div data-trpl-today data-layout="card"></div></div>
+<pre>&lt;div data-trpl-today data-layout="card"&gt;&lt;/div&gt;</pre>
+
+  <h2>Wall</h2>
+  <p>Three years at once, no rotation. Set <code>data-count</code> for more.</p>
+  <div class="demo bg-white"><div data-trpl-today data-layout="wall" data-count="3"></div></div>
+<pre>&lt;div data-trpl-today data-layout="wall" data-count="3"&gt;&lt;/div&gt;</pre>
+
+  <h2>Inline</h2>
+  <p>A quiet rule-left version for the flow of a page.</p>
+  <div class="demo bg-white"><div data-trpl-today data-layout="inline"></div></div>
+<pre>&lt;div data-trpl-today data-layout="inline"&gt;&lt;/div&gt;</pre>
+
+  <h2>On any background</h2>
+  <p>Nothing below is configured differently. On a photo or video section it switches to white text with a soft shadow. If a Drupal section hides its color from the widget, say what you want: <code>data-text="white"</code> or <code>data-text="dark"</code>.</p>
+  <div class="two">
+    <div class="demo bg-night"><div data-trpl-today data-layout="inline"></div></div>
+    <div class="demo bg-forest"><div data-trpl-today data-layout="inline"></div></div>
+  </div>
+  <div class="demo bg-photo"><div data-trpl-today data-layout="banner"></div></div>
+
+  <h2>Options</h2>
+  <table class="list-table">
+    <thead><tr><th>Attribute</th><th>What it does</th></tr></thead>
+    <tbody>
+      <tr><td><code>data-layout</code></td><td><code>banner</code> (default), <code>card</code>, <code>wall</code>, <code>inline</code></td></tr>
+      <tr><td><code>data-date</code></td><td>Show a fixed date instead of today, as <code>MM-DD</code>, e.g. <code>10-27</code> for his birthday</td></tr>
+      <tr><td><code>data-count</code></td><td>How many years to cycle through (default 6; wall 3)</td></tr>
+      <tr><td><code>data-min</code></td><td>Only include days at or above this significance, 1–5 (default 1)</td></tr>
+      <tr><td><code>data-interval</code></td><td>Seconds between slides; <code>0</code> turns rotation off (default 9)</td></tr>
+      <tr><td><code>data-text</code> / <code>data-theme</code></td><td>Force white or dark text, or name the background as light or dark</td></tr>
+      <tr><td><code>data-align</code></td><td><code>left</code> or <code>center</code></td></tr>
+      <tr><td><code>data-height</code></td><td><code>auto</code> lets the block resize with each slide (default fixed)</td></tr>
+      <tr><td><code>data-cta</code></td><td><code>off</code> hides the “Plan your visit” link</td></tr>
+    </tbody>
+  </table>
+  <p class="small" style="margin-top:12px">Roosevelt's own words are left out of the rotation until each quotation is verified against the original letter, diary or speech.</p>
+</main>
+<footer class="site"><div class="wrap">Theodore Roosevelt Presidential Library, Medora, North Dakota. <a href="api.html">More widgets and the API</a></div></footer>
+</body>
+</html>

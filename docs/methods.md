@@ -38,6 +38,10 @@ An independent reviewer checked a random sample of 50 days (37 clean, 10 minor, 
 
 Those records were moved (each keeps `redated_from` and its original TRA page citation), and 51 further days received corrected headlines, summaries or an `uncertain` note. `data/corrections_applied.json` logs every applied change. The full audit is in `docs/date_audit.md`.
 
+## 8. Links to the Theodore Roosevelt Center (`pipeline/link_trc.py`)
+
+The TRC Digital Library at Dickinson State University catalogs 141,609 items; 127,873 carry an exact date within TR's life. Using the Library's September 2026 harvest of that catalog (`TRPL/trc-rag/records.jsonl`), every dated item is attached to its day (`archive` on 8,296 days), and each Day by Day letter is matched to its TRC record when the date agrees and TR sits on one side while the correspondent's surname and first name (or initial) match the other side. 4,725 of 7,358 letters (64%) link to a TRC record. Unmatched letters are usually not in the TRC catalog or are addressed by title alone. Re-run `python pipeline/link_trc.py <trc_compact.jsonl>` after a fresh harvest.
+
 ## Known limitations
 
 - A comparison of the day entries against the independent place-names index suggests other short runs may be shifted (late Nov. 1876, Feb. 1883, Apr. 1886, late June 1888, early Oct. 1898, Nov. 1907, Dec. 1914, Mar. 1915). None is confirmed; check these before relying on exact dates there.

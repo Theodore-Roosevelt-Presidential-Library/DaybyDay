@@ -83,7 +83,9 @@ blockquote.trq footer { font: normal 12px var(--sans); color: var(--ink-2); marg
 .daynav { display: flex; justify-content: space-between; gap: 10px; margin-top: 18px; font: 600 15px var(--sans); }
 .side h2 { color: var(--night); }
 .otd { list-style: none; padding: 0; margin: 0; }
-.otd li { padding: 12px 0; border-bottom: 1px solid var(--sand); }
+.otd li { padding: 12px 0 12px 12px; border-bottom: 1px solid var(--sand); border-left: 4px solid var(--s1); }
+.otd li.sig2 { border-left-color: var(--s2); } .otd li.sig3 { border-left-color: var(--s3); }
+.otd li.sig4 { border-left-color: var(--s4); } .otd li.sig5 { border-left-color: var(--s5); }
 .otd .yr { font: 700 26px/1 var(--display); color: var(--s4); margin-right: 8px; }
 .otd button.linkish { all: unset; cursor: pointer; font: 700 17px/1.3 var(--serif); color: var(--ink); }
 .otd button.linkish:hover, .otd button.linkish:focus-visible { text-decoration: underline; }

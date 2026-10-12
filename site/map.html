@@ -4,9 +4,9 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Where he was | Theodore Roosevelt Day by Day</title>
-<meta name="description" content="Follow Theodore Roosevelt across the map, day by day, from New York City to the Badlands, Cuba, Africa and the Amazon.">
+<meta name="description" content="Follow Theodore Roosevelt across the map, stop by stop, from New York City to the Badlands, Cuba, Africa and the Amazon, with the story of each day.">
 <meta property="og:title" content="Where he was | Theodore Roosevelt Day by Day">
-<meta property="og:description" content="Follow Theodore Roosevelt across the map, day by day.">
+<meta property="og:description" content="Follow Theodore Roosevelt across the map, stop by stop, with the story of each day.">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -15,32 +15,76 @@
 <link rel="stylesheet" href="assets/app.css">
 <style>
   body.embed .bar, body.embed footer.site, body.embed .intro { display: none; }
-  body.embed main { padding: 0 !important; }
-  .now { display: grid; grid-template-columns: auto 1fr; gap: 4px 16px; align-items: baseline; margin-top: 12px; }
-  .now .when { font: 700 34px/1 var(--display); color: var(--night); text-transform: uppercase; }
-  .jumps { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
+  .mapgrid { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 28px; align-items: start; }
+  .mapcol { position: sticky; top: 12px; }
+  #map { height: min(70vh, 640px); min-height: 360px; }
+  @media (max-width: 900px) { .mapgrid { grid-template-columns: 1fr; } .mapcol { position: static; } #map { height: 52vh; } }
+  .stepper { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 12px 0 6px; }
+  .stepper .btn { padding: 9px 14px; }
+  .btn.ghost { background: transparent; color: var(--night); border: 1px solid var(--sky); }
+  .btn.ghost:hover { background: var(--sand-2); color: var(--night); }
+  .btn[disabled] { opacity: .4; cursor: default; }
+  .stepper select { font: 600 14px var(--sans); padding: 8px; border: 1px solid var(--sky); border-radius: var(--radius); background: #fff; }
+  .timeline { display: flex; gap: 10px; align-items: center; font: 14px var(--sans); color: var(--ink-2); }
+  .timeline input[type=range] { flex: 1; accent-color: var(--s3); }
+  .stop { background: var(--night); color: #fff; padding: 16px 20px; border-radius: var(--radius) var(--radius) 0 0; }
+  .stop .count { font: 13px var(--sans); color: var(--sky); }
+  .stop .where { font: 700 30px/1.05 var(--display); text-transform: uppercase; margin: 4px 0; }
+  .stop .where a { color: #fff; text-decoration: none; }
+  .stop .where a:hover { text-decoration: underline; }
+  .stop .span { font: 15px var(--sans); color: var(--sand); }
+  .hl { background: var(--sand-2); padding: 12px 20px 14px; }
+  .hl h3 { font: 600 13px var(--sans); color: var(--ink-2); margin: 0 0 6px; }
+  .hl ol { list-style: none; margin: 0; padding: 0; }
+  .hl li { padding: 3px 0; }
+  .hl button { all: unset; cursor: pointer; font: 15px/1.35 var(--serif); }
+  .hl button:hover, .hl button:focus-visible { text-decoration: underline; }
+  .hl button[aria-current=true] { font-weight: 700; }
+  .hl .d { font: 600 13px var(--sans); color: var(--s4); margin-right: 6px; }
+  #day .daycard { border-radius: 0 0 var(--radius) var(--radius); }
+  .keys { font: 13px var(--sans); color: var(--ink-2); margin-top: 8px; }
+  kbd { font: 12px var(--sans); border: 1px solid var(--sky); border-bottom-width: 2px; border-radius: 3px; padding: 0 5px; background: #fff; }
 </style>
 </head>
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
-  <nav><a href="index.html">Explore</a><a href="map.html" aria-current="page">Where he was</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+  <nav><a href="index.html">Explore</a><a href="map.html" aria-current="page">Where he was</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
 </header>
 <main class="wrap" style="padding:30px 20px 50px">
   <div class="intro">
     <h1 style="color:var(--night)">Where he was</h1>
-    <p style="max-width:62ch;font-size:19px">Drag through Theodore Roosevelt's life and watch him move. Each stop is a run of days he spent in one place; the trail shows where he had just been.</p>
+    <p style="max-width:64ch;font-size:19px">Follow Theodore Roosevelt stop by stop. Each stop is a run of days in one place. Step forward and back at your own pace, and read what happened there alongside the map.</p>
   </div>
-  <div class="mapctl">
-    <button class="btn" id="play" aria-pressed="false">Play</button>
-    <label for="t" class="small">Date</label>
-    <input type="range" id="t" min="0" value="0" aria-describedby="nowName">
-    <label class="small"><input type="checkbox" id="trail" checked> Show trail</label>
+  <div class="jumps" id="jumps" style="display:flex;gap:8px;flex-wrap:wrap"></div>
+  <div class="mapgrid" style="margin-top:14px">
+    <div class="mapcol">
+      <div id="map"></div>
+      <div class="stepper">
+        <button class="btn ghost" id="prev" aria-label="Previous stop">Previous stop</button>
+        <button class="btn" id="play" aria-pressed="false">Play</button>
+        <button class="btn ghost" id="next" aria-label="Next stop">Next stop</button>
+        <label class="small" for="speed" style="margin-left:auto">Pace</label>
+        <select id="speed">
+          <option value="9000">Slow</option>
+          <option value="5000" selected>Steady</option>
+          <option value="2500">Quick</option>
+        </select>
+      </div>
+      <div class="timeline"><span id="yearMin">1858</span><input type="range" id="t" min="0" value="0" aria-label="Move through his life"><span>1919</span></div>
+      <p class="keys">Keys: <kbd>←</kbd> <kbd>→</kbd> previous or next stop, <kbd>Shift</kbd>+<kbd>←</kbd> <kbd>→</kbd> previous or next day, <kbd>Space</kbd> play or pause. Play stops by itself on major days.</p>
+      <p class="small">Locations come from the Theodore Roosevelt Association's place-names index and the day entries. Days with no record carry forward his last known place. Map data &copy; OpenStreetMap contributors.</p>
+    </div>
+    <div>
+      <div class="stop" aria-live="polite">
+        <div class="count" id="count"></div>
+        <div class="where" id="where"></div>
+        <div class="span" id="span"></div>
+      </div>
+      <div class="hl" id="hl"></div>
+      <section id="day" aria-live="polite"></section>
+    </div>
   </div>
-  <div class="jumps" id="jumps"></div>
-  <div class="now"><div class="when" id="nowWhen"></div><div><div class="stay-now" id="nowName"></div><div class="small" id="nowMeta"></div></div></div>
-  <div id="map" style="margin-top:14px"></div>
-  <p class="small" style="margin-top:10px">Locations come from the Theodore Roosevelt Association's place-names index and the day entries. Days with no record carry forward his last known place. Map data &copy; OpenStreetMap contributors.</p>
 </main>
 <footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i>. <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
@@ -48,54 +92,136 @@
 <script>
 (async () => {
   if (DBD.param("embed")) document.body.classList.add("embed");
-  const stays = (await DBD.get("stays.json")).filter(s => s.lat != null);
-  const map = L.map("map", { worldCopyJump: true }).setView([40.7, -74], 4);
+  const [allStays, grid] = await Promise.all([DBD.get("stays.json"), DBD.get("grid.json")]);
+  const stays = allStays.filter(s => s.lat != null);
+  const rowByDate = new Map(grid.rows.map(r => [r[0], r]));   // [date, sig, loc, headline, tags]
+
+  const map = L.map("map", { worldCopyJump: true, scrollWheelZoom: false }).setView([40.7, -74], 5);
   L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors", maxZoom: 18 }).addTo(map);
-  const trail = L.polyline([], { color: "#E7805D", weight: 2, opacity: .7 }).addTo(map);
+  const trail = L.polyline([], { color: "#E7805D", weight: 2.5, opacity: .75 }).addTo(map);
   const dots = L.layerGroup().addTo(map);
-  const here = L.circleMarker([0, 0], { radius: 10, color: "#092A4D", weight: 3, fillColor: "#F9D635", fillOpacity: 1 }).addTo(map);
+  const here = L.circleMarker([0, 0], { radius: 11, color: "#092A4D", weight: 3, fillColor: "#F9D635", fillOpacity: 1 }).addTo(map);
   const slider = document.getElementById("t");
   slider.max = stays.length - 1;
-  const TRAIL = 25;
-  function show(i, pan) {
+  const TRAIL = 12;
+  let cur = -1, curDate = null, timer = null;
+
+  function daysOf(s) {
+    const out = []; let d = new Date(s.start + "T00:00:00Z"); const e = new Date(s.end + "T00:00:00Z");
+    while (d <= e) { out.push(d.toISOString().slice(0, 10)); d = new Date(d.getTime() + 864e5); }
+    return out;
+  }
+  function bestDay(s) {
+    let best = s.start, sig = -2;
+    for (const d of daysOf(s)) { const r = rowByDate.get(d); if (r && r[1] > sig) { sig = r[1]; best = d; } }
+    return best;
+  }
+  function stayIndexFor(date) {
+    let lo = 0, hi = stays.length - 1;
+    while (lo < hi) { const mid = (lo + hi) >> 1; if (stays[mid].end < date) lo = mid + 1; else hi = mid; }
+    return lo;
+  }
+  function drawMap(i, fly) {
     const s = stays[i];
     here.setLatLng([s.lat, s.lon]);
     dots.clearLayers();
     const pts = [];
-    if (document.getElementById("trail").checked) {
-      for (let k = Math.max(0, i - TRAIL); k <= i; k++) {
-        const t = stays[k];
-        pts.push([t.lat, t.lon]);
-        if (k < i) L.circleMarker([t.lat, t.lon], { radius: 4, stroke: false, fillColor: "#FC924E", fillOpacity: .35 + .6 * (k - (i - TRAIL)) / TRAIL }).addTo(dots);
-      }
+    for (let k = Math.max(0, i - TRAIL); k <= i; k++) {
+      const t = stays[k]; pts.push([t.lat, t.lon]);
+      if (k < i) L.circleMarker([t.lat, t.lon], { radius: 4, stroke: false, fillColor: "#FC924E", fillOpacity: .3 + .6 * (k - (i - TRAIL)) / TRAIL })
+        .bindTooltip(`${DBD.esc(t.name)}, ${DBD.fmtDate(t.start)}`).on("click", () => go(k, true)).addTo(dots);
     }
     trail.setLatLngs(pts);
-    document.getElementById("nowWhen").textContent = s.start.slice(0, 4);
-    document.getElementById("nowName").innerHTML = `<a href="place.html?id=${encodeURIComponent(s.place)}">${DBD.esc(s.name)}</a>`;
-    document.getElementById("nowMeta").innerHTML = `${DBD.fmtDate(s.start)}${s.days > 1 ? ` to ${DBD.fmtDate(s.end)} (${s.days} days)` : ""} &nbsp;|&nbsp; <a href="day.html?date=${s.start}">Read the day</a>`;
-    if (pan) map.panTo([s.lat, s.lon], { animate: true, duration: .4 });
+    if (fly) {
+      const prev = stays[Math.max(0, i - 1)];
+      const far = map.distance([prev.lat, prev.lon], [s.lat, s.lon]) > 600000;
+      const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+      if (!map.getBounds().pad(-0.15).contains([s.lat, s.lon]) || far) {
+        reduce ? map.setView([s.lat, s.lon], far ? 4 : map.getZoom()) : map.flyTo([s.lat, s.lon], far ? 4 : Math.max(map.getZoom(), 5), { duration: 1.2 });
+      }
+    }
   }
-  slider.addEventListener("input", () => show(+slider.value, true));
-  document.getElementById("trail").addEventListener("change", () => show(+slider.value));
-  let timer = null;
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  document.getElementById("play").addEventListener("click", e => {
-    if (timer) { clearInterval(timer); timer = null; e.target.textContent = "Play"; e.target.setAttribute("aria-pressed", "false"); return; }
-    e.target.textContent = "Pause"; e.target.setAttribute("aria-pressed", "true");
-    timer = setInterval(() => {
-      if (+slider.value >= stays.length - 1) { document.getElementById("play").click(); return; }
-      slider.value = +slider.value + 1; show(+slider.value, !reduce);
-    }, 180);
+  function drawStop(i) {
+    const s = stays[i];
+    document.getElementById("count").textContent = `Stop ${(i + 1).toLocaleString()} of ${stays.length.toLocaleString()} | ${s.start.slice(0, 4)}`;
+    document.getElementById("where").innerHTML = `<a href="place.html?id=${encodeURIComponent(s.place)}">${DBD.esc(s.name)}</a>`;
+    document.getElementById("span").textContent = s.days > 1 ? `${DBD.fmtDate(s.start)} to ${DBD.fmtDate(s.end)}, ${s.days.toLocaleString()} days` : DBD.fmtDate(s.start);
+    const notable = daysOf(s).map(d => rowByDate.get(d)).filter(r => r && r[1] >= 1)
+      .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0])).slice(0, 6).sort((a, b) => a[0].localeCompare(b[0]));
+    document.getElementById("hl").innerHTML = notable.length > 1
+      ? `<h3>Days here worth reading</h3><ol>${notable.map(r => `<li><button data-date="${r[0]}" aria-current="${r[0] === curDate}"><span class="d">${DBD.fmtDate(r[0], { noYear: s.start.slice(0, 4) === s.end.slice(0, 4) })}</span>${DBD.esc(r[3])}</button></li>`).join("")}</ol>`
+      : "";
+    document.getElementById("prev").disabled = i === 0;
+    document.getElementById("next").disabled = i === stays.length - 1;
+  }
+  async function showDay(date) {
+    curDate = date;
+    const d = await DBD.get(`days/${date}.json`);
+    if (curDate !== date) return;
+    document.getElementById("day").innerHTML = DBD.renderDay(d);
+    document.querySelectorAll("#hl button").forEach(b => b.setAttribute("aria-current", b.dataset.date === date));
+    history.replaceState(null, "", `?date=${date}${DBD.param("embed") ? "&embed=1" : ""}`);
+  }
+  function go(i, fly = true, date = null) {
+    i = Math.max(0, Math.min(stays.length - 1, i));
+    const moved = i !== cur;
+    cur = i; slider.value = i;
+    if (moved) drawMap(i, fly);
+    const target = date || bestDay(stays[i]);
+    curDate = target;
+    drawStop(i);
+    return showDay(target);
+  }
+  function stepDay(delta) {
+    const d = new Date(curDate + "T00:00:00Z"); d.setUTCDate(d.getUTCDate() + delta);
+    const iso = d.toISOString().slice(0, 10);
+    if (iso < stays[0].start || iso > stays[stays.length - 1].end) return;
+    go(stayIndexFor(iso), true, iso);
+  }
+
+  // controls
+  document.getElementById("prev").addEventListener("click", () => { stop(); go(cur - 1); });
+  document.getElementById("next").addEventListener("click", () => { stop(); go(cur + 1); });
+  slider.addEventListener("input", () => { stop(); go(+slider.value); });
+  document.getElementById("hl").addEventListener("click", e => { const b = e.target.closest("button[data-date]"); if (b) { stop(); showDay(b.dataset.date); } });
+  document.getElementById("day").addEventListener("click", e => {
+    const a = e.target.closest(".daynav a[data-date]"); if (!a) return;
+    e.preventDefault(); stop(); go(stayIndexFor(a.dataset.date), true, a.dataset.date);
   });
-  const JUMPS = [["Born", "1858-10-27"], ["Harvard", "1876-09-27"], ["Badlands", "1883-09-08"], ["Rough Riders", "1898-06-22"],
-                 ["President", "1901-09-14"], ["Africa", "1909-04-21"], ["River of Doubt", "1914-02-27"], ["Final days", "1918-12-25"]];
-  document.getElementById("jumps").innerHTML = JUMPS.map(([l, d]) => `<button class="chip" style="color:var(--night);border-color:var(--sky)" data-d="${d}">${l}</button>`).join("");
-  function jumpTo(date) {
-    let i = stays.findIndex(s => s.end >= date); if (i < 0) i = stays.length - 1;
-    slider.value = i; show(i); map.setView([stays[i].lat, stays[i].lon], 6);
+  const playBtn = document.getElementById("play");
+  function stop() { if (timer) { clearTimeout(timer); timer = null; } playBtn.textContent = "Play"; playBtn.setAttribute("aria-pressed", "false"); }
+  function tick() {
+    if (cur >= stays.length - 1) return stop();
+    go(cur + 1).then(() => {
+      const r = rowByDate.get(curDate);
+      if (r && r[1] >= 4) return stop();          // pause on major days so they can be read
+      const base = +document.getElementById("speed").value;
+      timer = setTimeout(tick, stays[cur].days > 30 ? base * 1.4 : base);
+    });
   }
-  document.getElementById("jumps").addEventListener("click", e => { const b = e.target.closest("button"); if (b) jumpTo(b.dataset.d); });
-  jumpTo(DBD.param("date") || "1858-10-27");
+  playBtn.addEventListener("click", () => {
+    if (timer) return stop();
+    playBtn.textContent = "Pause"; playBtn.setAttribute("aria-pressed", "true");
+    timer = setTimeout(tick, 400);
+  });
+  document.addEventListener("keydown", e => {
+    if (e.target.closest("input, select, textarea")) return;
+    if (e.key === "ArrowRight") { e.preventDefault(); stop(); e.shiftKey ? stepDay(1) : go(cur + 1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); stop(); e.shiftKey ? stepDay(-1) : go(cur - 1); }
+    else if (e.key === " " && !e.target.closest("button, a")) { e.preventDefault(); playBtn.click(); }
+  });
+
+  const JUMPS = [["Born", "1858-10-27"], ["Harvard", "1876-09-27"], ["Badlands", "1883-09-08"], ["Elkhorn", "1884-06-25"], ["Rough Riders", "1898-06-22"],
+                 ["President", "1901-09-14"], ["Panama", "1906-11-14"], ["Africa", "1909-04-21"], ["River of Doubt", "1914-02-27"], ["Final days", "1918-12-25"]];
+  document.getElementById("jumps").innerHTML = JUMPS.map(([l, d]) => `<button class="chip" style="color:var(--night);border-color:var(--sky)" data-d="${d}">${l}</button>`).join("");
+  document.getElementById("jumps").addEventListener("click", e => {
+    const b = e.target.closest("button"); if (!b) return;
+    stop(); const i = stayIndexFor(b.dataset.d); go(i, false, b.dataset.d); map.setView([stays[i].lat, stays[i].lon], 6);
+  });
+  const start = DBD.param("date") || "1858-10-27";
+  const i0 = stayIndexFor(start);
+  map.setView([stays[i0].lat, stays[i0].lon], 6);
+  go(i0, false, start);
 })();
 </script>
 </body>

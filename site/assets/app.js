@@ -39,15 +39,30 @@ const DBD = (() => {
       if (d.letters?.length) {
         h += `<h3 style="margin-top:14px">Letters</h3><ul class="who">` + d.letters.map(l => {
           const who = typeof l.correspondent === "string" && l.correspondent_resolved ? `<a href="person.html?id=${encodeURIComponent(l.correspondent)}">${esc(l.correspondent_name || l.correspondent)}</a>` : esc(l.correspondent);
-          return `<li>${l.direction === "from_tr" ? "To" : "From"} ${who}<br><span class="role">${esc(l.topic || "")}</span></li>`;
+          const trc = (l.trc || []).map((u, k) => `<a href="${esc(u)}" target="_blank" rel="noopener">${k ? `copy ${k + 1}` : "See the letter at the TRC"}</a>`).join(", ");
+          return `<li>${l.direction === "from_tr" ? "To" : "From"} ${who}<br><span class="role">${esc(l.topic || "")}</span>${trc ? `<br><span class="role">${trc}</span>` : ""}</li>`;
         }).join("") + `</ul>`;
       }
       if (d.tags?.length) h += `<ul class="taglist">` + d.tags.map(t => `<li><a href="index.html?tag=${encodeURIComponent(t)}">${esc(t.replace(/-/g, " "))}</a></li>`).join("") + `</ul>`;
+    }
+    if (d.archive) {
+      const a = d.archive;
+      const kinds = Object.entries(a.types).map(([k, v]) => `${v} ${v === 1 ? k.toLowerCase() : (k.toLowerCase() + (k.endsWith("s") ? "" : "s"))}`).join(", ");
+      h += `<h3 style="margin-top:16px">In the archive</h3><p class="small" style="margin:0 0 6px">The Theodore Roosevelt Center at Dickinson State University holds ${a.count.toLocaleString()} item${a.count === 1 ? "" : "s"} dated this day: ${esc(kinds)}.</p><ul class="who">` +
+        a.items.slice(0, 8).map(i => `<li><a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a></li>`).join("") + `</ul>`;
     }
     const pages = (d.sources?.[0]?.pages || []).join(", ");
     h += `<div class="src">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i>${pages ? ` (${esc(pages)})` : ""}.${d.uncertain ? ` Note: ${esc(d.uncertain)}` : ""}</div>`;
     if (d.prev || d.next) h += `<nav class="daynav">${d.prev ? `<a href="day.html?date=${d.prev}" data-date="${d.prev}">Previous day</a>` : "<span></span>"}<a href="day.html?date=${d.date}">Permalink</a>${d.next ? `<a href="day.html?date=${d.next}" data-date="${d.next}">Next day</a>` : "<span></span>"}</nav>`;
     return h + `</article>`;
   }
-  return { API, get, esc, fmtDate, param, renderDay, personLink, placeLink, MONTHS };
+  // Pick the n most significant entries for a calendar date, then list them in year order.
+  const SIG_LABEL = ["", "Ordinary day", "Notable", "Important", "Major", "History-making"];
+  function otdList(days, n, link) {
+    const picked = days.slice(0, n).sort((a, b) => a.date.localeCompare(b.date));
+    const items = picked.map(x => `<li class="sig${x.significance}"><span class="yr">${x.date.slice(0, 4)}</span>${link(x)}<div class="small">Age ${x.age}${x.location ? ` | ${esc(x.location)}` : ""} | ${SIG_LABEL[x.significance] || ""}</div></li>`).join("");
+    const note = days.length > n ? `<p class="small">The ${n} biggest of ${days.length} years with an entry on this date, in order.</p>` : `<p class="small">Every year with an entry on this date, in order.</p>`;
+    return { items, note };
+  }
+  return { API, get, esc, fmtDate, param, renderDay, personLink, placeLink, MONTHS, otdList };
 })();
