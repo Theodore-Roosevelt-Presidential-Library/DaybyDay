@@ -46,7 +46,7 @@ def main():
             nd = (dt.date.fromisoformat(d) + dt.timedelta(days=m["shift_days"])).isoformat()
             r["date"] = nd
             r["moved_from"] = d
-            note = f"Re-dated from {d}: {m['reason']}"
+            note = f"The record places this on {dt.date.fromisoformat(d):%B %-d, %Y}; {m['reason']}"
             r["uncertain"] = f"{r['uncertain']} {note}" if r.get("uncertain") else note
             moved[nd] = (r, f)
         for nd, (r, f) in moved.items():
@@ -93,7 +93,7 @@ def main():
         tgt["events"] = (tgt.get("events") or []) + go
         for k, items in (("people", moved_people), ("places", moved_places), ("letters", moved_letters)):
             tgt[k] = (tgt.get(k) or []) + [x for x in items if x not in (tgt.get(k) or [])]
-        note = f"Includes items the source logged on {sp['from']}: {sp['reason']}"
+        note = f"Includes items the record places on {dt.date.fromisoformat(sp['from']):%B %-d}: {sp['reason']}"
         tgt["uncertain"] = f"{tgt['uncertain']} {note}" if tgt.get("uncertain") else note
         done["splits"].append(key)
         print(f"split {len(go)} events {sp['from']} -> {sp['to']}")

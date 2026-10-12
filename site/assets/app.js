@@ -52,7 +52,8 @@ const DBD = (() => {
         a.items.slice(0, 8).map(i => `<li><a href="${esc(i.url)}" target="_blank" rel="noopener">${esc(i.title)}</a></li>`).join("") + `</ul>`;
     }
     const pages = (d.sources?.[0]?.pages || []).join(", ");
-    h += `<div class="src">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i>${pages ? ` (${esc(pages)})` : ""}.${d.uncertain ? ` Note: ${esc(d.uncertain)}` : ""}</div>`;
+    if (d.uncertain) h += `<p class="dnote"><b>A note on this day.</b> ${esc(d.uncertain)}</p>`;
+    h += `<div class="src">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i>${pages ? ` (${esc(pages)})` : ""}. <a href="about.html">About the dates</a></div>`;
     if (d.prev || d.next) h += `<nav class="daynav">${d.prev ? `<a href="day.html?date=${d.prev}" data-date="${d.prev}">Previous day</a>` : "<span></span>"}<a href="day.html?date=${d.date}">Permalink</a>${d.next ? `<a href="day.html?date=${d.next}" data-date="${d.next}">Next day</a>` : "<span></span>"}</nav>`;
     return h + `</article>`;
   }

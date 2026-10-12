@@ -59,6 +59,10 @@ Three reviewers each took one era (1858–1888, 1889–1908, 1909–1919) and ch
 
 Moves, splits (`splits` in `data/corrections.json`) and fixes are all logged in `data/corrections_applied.json`. Seven runs flagged earlier as possibly shifted (Nov. 1876, Feb. 1883, Apr. 1886, June 1888, Oct. 1898, Nov. 1907, Dec. 1914) were checked and cleared. Late March 1915 is compressed in the source; affected days carry an `uncertain` note.
 
+### Notes for readers
+
+Each day's `uncertain` field is shown on the site as "A note on this day." In October 2026 the 1,756 notes written in pipeline language ("OCR reads…", "source parse") were rewritten for the public by the same brief, keeping every fact and caveat; 187 that described only transcription fixes with no remaining doubt were dropped. Event lines on news-lag days now say the news arrived rather than that the event happened. `site/about.html` ("About the dates") explains the record, news lag, notes, moved days, locations and unverified quotations, and invites corrections to hello@trlibrary.com.
+
 ## 8. Links to the Theodore Roosevelt Center (`pipeline/link_trc.py`)
 
 The TRC Digital Library at Dickinson State University catalogs 141,609 items; 127,873 carry an exact date within TR's life. Using the Library's September 2026 harvest of that catalog (`TRPL/trc-rag/records.jsonl`), every dated item is attached to its day (`archive` on 8,296 days), and each Day by Day letter is matched to its TRC record when the date agrees and TR sits on one side while the correspondent's surname and first name (or initial) match the other side. 4,725 of 7,358 letters (64%) link to a TRC record. Unmatched letters are usually not in the TRC catalog or are addressed by title alone. Re-run `python pipeline/link_trc.py <trc_compact.jsonl>` after a fresh harvest.

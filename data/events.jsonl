@@ -2313,7 +2313,7 @@
 {"date": "1877-02-28", "seq": 1, "action": "family", "detail": "Ellie's 17th birthday", "time": null, "people": ["elliott-roosevelt"], "places": []}
 {"date": "1877-02-28", "seq": 2, "action": "other", "detail": "A manservant blacks his boots and makes his morning fire; a laundress does his washing", "time": null, "people": [], "places": []}
 {"date": "1877-03-02", "seq": 1, "action": "election", "detail": "The contested 1876 presidential race is settled in favor of Hayes over Tilden", "time": null, "people": ["rutherford-b-hayes", "samuel-j-tilden"], "places": []}
-{"date": "1877-03-04", "seq": 1, "action": "official_act", "detail": "Hayes is sworn in as 19th President at the White House", "time": null, "people": ["rutherford-b-hayes"], "places": ["white-house"]}
+{"date": "1877-03-04", "seq": 1, "action": "press", "detail": "Rutherford B. Hayes takes office as 19th President", "time": null, "people": ["rutherford-b-hayes"], "places": ["white-house"]}
 {"date": "1877-03-04", "seq": 2, "action": "correspondence", "detail": "Elliott writes to Roosevelt from Fort McKavett about the election outcome", "time": null, "people": ["elliott-roosevelt"], "places": ["fort-mckavett"]}
 {"date": "1877-03-05", "seq": 1, "action": "ceremony", "detail": "Hayes is publicly inaugurated in the capital", "time": null, "people": ["rutherford-b-hayes"], "places": ["washington-dc"]}
 {"date": "1877-03-12", "seq": 1, "action": "travel", "detail": "Travels from Cambridge to Oyster Bay", "time": null, "people": [], "places": ["cambridge-ma", "oyster-bay-ny"]}
@@ -2351,7 +2351,7 @@
 {"date": "1877-05-24", "seq": 1, "action": "correspondence", "detail": "Receives Edith's letter about her stay in Cambridge", "time": null, "people": ["edith-kermit-roosevelt"], "places": []}
 {"date": "1877-05-26", "seq": 1, "action": "other", "detail": "Locomotive engineers stage a big strike", "time": null, "people": [], "places": []}
 {"date": "1877-05-31", "seq": 1, "action": "legal", "detail": "Jay Commission begins hearings on New York Custom House graft", "time": null, "people": [], "places": ["new-york-custom-house"]}
-{"date": "1877-05-31", "seq": 2, "action": "other", "detail": "Cable spinning begins on the Brooklyn Bridge", "time": null, "people": [], "places": ["brooklyn-bridge"]}
+{"date": "1877-05-31", "seq": 2, "action": "other", "detail": "Work toward spinning the Brooklyn Bridge cables is under way", "time": null, "people": [], "places": ["brooklyn-bridge"]}
 {"date": "1877-06-03", "seq": 1, "action": "correspondence", "detail": "Writes Corinne about his room and the family's next visit", "time": null, "people": ["corinne-roosevelt-robinson"], "places": []}
 {"date": "1877-06-19", "seq": 1, "action": "education", "detail": "Learns he made the rank list in all exams but one", "time": null, "people": [], "places": ["cambridge-ma"]}
 {"date": "1877-06-19", "seq": 2, "action": "education", "detail": "Year's marks: Chemistry, Advanced Math 75 each; Latin 73; Classics 77; Physics 78; Greek 58; German failed, later raised to 92", "time": null, "people": [], "places": []}
@@ -9236,7 +9236,7 @@
 {"date": "1898-10-02", "seq": 2, "action": "correspondence", "detail": "Writes President McKinley about the campaign", "time": null, "people": ["william-mckinley"], "places": []}
 {"date": "1898-10-03", "seq": 1, "action": "legal", "detail": "Pays his taxes of $995.28", "time": null, "people": [], "places": ["sagamore-hill"]}
 {"date": "1898-10-04", "seq": 1, "action": "ceremony", "detail": "Party leaders formally notify him of his nomination", "time": null, "people": [], "places": ["sagamore-hill"]}
-{"date": "1898-10-04", "seq": 2, "action": "campaign", "detail": "Democrats nominate Augustus Van Wyck", "time": null, "people": ["augustus-van-wyck"], "places": []}
+{"date": "1898-10-04", "seq": 2, "action": "press", "detail": "Augustus Van Wyck is the Democratic nominee (named September 29)", "time": null, "people": ["augustus-van-wyck"], "places": []}
 {"date": "1898-10-05", "seq": 1, "action": "speech", "detail": "Delivers 'The Duties of a Great Nation' at Carnegie Hall", "time": null, "people": [], "places": ["carnegie-hall"]}
 {"date": "1898-10-05", "seq": 2, "action": "correspondence", "detail": "Asks Lodge to give a speech in New York City", "time": null, "people": ["henry-cabot-lodge"], "places": []}
 {"date": "1898-10-06", "seq": 1, "action": "correspondence", "detail": "Receives McKinley's congratulations", "time": null, "people": ["william-mckinley"], "places": []}
@@ -11731,7 +11731,7 @@
 {"date": "1902-05-09", "seq": 4, "action": "social", "detail": "Lunch with Taft", "time": "1:30 p.m.", "people": ["william-howard-taft"], "places": []}
 {"date": "1902-05-09", "seq": 5, "action": "illness", "detail": "Edith miscarries and is bedridden", "time": null, "people": ["edith-kermit-roosevelt"], "places": []}
 {"date": "1902-05-09", "seq": 6, "action": "correspondence", "detail": "Letters to Bishop Lawrence, Lowell, Wood and Root", "time": null, "people": ["william-lawrence", "josephine-shaw-lowell", "leonard-wood", "william-jennings-bryan", "elihu-root"], "places": ["havana-cuba"]}
-{"date": "1902-05-10", "seq": 1, "action": "death", "detail": "Volcano on Martinique kills about 40,000", "time": null, "people": [], "places": ["martinique"]}
+{"date": "1902-05-10", "seq": 1, "action": "press", "detail": "Word arrives of the May 8 eruption of Mount Pelée on Martinique", "time": null, "people": [], "places": ["martinique"]}
 {"date": "1902-05-10", "seq": 2, "action": "conference", "detail": "Rathbone case with Hanna", "time": null, "people": ["mark-hanna", "estes-g-rathbone"], "places": []}
 {"date": "1902-05-10", "seq": 3, "action": "meeting", "detail": "English Textile Commission calls", "time": null, "people": [], "places": []}
 {"date": "1902-05-10", "seq": 4, "action": "social", "detail": "Lunch with Owen Wister and Hay", "time": null, "people": ["owen-wister", "john-hay"], "places": []}
@@ -13906,7 +13906,7 @@
 {"date": "1904-03-31", "seq": 1, "action": "conference", "detail": "Canal finances with Knox", "time": null, "people": ["philander-knox"], "places": []}
 {"date": "1904-03-31", "seq": 2, "action": "conference", "detail": "Republican campaign strategy with Quay", "time": null, "people": ["matthew-s-quay"], "places": []}
 {"date": "1904-03-31", "seq": 3, "action": "social", "detail": "Dinner with Justice Holmes", "time": null, "people": ["oliver-wendell-holmes-jr"], "places": []}
-{"date": "1904-03-31", "seq": 4, "action": "other", "detail": "France and Britain settle colonial spheres, France taking Morocco and Britain Egypt", "time": null, "people": [], "places": ["morocco", "egypt"]}
+{"date": "1904-03-31", "seq": 4, "action": "press", "detail": "Britain and France near agreement on Morocco and Egypt (signed April 8)", "time": null, "people": [], "places": ["morocco", "egypt"]}
 {"date": "1904-04-01", "seq": 1, "action": "meeting", "detail": "Cabinet on Panama Canal finances", "time": null, "people": [], "places": []}
 {"date": "1904-04-01", "seq": 2, "action": "meeting", "detail": "Cannon, Cullom, Penrose, Frye and McCumber call", "time": null, "people": ["joseph-cannon", "shelby-m-cullom", "boies-penrose", "william-p-frye", "porter-j-mccumber"], "places": []}
 {"date": "1904-04-01", "seq": 3, "action": "social", "detail": "Lunch with Taft and Clarkson", "time": null, "people": ["william-howard-taft", "james-s-clarkson"], "places": []}
@@ -18008,7 +18008,7 @@
 {"date": "1907-11-22", "seq": 1, "action": "meeting", "detail": "Cabinet meeting", "time": null, "people": [], "places": []}
 {"date": "1907-11-22", "seq": 2, "action": "social", "detail": "Lunch with Henry Taft, Loeb, Harlan, Root and Lodge", "time": null, "people": ["henry-cabot-lodge", "elihu-root", "john-marshall-harlan", "william-loeb", "henry-w-taft"], "places": []}
 {"date": "1907-11-22", "seq": 3, "action": "conference", "detail": "Financial crisis meeting with Morgan and Baker", "time": "9:45 p.m.", "people": ["j-pierpont-morgan", "george-f-baker", "robert-bacon", "george-cortelyou"], "places": []}
-{"date": "1907-11-22", "seq": 4, "action": "official_act", "detail": "Japan accepts Root's Gentlemen's Agreement on immigration", "time": null, "people": ["elihu-root"], "places": ["japan"]}
+{"date": "1907-11-22", "seq": 4, "action": "official_act", "detail": "Root presses Tokyo on limiting Japanese immigration, the start of the Gentlemen's Agreement", "time": null, "people": ["elihu-root"], "places": ["japan"]}
 {"date": "1907-11-23", "seq": 1, "action": "conference", "detail": "Tariff with Sereno Payne and John Dalzell", "time": null, "people": ["sereno-e-payne", "john-dalzell"], "places": []}
 {"date": "1907-11-23", "seq": 2, "action": "conference", "detail": "Puerto Rico with Post and Winthrop", "time": null, "people": ["regis-h-post", "beekman-winthrop"], "places": []}
 {"date": "1907-11-23", "seq": 3, "action": "meeting", "detail": "Reynolds and William Jennings Bryan call", "time": null, "people": ["william-jennings-bryan", "james-b-reynolds"], "places": []}
@@ -19059,7 +19059,7 @@
 {"date": "1908-06-30", "seq": 3, "action": "other", "detail": "A huge blast strikes Tunguska, Siberia", "time": null, "people": [], "places": ["tunguska-russia"]}
 {"date": "1908-06-30", "seq": 4, "action": "correspondence", "detail": "Writes Metcalf about faults in naval ship design", "time": null, "people": ["victor-h-metcalf"], "places": []}
 {"date": "1908-06-30", "seq": 5, "action": "photograph", "detail": "Poses for the sculptor Victor D. Brenner", "time": null, "people": ["victor-d-brenner"], "places": []}
-{"date": "1908-06-30", "seq": 6, "action": "election", "detail": "Democrats nominate Bryan for President once more", "time": null, "people": ["william-jennings-bryan"], "places": []}
+{"date": "1908-06-30", "seq": 6, "action": "press", "detail": "Bryan expected as the Democratic nominee (named July 10)", "time": null, "people": ["william-jennings-bryan"], "places": []}
 {"date": "1908-07-01", "seq": 1, "action": "official_act", "detail": "Ninety-four National Forests are established", "time": null, "people": [], "places": []}
 {"date": "1908-07-01", "seq": 2, "action": "appointment", "detail": "Luke E. Wright becomes Secretary of War", "time": null, "people": ["luke-e-wright"], "places": []}
 {"date": "1908-07-01", "seq": 3, "action": "social", "detail": "Lunch guests include McClure, Whitney, Kellogg, Ward and James T. Williams", "time": null, "people": ["s-s-mcclure", "caspar-whitney", "frank-b-kellogg", "william-l-ward", "james-t-williams"], "places": []}
@@ -19137,7 +19137,7 @@
 {"date": "1908-08-03", "seq": 1, "action": "family", "detail": "Bamie and her son Sheffield visit", "time": null, "people": ["anna-roosevelt-cowles", "william-sheffield-cowles-jr"], "places": []}
 {"date": "1908-08-03", "seq": 2, "action": "correspondence", "detail": "Letters to Taft, Root, Bryce and Jusserand", "time": null, "people": ["william-howard-taft", "elihu-root", "james-bryce", "jean-jules-jusserand"], "places": []}
 {"date": "1908-08-04", "seq": 1, "action": "social", "detail": "Lunch with Collier, Sullivan, Hapgood, O'Brien, Cortelyou, Rogers and Forbes", "time": null, "people": ["robert-j-collier", "mark-sullivan", "norman-hapgood", "o-brien", "george-cortelyou", "r-r-rogers", "forbes"], "places": []}
-{"date": "1908-08-05", "seq": 1, "action": "death", "detail": "Senator William B. Allison dies", "time": null, "people": ["william-b-allison"], "places": []}
+{"date": "1908-08-05", "seq": 1, "action": "press", "detail": "Word arrives that Senator William B. Allison died the day before", "time": null, "people": ["william-b-allison"], "places": []}
 {"date": "1908-08-05", "seq": 2, "action": "guest", "detail": "Nicholas Roosevelt visits; LaFarge stays overnight", "time": null, "people": ["nicholas-roosevelt", "c-grant-lafarge"], "places": []}
 {"date": "1908-08-05", "seq": 3, "action": "correspondence", "detail": "Letters to Osborn and to Maurice Egan in Denmark", "time": null, "people": ["henry-fairfield-osborn", "maurice-francis-egan"], "places": []}
 {"date": "1908-08-06", "seq": 1, "action": "family", "detail": "Edith's 47th birthday", "time": null, "people": ["edith-kermit-roosevelt"], "places": []}
