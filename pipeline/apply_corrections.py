@@ -5,8 +5,11 @@ data/corrections.json:
             Every record dated in [from, to] moves by shift_days. If the target date already holds a
             record that is not itself moving, the two are merged (moved record keeps its headline and
             summary; events, people, places, letters, quotes and tags are combined).
+  "splits": [{"from": "...", "to": "...", "match": ["substring of event detail", ...], "reason": "..."}]
+            Applied after moves. Events whose detail matches move to the target day (created if empty),
+            with the people, places and letters that appear only in those events.
   "fixes":  [{"date": "...", "uncertain": "...", "headline": "...", "summary": "..."}]
-            Applied after moves, to the record's final date. Only the fields given are changed.
+            Applied after moves and splits, to the record's final date. Only the fields given are changed.
 Applied corrections are recorded in data/corrections_applied.json; running again is a no-op.
 """
 import datetime as dt
@@ -57,15 +60,58 @@ def main():
             where[nd] = where.get(nd, f)
         done["moves"].append(key)
         print(f"moved {len(moving)} records {m['from']}..{m['to']} by {m['shift_days']:+d} days")
+    for sp in spec.get("splits", []):
+        key = f"split:{sp['from']}>{sp['to']}:{'|'.join(sp['match'])}"
+        if key in done.setdefault("splits", []):
+            continue
+        src = recs.get(sp["from"])
+        if not src:
+            print("split source missing:", sp["from"])
+            continue
+        hit = lambda e: any(m.lower() in (e.get("detail") or "").lower() for m in sp["match"])
+        go = [e for e in src.get("events") or [] if hit(e)]
+        stay = [e for e in src.get("events") or [] if not hit(e)]
+        names = lambda evs, k: {x for e in evs for x in (e.get(k) or [])}
+        go_people = names(go, "people") - names(stay, "people")
+        go_places = names(go, "places") - names(stay, "places")
+        tgt = recs.get(sp["to"])
+        if not tgt:
+            tgt = {"date": sp["to"], "headline": "", "summary": "", "events": [], "people": [], "places": [],
+                   "letters": [], "tr_quotes": [], "works": [], "references": [], "guests": [], "film": False,
+                   "tags": list(src.get("tags") or []), "significance": src.get("significance") or 1,
+                   "uncertain": None, "moved_from": sp["from"], "split": True}
+            recs[sp["to"]] = tgt
+            where[sp["to"]] = where[sp["from"]]
+        moved_people = [p for p in src.get("people") or [] if p["name"] in go_people]
+        moved_places = [p for p in src.get("places") or [] if p["name"] in go_places or
+                        (p["name"] in names(go, "places") and p not in tgt["places"])]
+        moved_letters = [l for l in src.get("letters") or [] if l.get("correspondent") in go_people]
+        src["events"] = stay
+        src["people"] = [p for p in src.get("people") or [] if p["name"] not in go_people]
+        src["places"] = [p for p in src.get("places") or [] if p["name"] not in go_places]
+        src["letters"] = [l for l in src.get("letters") or [] if l not in moved_letters]
+        tgt["events"] = (tgt.get("events") or []) + go
+        for k, items in (("people", moved_people), ("places", moved_places), ("letters", moved_letters)):
+            tgt[k] = (tgt.get(k) or []) + [x for x in items if x not in (tgt.get(k) or [])]
+        note = f"Includes items the source logged on {sp['from']}: {sp['reason']}"
+        tgt["uncertain"] = f"{tgt['uncertain']} {note}" if tgt.get("uncertain") else note
+        done["splits"].append(key)
+        print(f"split {len(go)} events {sp['from']} -> {sp['to']}")
     for fx in spec.get("fixes", []):
         key = json.dumps(fx, sort_keys=True)
         if key in done["fixes"]:
             continue
         r = recs.get(fx["date"])
+        if not r and fx.get("create"):   # fill an empty day; "create" names the source date it rests on
+            r = {"date": fx["date"], "headline": "", "summary": "", "events": [], "people": [], "places": [],
+                 "letters": [], "tr_quotes": [], "works": [], "references": [], "guests": [], "film": False,
+                 "tags": [], "significance": 1, "uncertain": None, "moved_from": fx["create"], "split": True}
+            recs[fx["date"]] = r
+            where[fx["date"]] = next((where[d] for d in sorted(where) if d > fx["date"]), files[-1])
         if not r:
             print("fix target missing:", fx["date"])
             continue
-        for k in ("headline", "summary", "uncertain", "significance", "tr_quotes"):
+        for k in ("headline", "summary", "uncertain", "significance", "tr_quotes", "events", "people", "places", "tags"):
             if fx.get(k) is not None:
                 r[k] = fx[k]
         done["fixes"].append(key)

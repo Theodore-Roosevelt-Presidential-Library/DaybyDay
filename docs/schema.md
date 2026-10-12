@@ -12,7 +12,7 @@ All dates are ISO `YYYY-MM-DD` in the Gregorian calendar. IDs are lowercase slug
 | `headline` | string | 3–9 words, Library's own wording |
 | `summary` | string | 1–3 sentences, Library's own wording |
 | `significance` | int 0–5 | 0 no entry · 1 routine · 2 notable · 3 important · 4 major · 5 history-making |
-| `location` | object | `{id, name, lat, lon, source, also[]}` — where TR most likely was. `source`: `index` (TRA place-names index), `index+entry` (index refined by a more specific place named that day), `entry` (named in the day only), `carried` (no information; last known place carried forward) |
+| `location` | object | `{id, name, lat, lon, source, also[]}` — where TR most likely was. `source`: `heading` (the day's own place heading in the record), `heading-carried` (last heading carried forward), `arrival` (an arrival event that day), `index` (TRA place-names index), `entry` (named in the day only), `carried` (no information; last known place carried forward); `+refined` means a more specific place inside it, named that day, was used |
 | `places` | id[] | every place named that day plus the index places for that date |
 | `people` | `{id, role}`[] | role: family, companion, host, guest, correspondent, official, colleague, visitor, subject, adversary, other |
 | `events` | object[] | `{seq, action, detail, time, people[], places[]}`; `action` from the controlled list below |
@@ -24,6 +24,7 @@ All dates are ISO `YYYY-MM-DD` in the Gregorian calendar. IDs are lowercase slug
 | `tags` | string[] | controlled topic list below |
 | `periods` | id[] | every period (any facet) containing the date |
 | `film` | bool | motion-picture footage of the day exists |
+| `redated_from` | date \| null | the record's original date in the source, when it was moved or split off by a correction |
 | `sources` | object[] | `{work, pages[]}` — volume and page in the TRA Chronological Record |
 | `uncertain` | string \| null | caveat about OCR, dating or identification |
 

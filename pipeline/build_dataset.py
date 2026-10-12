@@ -95,15 +95,48 @@ def main():
         return person_alias.get(norm(name))
 
     # where TR was, from the TRA place index
-    where = defaultdict(list)
+    # index entries the OCR ran together (lists of ships under one heading) are not used for location
+    BUNDLED = {e["id"] for e in pidx if len(e["id"]) > 45}
+    ovr_path = ROOT / "data/places_index_overrides.json"
+    for fx in (json.load(open(ovr_path)).get("year_fixes", []) if ovr_path.exists() else []):
+        for e in pidx:
+            if e["id"] == fx["id"]:
+                for v in e["visits"]:
+                    for k in ("start", "end"):
+                        if v[k].startswith(str(fx["from_year"])):
+                            v[k] = str(fx["to_year"]) + v[k][4:]
+    headers = json.load(open(ROOT / "data/day_headers.json")) if (ROOT / "data/day_headers.json").exists() else {}
+
+    def chain(pid):
+        out, n = [], 0
+        while pid and n < 6:
+            out.append(pid)
+            pid = place_by_id.get(pid, {}).get("parent")
+            n += 1
+        return out
+
+    def related(a, b):
+        return a in chain(b) or b in chain(a)
+    where = defaultdict(list)          # date -> [(place, precision, span_days)]
+    skipped_visits = 0
     for e in pidx:
         pid = index_to_place.get(e["id"])
-        if not pid:
+        if not pid or e["id"] in BUNDLED:
             continue
         for v in e["visits"]:
-            for d in daterange(dt.date.fromisoformat(v["start"]), dt.date.fromisoformat(v["end"])):
+            a, b = dt.date.fromisoformat(v["start"]), dt.date.fromisoformat(v["end"])
+            # skip a visit that every heading in its span contradicts (a misread date in the index)
+            heads = [headers[x.isoformat()]["ids"] for x in daterange(a, b) if x.isoformat() in headers]
+            if len(heads) >= 3 and not any(related(pid, h) for ids in heads for h in ids):
+                skipped_visits += 1
+                continue
+            for d in daterange(a, b):
                 if pid not in [x[0] for x in where[d]]:
-                    where[d].append((pid, v.get("precision", "day")))
+                    where[d].append((pid, v.get("precision", "day"), (b - a).days + 1))
+    for d in where:
+        where[d].sort(key=lambda x: (x[1] != "day", x[2]))   # day precision, shortest stay first
+    print(f"index visits contradicted by every heading in their span, skipped: {skipped_visits}")
+
 
     enrich = {}
     for f in sorted(glob.glob(str(ROOT / "data/enrich/*.jsonl"))):
@@ -129,7 +162,7 @@ def main():
     TRC_URL = "https://www.theodorerooseveltcenter.org/digital-library/{}/"
 
     unresolved_people, unresolved_places = Counter(), Counter()
-    days, last_loc = [], None
+    days, last_loc, last_head = [], None, None
     stats_person = defaultdict(lambda: {"mentions": 0, "days": [], "places": Counter(), "with": Counter()})
     stats_place = defaultdict(list)
     letters_out, quotes_out, events_out = [], [], []
@@ -191,21 +224,46 @@ def main():
                 rec["tr_quotes"].append(qq)
                 quotes_out.append({"date": ds, **qq})
 
-        # location: TRA place index first, refined by a more specific place named that day
-        idx_places = [pid for pid, _ in where.get(d, [])]
+        # location. 1) the day's own place heading in the record; 2) between headings, the last stated
+        # place carries forward unless the place index records a short, specific visit elsewhere;
+        # 3) with no heading at all, the place index (shortest day-precision stay first); 4) a place
+        # named in the entry; 5) the last known place. A more specific place inside the chosen one
+        # (Sagamore Hill inside Oyster Bay) refines it.
+        idx = where.get(d, [])
+        idx_places = [pid for pid, _, _ in idx]
+        src_date = (r or {}).get("moved_from") or ds
+        head = [] if (r or {}).get("split") else (headers.get(src_date) or {}).get("ids") or []
         loc, loc_source = None, None
-        refined = [pid for pid in day_places if place_by_id[pid].get("parent") in idx_places
-                   or place_by_id[pid].get("parent") and place_by_id.get(place_by_id[pid]["parent"], {}).get("parent") in idx_places]
-        if refined:
-            loc, loc_source = sorted(refined, key=lambda x: SPECIFIC.get(place_by_id[x]["kind"], 6))[0], "index+entry"
-        elif idx_places:
-            loc, loc_source = idx_places[0], "index"
-        elif day_places:
+        if head:
+            loc, loc_source = head[0], "heading"
+            last_head = (loc, d)
+        elif last_head and (d - last_head[1]).days <= 45:
+            short = [pid for pid, prec, span in idx if prec == "day" and span <= 14 and not related(pid, last_head[0])]
+            if short:
+                loc, loc_source = short[0], "index"
+            else:
+                loc, loc_source = last_head[0], "heading-carried"
+                # an arrival somewhere new that day moves him, and later days carry it
+                arr = [x for ev in rec["events"] if ev["action"] == "arrival" for x in ev["places"]
+                       if place_by_id[x]["kind"] in LOCAL_KINDS and place_by_id[x].get("lat") is not None
+                       and not related(x, last_head[0])]
+                if arr:
+                    loc, loc_source = arr[-1], "arrival"
+                    last_head = (loc, d)
+        elif idx:
+            loc, loc_source = idx[0][0], "index"
+        if loc is None and day_places:
             cands = [p for p in day_places if place_by_id[p]["kind"] in LOCAL_KINDS]
             if cands:
                 loc, loc_source = sorted(cands, key=lambda x: SPECIFIC.get(place_by_id[x]["kind"], 6))[0], "entry"
         if loc is None and last_loc:
             loc, loc_source = last_loc, "carried"
+        if loc:   # refine to a more specific place inside it, named that day or in the index
+            inner = [p for p in day_places + idx_places
+                     if p != loc and loc in chain(p)[1:] and place_by_id[p]["kind"] in LOCAL_KINDS]
+            if inner:
+                loc = sorted(inner, key=lambda x: SPECIFIC.get(place_by_id[x]["kind"], 6))[0]
+                loc_source = loc_source + "+refined"
         for pid in idx_places:
             if pid not in day_places:
                 day_places.append(pid)

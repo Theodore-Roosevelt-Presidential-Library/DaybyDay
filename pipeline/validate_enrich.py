@@ -50,7 +50,7 @@ def check_chunk(cid):
     if not out_path.exists():
         return [f"missing output {out_path}"], warns
     src_days = {d["date"]: d for d in src["days"]}
-    got = {}
+    got, seen = {}, set()
     for i, line in enumerate(out_path.read_text().splitlines(), 1):
         if not line.strip():
             continue
@@ -63,8 +63,9 @@ def check_chunk(cid):
         if dte not in src_days:
             errs.append(f"line {i}: date {dte} not in chunk")
             continue
-        if dte in got:
-            errs.append(f"{dte}: duplicate")
+        if r.get("date") in seen:   # a split can rest two records on one source day; final dates must be unique
+            errs.append(f"{r.get('date')}: duplicate")
+        seen.add(r.get("date"))
         got[dte] = r
         text = src_days[dte]["text"]
         src_grams = ngrams(words(text))

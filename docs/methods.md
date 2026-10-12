@@ -24,7 +24,14 @@ Cities and towns were matched offline against GeoNames (cities500) by name, stat
 
 ## 6. Assembly (`pipeline/build_dataset.py`) and API (`pipeline/build_api.py`)
 
-One record per calendar day of TR's life. Location comes from the place-names index, refined by a more specific place named that day (Elkhorn Ranch rather than "Medora area"); days with no information carry forward the last known place and are marked `carried`. The API is a set of static JSON files generated on every push by GitHub Actions and served by GitHub Pages.
+One record per calendar day of TR's life. Location is decided in this order (`location.source`):
+
+1. `heading`: the day's own place heading in the record ("SAGAMORE HILL –", "MILWAUKEE, Wisconsin –"), resolved to the place registry by `pipeline/extract_headers.py` into `data/day_headers.json` (place ids only, no source prose). When headings are stacked ("KENTUCKY – SAGAMORE HILL"), the last one wins. 11,519 days have one.
+2. `heading-carried`: between headings, the last stated place carries forward for up to 45 days, unless the index records a short (two weeks or less) day-precise visit somewhere else (`index`), or an arrival event that day names a new place (`arrival`), which later days then carry.
+3. `index`: with no recent heading, the place-names index, shortest day-precise stay first. Index entries the OCR ran together (ship lists) are not used, and any index visit that every heading in its span contradicts is dropped as a misread date (17 visits). Two index entries filed under the wrong year are corrected in `data/places_index_overrides.json` (Cuba, 1913 → 1898; Meru Boma, 1912 → 1909).
+4. `entry`: a place named in the day's entry; 5. `carried`: the last known place.
+
+A more specific place inside the chosen one and named that day refines it (`+refined`: the Gilpatrick Hotel inside Milwaukee). Heading-first replaced an earlier index-first rule that let month-long index ranges ("Kentucky, Mar.–Apr. 1888", long Oyster Bay stays) override what the day itself said. The API is a set of static JSON files generated on every push by GitHub Actions and served by GitHub Pages.
 
 ## 7. Fact-check and date corrections (`pipeline/apply_corrections.py`, `data/corrections.json`)
 
@@ -38,13 +45,28 @@ An independent reviewer checked a random sample of 50 days (37 clean, 10 minor, 
 
 Those records were moved (each keeps `redated_from` and its original TRA page citation), and 51 further days received corrected headlines, summaries or an `uncertain` note. `data/corrections_applied.json` logs every applied change. The full audit is in `docs/date_audit.md`.
 
+### Chronology spot-check (October 2026)
+
+Three reviewers each took one era (1858–1888, 1889–1908, 1909–1919) and checked 124 days against outside sources: a random sample plus targeted date anchors. Result: 105 correct, 13 minor issues, 6 errors. Roosevelt's own activities and every sampled quotation held up. The errors were all world events the record logs on the day the news reached him rather than the day they happened (Mount Pelée, the Entente Cordiale, Bryan's nomination, the Hayes inauguration, the Brooklyn Bridge cables); those days now say so in `uncertain` and the summaries were rewritten. The check also confirmed and fixed these date slips:
+
+| Day(s) | Correction |
+| --- | --- |
+| July 14–16, 1913 (Grand Canyon) | July 14 split; descent moved to July 15, North Rim climb to July 16 |
+| Aug. 24–26, 1913 (return from Arizona) | Chicago stop to Aug. 25, New York arrival to Aug. 26; Aug. 24 now the train east |
+| Apr. 5, 1915 | Easter note moved to Easter Sunday, Apr. 4 |
+| July 27, 1908 | Taft's acceptance speech moved to July 28 |
+| Oct. 24, 1901 | items from the source's Oct. 24 entry moved to Oct. 31 with the rest of the shifted run |
+
+Moves, splits (`splits` in `data/corrections.json`) and fixes are all logged in `data/corrections_applied.json`. Seven runs flagged earlier as possibly shifted (Nov. 1876, Feb. 1883, Apr. 1886, June 1888, Oct. 1898, Nov. 1907, Dec. 1914) were checked and cleared. Late March 1915 is compressed in the source; affected days carry an `uncertain` note.
+
 ## 8. Links to the Theodore Roosevelt Center (`pipeline/link_trc.py`)
 
 The TRC Digital Library at Dickinson State University catalogs 141,609 items; 127,873 carry an exact date within TR's life. Using the Library's September 2026 harvest of that catalog (`TRPL/trc-rag/records.jsonl`), every dated item is attached to its day (`archive` on 8,296 days), and each Day by Day letter is matched to its TRC record when the date agrees and TR sits on one side while the correspondent's surname and first name (or initial) match the other side. 4,725 of 7,358 letters (64%) link to a TRC record. Unmatched letters are usually not in the TRC catalog or are addressed by title alone. Re-run `python pipeline/link_trc.py <trc_compact.jsonl>` after a fresh harvest.
 
 ## Known limitations
 
-- A comparison of the day entries against the independent place-names index suggests other short runs may be shifted (late Nov. 1876, Feb. 1883, Apr. 1886, late June 1888, early Oct. 1898, Nov. 1907, Dec. 1914, Mar. 1915). None is confirmed; check these before relying on exact dates there.
+- The record sometimes logs outside events on the day news reached Roosevelt, not the day they happened. Days found so far are noted in `uncertain`; treat world-event dates as approximate unless confirmed.
+- Late March 1915 is compressed in the source; exact dates there are not confirmed.
 - 152 days could not be placed by the original OCR parse and have no entry.
 - Life-period boundaries (`data/periods.json`) are editorial and marked `verified: false`.
 - Person identification is uncertain for bare surnames; those entities carry `uncertain: true`.

@@ -6,7 +6,7 @@ Every day of Theodore Roosevelt's life — 21,986 of them, from his birth on Oct
 
 | | |
 | --- | --- |
-| Days | 21,986 (14,552 with an entry in the record) |
+| Days | 21,986 (14,551 with an entry in the record) |
 | People | 4,750 canonical people, every mention linked |
 | Places | 2,827 canonical places, most with coordinates |
 | Letters | 7,358 letters to and from TR, with correspondent and topic; 4,725 linked to the letter itself at the Theodore Roosevelt Center |
@@ -22,7 +22,7 @@ Every day of Theodore Roosevelt's life — 21,986 of them, from his birth on Oct
   "headline": "Finding the Elkhorn site",
   "summary": "After a mallard for the pot, Roosevelt scouts the river north of Medora for a new ranch site…",
   "significance": 3,
-  "location": {"id": "elkhorn-ranch", "name": "Elkhorn Ranch", "lat": …, "lon": …, "source": "index+entry"},
+  "location": {"id": "elkhorn-ranch", "name": "Elkhorn Ranch", "lat": …, "lon": …, "source": "heading+refined"},
   "places": ["elkhorn-ranch", "medora-nd", "little-missouri-river"],
   "people": [{"id": "…", "role": "companion"}],
   "events": [{"seq": 1, "action": "hunting", "detail": "…", "people": [], "places": []}, …],

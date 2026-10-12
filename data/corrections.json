@@ -17,6 +17,30 @@
    "to": "1898-04-12",
    "shift_days": -1,
    "reason": "the source parse placed these entries one day late (anchors: Archie's birthday Apr. 9, Easter Apr. 10, McKinley's war message Apr. 11)."
+  },
+  {
+   "from": "1913-08-25",
+   "to": "1913-08-25",
+   "shift_days": 1,
+   "reason": "Roosevelt was in Chicago on August 25, 1913 and reached New York on the 26th (Chicago dispatch of Aug. 26; Harvey Leake from Nicholas Roosevelt's papers), so this entry belongs a day later."
+  },
+  {
+   "from": "1913-08-24",
+   "to": "1913-08-24",
+   "shift_days": 1,
+   "reason": "the Chicago stop the source logs on August 24, 1913 fell on August 25 (a Chicago dispatch dated Aug. 26 says he arrived 'yesterday')."
+  },
+  {
+   "from": "1913-07-15",
+   "to": "1913-07-15",
+   "shift_days": 1,
+   "reason": "the party went down into the canyon on the morning of July 15, 1913, so the 1:30 a.m. climb to the North Rim was July 16 (Harvey Leake, from Nicholas Roosevelt's papers)."
+  },
+  {
+   "from": "1915-04-05",
+   "to": "1915-04-05",
+   "shift_days": -1,
+   "reason": "Easter 1915 fell on Sunday, April 4; the Easter note is the tail of the April 4 entry."
   }
  ],
  "fixes": [
@@ -266,6 +290,184 @@
   {
    "date": "1916-08-07",
    "uncertain": "Misdated in the source: Edith's 55th birthday falls on August 6, 1916; that part of this entry belongs to that date."
+  },
+  {
+   "date": "1877-03-04",
+   "headline": "A Sunday inauguration day for Hayes",
+   "summary": "March 4 falls on a Sunday this year, so Rutherford B. Hayes, who quietly took the oath at the White House the evening before, holds his public inauguration as the 19th President on Monday. In Cambridge, Roosevelt hears from his brother Elliott, writing from Fort McKavett in Texas about the disputed election.",
+   "uncertain": "The source puts Hayes's swearing-in on this day. He took a private oath in the White House on Saturday, March 3, and the public ceremony was on Monday, March 5, 1877."
+  },
+  {
+   "date": "1877-05-31",
+   "headline": "Customs probe opens as the bridge takes shape",
+   "summary": "The Jay Commission opens its inquiry into graft at the New York Custom House. Over the East River, the Brooklyn Bridge is nearing its cable-making stage: a first trial wire crossed between the towers on May 29, and spinning of the great cables will begin about two weeks later.",
+   "uncertain": "The source dates the start of cable spinning to this day; bridge histories put the first trial wire on May 29 and the start of spinning in mid-June 1877. The hearing date is as given in the source."
+  },
+  {
+   "date": "1902-05-10",
+   "headline": "Beef trust suit and a deadline for McKim",
+   "summary": "Attorney General Knox opens the government's case against the beef trust. Roosevelt talks over the Rathbone case with Senator Hanna, receives a visiting English textile commission, and has Owen Wister and John Hay to lunch. He tells architect Charles McKim that speed comes first: the new offices and the family's rooms must be ready by October 1. Word is spreading of the eruption of Mount Pelée, which wiped out Saint-Pierre on Martinique two days earlier.",
+   "uncertain": "The source logs the Martinique disaster on this day, but Mount Pelée erupted on May 8, 1902. Its toll, put at about 40,000 at the time, is now usually given as roughly 28,000 to 30,000."
+  },
+  {
+   "date": "1904-03-31",
+   "headline": "Canal money, campaign plans, dinner with Holmes",
+   "summary": "Roosevelt goes over canal finances with Attorney General Knox and the coming Republican campaign with Senator Quay, then dines with Justice Oliver Wendell Holmes. Across the Atlantic, Britain and France are closing in on the Entente Cordiale, trading a free French hand in Morocco for British control in Egypt.",
+   "uncertain": "The source places the Anglo-French agreement on this day; the Entente Cordiale was signed in London on April 8, 1904."
+  },
+  {
+   "date": "1908-06-30",
+   "headline": "Taft steps down from the War Department",
+   "summary": "Taft's resignation as Secretary of War takes effect so he can run his campaign full time, and four troops of cavalry head for the Mexican border. At Sagamore Hill, Roosevelt sits for the sculptor Victor D. Brenner and writes Navy Secretary Metcalf about flaws in American ship design. Half a world away, an enormous blast flattens the forest near the Tunguska River in Siberia.",
+   "uncertain": "The source also logs Bryan's nomination here; the Democratic convention in Denver nominated him on July 10, 1908."
+  },
+  {
+   "date": "1908-07-27",
+   "headline": "Tennis and talk of Bryan",
+   "summary": "Roosevelt and Archie Butt play tennis and talk over William Jennings Bryan's campaign."
+  },
+  {
+   "date": "1908-08-05",
+   "headline": "Word of Senator Allison's death",
+   "summary": "News arrives that Iowa's Senator William B. Allison died the day before. Architect C. Grant LaFarge stays the night, and Roosevelt asks Henry Fairfield Osborn for a standard natural history reference so he can study up on African wildlife.",
+   "uncertain": "Senator Allison died August 4, 1908; the source logs his death on August 5."
+  },
+  {
+   "date": "1913-07-14",
+   "headline": "Archie reaches the canyon rim",
+   "summary": "Archie comes in from Flagstaff by train, bringing Jesse Cummings of Mesa to cook, pack and wrangle for the trip. Roosevelt and Quentin spend part of the day on horseback near El Tovar. Edith writes Kermit that the coming Brazil journey worries her.",
+   "uncertain": "The source runs this day together with the descent into the canyon, which came on July 15, 1913 (Nicholas Roosevelt's account, as summarized by Harvey Leake)."
+  },
+  {
+   "date": "1913-07-15",
+   "headline": "Down into the Grand Canyon",
+   "summary": "After an early hotel breakfast, Roosevelt, Archie, Quentin, cousin Nicholas and Jesse Cummings ride mules down the Bright Angel Trail and finish the steepest pitch on foot. Rain turns to a thunderstorm as they ride a hand-pulled cable car over the Colorado. A Bar Z hand named Stevenson lends horses for the climb north, and supper by the river is bacon, flat pancakes and canned peas.",
+   "uncertain": "The source logs the descent with July 14; it is placed here from Nicholas Roosevelt's account as summarized by Harvey Leake."
+  },
+  {
+   "date": "1913-08-24",
+   "headline": "On the train east",
+   "summary": "Roosevelt, Archie, Quentin and Nicholas are aboard the train from Gallup, crossing the plains toward Chicago.",
+   "uncertain": "The source logs the Chicago stop and the return to New York on this day; a Chicago dispatch dated August 26 says he arrived 'yesterday,' and Harvey Leake puts the party back in New York on the 26th.",
+   "create": "1913-08-24",
+   "events": [
+    {
+     "action": "travel",
+     "detail": "On the train from Gallup toward Chicago",
+     "people": [
+      "Archibald Roosevelt",
+      "Quentin Roosevelt",
+      "Nicholas Roosevelt"
+     ],
+     "places": [],
+     "time": null
+    }
+   ],
+   "people": [
+    {
+     "name": "Archibald Roosevelt",
+     "role": "family"
+    },
+    {
+     "name": "Quentin Roosevelt",
+     "role": "family"
+    },
+    {
+     "name": "Nicholas Roosevelt",
+     "role": "family"
+    }
+   ],
+   "tags": [
+    "travel",
+    "family"
+   ]
+  },
+  {
+   "date": "1913-08-25",
+   "headline": "Sunburned and back in Chicago",
+   "summary": "Burned red by the desert sun, Roosevelt is met in Chicago by a reception committee and a crowd of photographers. He lunches and speaks at the Progressive Club, talks with party leaders, and within a couple of hours boards the Pennsylvania Limited for home.",
+   "uncertain": "The source logs this Chicago stop on August 24; a Chicago dispatch dated August 26 says he arrived 'yesterday.'"
+  },
+  {
+   "date": "1913-08-26",
+   "headline": "Home from the Southwest",
+   "summary": "The train pulls into New York in the morning. Roosevelt heads straight to the Outlook office to confer with Progressive leaders, meets George McAneny and the fusion candidates at the Harvard Club, and then goes home to Sagamore Hill. He writes Hiram Johnson about California's Progressives, admitting little faith in Wilson, and Frank Dingley about the party in Maine.",
+   "uncertain": "Combines the New York half of the source's August 24 entry, its August 25 Dingley letter and its August 26 McAneny meeting; the letter dates are not independently confirmed."
+  },
+  {
+   "date": "1915-04-04",
+   "headline": "Easter in a blizzard",
+   "summary": "Easter Sunday finds Sagamore Hill snowbound, the spring storm that hit the day before still blowing. It is also Ethel and Dick Derby's second wedding anniversary."
+  },
+  {
+   "date": "1915-03-09",
+   "uncertain": "The parse packs several March 1915 entries into single days. The source points to a New York Times list of guests printed March 16, so the Explorers Club luncheon may have been nearer March 15; date not confirmed."
+  },
+  {
+   "date": "1915-03-15",
+   "uncertain": "The source cites a New York Times story of March 23 for this Flower Show visit, and the parse compresses late March 1915; the visit likely fell nearer March 22. Date not confirmed."
+  },
+  {
+   "date": "1908-07-28",
+   "headline": "Taft accepts the nomination",
+   "summary": "In Cincinnati, William Howard Taft formally accepts the Republican nomination for president.",
+   "uncertain": "The source logs Taft's acceptance speech on July 27; it was given July 28, 1908."
+  },
+  {
+   "date": "1898-10-04",
+   "summary": "Leading Republicans travel to Sagamore Hill to formally notify Roosevelt that he is their nominee for governor. His Democratic opponent will be Augustus Van Wyck.",
+   "uncertain": "The source logs Van Wyck's nomination on this day; the Democratic state convention at Syracuse nominated him on September 29, 1898."
+  },
+  {
+   "date": "1907-11-22",
+   "headline": "Late-night meeting with Morgan on the money crisis",
+   "summary": "After Cabinet and lunch with Henry Taft, Loeb, Justice Harlan, Root and Lodge, Roosevelt meets J. P. Morgan, George F. Baker, Bacon and Cortelyou late into the night on the money crisis. Talks with Tokyo over limiting Japanese immigration, which became the Gentlemen's Agreement, are under way.",
+   "uncertain": "The source says Japan accepted the Gentlemen's Agreement this day; the exchange of notes that made up the agreement ran into early 1908."
+  },
+  {
+   "date": "1884-10-06",
+   "summary": "At Elkhorn, Sewall and Dow tell Roosevelt of threats against him and his men, of lynchings while he was away, and of the Marquis de Morès's hired gunmen stopping in for a meal. As the story was later told, Roosevelt rode to E. C. Paddock's cabin, told him that if there was to be killing it could start now, and warned him off his men and his claim.",
+   "uncertain": "The confrontation with Paddock comes from later recollections (Sewall, and Hagedorn's Roosevelt in the Bad Lands), not a record made at the time."
+  }
+ ],
+ "splits": [
+  {
+   "from": "1913-08-25",
+   "to": "1913-08-26",
+   "match": [
+    "Outlook office",
+    "Returns to Sagamore",
+    "Hiram Johnson"
+   ],
+   "reason": "the New York arrival, the Outlook conference and the Hiram Johnson letter came after the Chicago stop, on August 26, 1913."
+  },
+  {
+   "from": "1913-07-14",
+   "to": "1913-07-15",
+   "match": [
+    "Descends",
+    "cable car",
+    "Bar Z"
+   ],
+   "reason": "the source runs two days together; the descent into the canyon was July 15, 1913."
+  },
+  {
+   "from": "1908-07-27",
+   "to": "1908-07-28",
+   "match": [
+    "Taft speaks"
+   ],
+   "reason": "Taft's Cincinnati speech accepting the Republican nomination was July 28, 1908."
+  },
+  {
+   "from": "1901-10-24",
+   "to": "1901-10-31",
+   "match": [
+    "Archbishops",
+    "Cutting",
+    "Yerkes"
+   ],
+   "reason": "these items come from the source's October 24 entry, which sits in the run of entries placed one week early."
   }
  ]
 }

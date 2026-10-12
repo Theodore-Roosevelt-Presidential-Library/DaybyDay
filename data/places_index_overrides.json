@@ -1,0 +1,7 @@
+{
+ "_note": "Year fixes for TRA place-index entries the OCR parse assigned to the wrong year. Applied by build_dataset.py when it loads data/places_index.json.",
+ "year_fixes": [
+  {"id": "cuba", "from_year": 1913, "to_year": 1898, "reason": "Index dates June 22 to Aug 8 match the Santiago campaign of 1898; the parse attached them to 1913."},
+  {"id": "meru-boma-british-east-africa", "from_year": 1912, "to_year": 1909, "reason": "Meru Boma, British East Africa, was on the 1909 safari; the parse attached the dates to 1912, when he was campaigning in the western states."}
+ ]
+}

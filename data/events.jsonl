@@ -11142,9 +11142,6 @@
 {"date": "1901-10-23", "seq": 3, "action": "social", "detail": "Alice sits next to Mark Twain", "time": null, "people": ["alice-roosevelt-longworth", "mark-twain"], "places": []}
 {"date": "1901-10-24", "seq": 1, "action": "travel", "detail": "Returns to Washington", "time": null, "people": [], "places": ["washington-dc"]}
 {"date": "1901-10-24", "seq": 2, "action": "correspondence", "detail": "Defends the Washington dinner in a letter to Littauer", "time": null, "people": ["lucius-n-littauer", "booker-t-washington"], "places": []}
-{"date": "1901-10-24", "seq": 3, "action": "meeting", "detail": "Interviews Archbishops Ireland and Riordan", "time": null, "people": ["john-ireland", "patrick-w-riordan"], "places": []}
-{"date": "1901-10-24", "seq": 4, "action": "social", "detail": "Lunch with W. P. Cutting", "time": null, "people": ["w-p-cutting"], "places": []}
-{"date": "1901-10-24", "seq": 5, "action": "correspondence", "detail": "Letter to John Yerkes on appointments", "time": null, "people": ["john-w-yerkes"], "places": []}
 {"date": "1901-10-25", "seq": 1, "action": "conference", "detail": "Meets Senators Pritchard and Wolcott and Representative Moody", "time": null, "people": ["jeter-c-pritchard", "edward-o-wolcott", "william-h-moody"], "places": []}
 {"date": "1901-10-25", "seq": 2, "action": "meeting", "detail": "Cabinet meeting", "time": null, "people": [], "places": []}
 {"date": "1901-10-25", "seq": 3, "action": "guest", "detail": "J. C. Greenaway stays overnight", "time": null, "people": ["john-c-greenway"], "places": ["white-house"]}
@@ -11165,6 +11162,9 @@
 {"date": "1901-10-31", "seq": 3, "action": "appointment", "detail": "Isabella Hagner becomes Edith's social secretary", "time": null, "people": ["isabella-hagner", "edith-kermit-roosevelt"], "places": []}
 {"date": "1901-10-31", "seq": 4, "action": "exercise", "detail": "Roosevelt and Edith ride together in Rock Creek Park as a daily habit", "time": null, "people": ["edith-kermit-roosevelt"], "places": ["rock-creek-park-dc"]}
 {"date": "1901-10-31", "seq": 5, "action": "family", "detail": "Children use borrowed serving trays to sled down the old west stairs", "time": null, "people": ["alice-roosevelt-longworth"], "places": []}
+{"date": "1901-10-31", "seq": 6, "action": "meeting", "detail": "Interviews Archbishops Ireland and Riordan", "time": null, "people": ["john-ireland", "patrick-w-riordan"], "places": []}
+{"date": "1901-10-31", "seq": 7, "action": "social", "detail": "Lunch with W. P. Cutting", "time": null, "people": ["w-p-cutting"], "places": []}
+{"date": "1901-10-31", "seq": 8, "action": "correspondence", "detail": "Letter to John Yerkes on appointments", "time": null, "people": ["john-w-yerkes"], "places": []}
 {"date": "1901-11-01", "seq": 1, "action": "social", "detail": "Dines with James J. Hill and Secretary Hay", "time": null, "people": ["john-hay", "james-j-hill"], "places": []}
 {"date": "1901-11-01", "seq": 2, "action": "correspondence", "detail": "Letters to Butler, Riis and Ted", "time": null, "people": ["nicholas-murray-butler", "jacob-riis", "theodore-roosevelt-jr"], "places": []}
 {"date": "1901-11-02", "seq": 1, "action": "conference", "detail": "Conference with Senator Wolcott", "time": null, "people": ["edward-o-wolcott"], "places": []}
@@ -19127,7 +19127,7 @@
 {"date": "1908-07-26", "seq": 2, "action": "family", "detail": "Visits the West Roosevelt household and tells stories after dinner", "time": null, "people": ["west-roosevelt"], "places": []}
 {"date": "1908-07-27", "seq": 1, "action": "sport", "detail": "Tennis with Archie Butt", "time": null, "people": ["archibald-butt"], "places": []}
 {"date": "1908-07-27", "seq": 2, "action": "conference", "detail": "Talks over Bryan with Butt", "time": null, "people": ["archibald-butt", "william-jennings-bryan"], "places": []}
-{"date": "1908-07-27", "seq": 3, "action": "campaign", "detail": "Taft speaks in Cincinnati", "time": null, "people": ["william-howard-taft"], "places": ["cincinnati-oh"]}
+{"date": "1908-07-28", "seq": 1, "action": "campaign", "detail": "Taft speaks in Cincinnati", "time": null, "people": ["william-howard-taft"], "places": ["cincinnati-oh"]}
 {"date": "1908-07-31", "seq": 1, "action": "other", "detail": "Cross-references to von Sternberg's death and the Country Life Commission", "time": null, "people": ["hermann-speck-von-sternberg"], "places": []}
 {"date": "1908-08-01", "seq": 1, "action": "social", "detail": "Breakfast with Bacon", "time": null, "people": ["robert-bacon"], "places": []}
 {"date": "1908-08-01", "seq": 2, "action": "conference", "detail": "West Point dismissals with Wright and Bacon", "time": null, "people": ["luke-e-wright", "robert-bacon"], "places": ["west-point-ny"]}
@@ -22926,13 +22926,13 @@
 {"date": "1913-07-13", "seq": 5, "action": "correspondence", "detail": "Asks Pinchot whether he should reply to La Follette's article", "time": null, "people": ["gifford-pinchot", "robert-m-la-follette"], "places": []}
 {"date": "1913-07-14", "seq": 1, "action": "arrival", "detail": "Archie comes from Flagstaff with Jesse Cummings, hired as cook and wrangler", "time": null, "people": ["archibald-roosevelt", "jesse-cummings"], "places": ["el-tovar-hotel"]}
 {"date": "1913-07-14", "seq": 2, "action": "exercise", "detail": "Rides with Quentin", "time": null, "people": ["quentin-roosevelt"], "places": ["grand-canyon-az"]}
-{"date": "1913-07-14", "seq": 3, "action": "travel", "detail": "Descends the Bright Angel Trail by mule, finishing on foot", "time": "8:45 a.m.", "people": ["archibald-roosevelt", "quentin-roosevelt", "nicholas-roosevelt", "jesse-cummings"], "places": ["bright-angel-trail"]}
-{"date": "1913-07-14", "seq": 4, "action": "travel", "detail": "Crosses the Colorado in a hand-run cable car during a thunderstorm", "time": null, "people": [], "places": ["colorado-river"]}
-{"date": "1913-07-14", "seq": 5, "action": "other", "detail": "Bar Z hand Stevenson provides mounts and pack stock for the climb north", "time": null, "people": ["stevenson"], "places": []}
-{"date": "1913-07-14", "seq": 6, "action": "family", "detail": "Edith writes Kermit of her worry over the Brazil trip", "time": null, "people": ["edith-kermit-roosevelt", "kermit-roosevelt"], "places": []}
-{"date": "1913-07-15", "seq": 1, "action": "travel", "detail": "Up at 1:30 a.m.; starts the climb at 2:45, some walking, some riding", "time": "2:45 a.m.", "people": ["mansfield", "jesse-cummings", "archibald-roosevelt", "nicholas-roosevelt"], "places": ["grand-canyon-az"]}
-{"date": "1913-07-15", "seq": 2, "action": "arrival", "detail": "Reach the North Rim about noon and meet game warden Uncle Jimmy Owens", "time": "noon", "people": ["james-t-owens"], "places": ["north-rim-grand-canyon"]}
-{"date": "1913-07-15", "seq": 3, "action": "hunting", "detail": "Prepare for the hunt", "time": null, "people": [], "places": ["north-rim-grand-canyon"]}
+{"date": "1913-07-14", "seq": 3, "action": "family", "detail": "Edith writes Kermit of her worry over the Brazil trip", "time": null, "people": ["edith-kermit-roosevelt", "kermit-roosevelt"], "places": []}
+{"date": "1913-07-15", "seq": 1, "action": "travel", "detail": "Descends the Bright Angel Trail by mule, finishing on foot", "time": "8:45 a.m.", "people": ["archibald-roosevelt", "quentin-roosevelt", "nicholas-roosevelt", "jesse-cummings"], "places": ["bright-angel-trail"]}
+{"date": "1913-07-15", "seq": 2, "action": "travel", "detail": "Crosses the Colorado in a hand-run cable car during a thunderstorm", "time": null, "people": [], "places": ["colorado-river"]}
+{"date": "1913-07-15", "seq": 3, "action": "other", "detail": "Bar Z hand Stevenson provides mounts and pack stock for the climb north", "time": null, "people": ["stevenson"], "places": []}
+{"date": "1913-07-16", "seq": 1, "action": "travel", "detail": "Up at 1:30 a.m.; starts the climb at 2:45, some walking, some riding", "time": "2:45 a.m.", "people": ["mansfield", "jesse-cummings", "archibald-roosevelt", "nicholas-roosevelt"], "places": ["grand-canyon-az"]}
+{"date": "1913-07-16", "seq": 2, "action": "arrival", "detail": "Reach the North Rim about noon and meet game warden Uncle Jimmy Owens", "time": "noon", "people": ["james-t-owens"], "places": ["north-rim-grand-canyon"]}
+{"date": "1913-07-16", "seq": 3, "action": "hunting", "detail": "Prepare for the hunt", "time": null, "people": [], "places": ["north-rim-grand-canyon"]}
 {"date": "1913-07-17", "seq": 1, "action": "other", "detail": "Dismisses the guides who failed to appear", "time": null, "people": [], "places": ["grand-canyon-az"]}
 {"date": "1913-07-17", "seq": 2, "action": "hunting", "detail": "Engages Owens and the prospector Joe Wilson as guides", "time": null, "people": ["james-t-owens", "joe-wilson"], "places": ["grand-canyon-az"]}
 {"date": "1913-07-17", "seq": 3, "action": "meeting", "detail": "Meets Forest Supervisor Pelton and his rangers", "time": null, "people": ["mr-pelton"], "places": ["grand-canyon-az"]}
@@ -23024,14 +23024,15 @@
 {"date": "1913-08-23", "seq": 3, "action": "social", "detail": "Bath and fresh clothes courtesy of the Cotton and Manning families", "time": null, "people": [], "places": ["gallup-nm"]}
 {"date": "1913-08-23", "seq": 4, "action": "departure", "detail": "Catch the noon California Limited bound for Chicago", "time": "noon", "people": [], "places": ["california-limited"]}
 {"date": "1913-08-23", "seq": 5, "action": "correspondence", "detail": "Writes Perkins on the Progressive pledge", "time": null, "people": ["george-perkins"], "places": []}
-{"date": "1913-08-24", "seq": 1, "action": "arrival", "detail": "Greeted by a welcoming committee and photographers", "time": null, "people": [], "places": ["chicago-il"]}
-{"date": "1913-08-24", "seq": 2, "action": "speech", "detail": "Lunch and speech at the Progressive Club; confers with leaders", "time": null, "people": [], "places": ["progressive-club-chicago"]}
-{"date": "1913-08-24", "seq": 3, "action": "travel", "detail": "Pennsylvania Limited to New York", "time": null, "people": [], "places": ["pennsylvania-limited"]}
-{"date": "1913-08-24", "seq": 4, "action": "conference", "detail": "Meets Progressive leaders at the Outlook office", "time": null, "people": [], "places": []}
-{"date": "1913-08-24", "seq": 5, "action": "travel", "detail": "Returns to Sagamore Hill", "time": null, "people": [], "places": ["sagamore-hill"]}
-{"date": "1913-08-24", "seq": 6, "action": "correspondence", "detail": "Writes Hiram Johnson about California Progressives", "time": null, "people": ["hiram-johnson", "woodrow-wilson"], "places": []}
-{"date": "1913-08-25", "seq": 1, "action": "correspondence", "detail": "Writes about Maine Progressives", "time": null, "people": ["frank-l-dingley"], "places": []}
-{"date": "1913-08-26", "seq": 1, "action": "conference", "detail": "Meets McAneny and the fusion ticket's candidates", "time": null, "people": ["george-mcaneny"], "places": ["harvard-club-nyc"]}
+{"date": "1913-08-24", "seq": 1, "action": "travel", "detail": "On the train from Gallup toward Chicago", "time": null, "people": ["archibald-roosevelt", "quentin-roosevelt", "nicholas-roosevelt"], "places": []}
+{"date": "1913-08-25", "seq": 1, "action": "arrival", "detail": "Greeted by a welcoming committee and photographers", "time": null, "people": [], "places": ["chicago-il"]}
+{"date": "1913-08-25", "seq": 2, "action": "speech", "detail": "Lunch and speech at the Progressive Club; confers with leaders", "time": null, "people": [], "places": ["progressive-club-chicago"]}
+{"date": "1913-08-25", "seq": 3, "action": "travel", "detail": "Pennsylvania Limited to New York", "time": null, "people": [], "places": ["pennsylvania-limited"]}
+{"date": "1913-08-26", "seq": 1, "action": "correspondence", "detail": "Writes about Maine Progressives", "time": null, "people": ["frank-l-dingley"], "places": []}
+{"date": "1913-08-26", "seq": 2, "action": "conference", "detail": "Meets McAneny and the fusion ticket's candidates", "time": null, "people": ["george-mcaneny"], "places": ["harvard-club-nyc"]}
+{"date": "1913-08-26", "seq": 3, "action": "conference", "detail": "Meets Progressive leaders at the Outlook office", "time": null, "people": [], "places": []}
+{"date": "1913-08-26", "seq": 4, "action": "travel", "detail": "Returns to Sagamore Hill", "time": null, "people": [], "places": ["sagamore-hill"]}
+{"date": "1913-08-26", "seq": 5, "action": "correspondence", "detail": "Writes Hiram Johnson about California Progressives", "time": null, "people": ["hiram-johnson", "woodrow-wilson"], "places": []}
 {"date": "1913-08-27", "seq": 1, "action": "other", "detail": "At home", "time": null, "people": [], "places": ["sagamore-hill"]}
 {"date": "1913-08-28", "seq": 1, "action": "family", "detail": "Edith tells Kermit that Quentin has matured on the trip", "time": null, "people": ["edith-kermit-roosevelt", "kermit-roosevelt", "quentin-roosevelt"], "places": []}
 {"date": "1913-08-31", "seq": 1, "action": "publication", "detail": "Autobiography installment appears", "time": null, "people": [], "places": []}
@@ -24040,8 +24041,8 @@
 {"date": "1915-04-02", "seq": 4, "action": "writing", "detail": "Memorandum on Lady Gregory's proposal for an American theater like her Irish one", "time": null, "people": ["augusta-gregory"], "places": ["sagamore-hill"]}
 {"date": "1915-04-02", "seq": 5, "action": "correspondence", "detail": "Writes Jusserand about a righteous peace", "time": null, "people": ["jean-jules-jusserand"], "places": ["sagamore-hill"]}
 {"date": "1915-04-03", "seq": 1, "action": "other", "detail": "Blizzard at Oyster Bay", "time": null, "people": [], "places": ["sagamore-hill"]}
-{"date": "1915-04-04", "seq": 1, "action": "family", "detail": "Ethel and Richard Derby's second anniversary", "time": null, "people": ["ethel-roosevelt-derby", "richard-derby"], "places": []}
-{"date": "1915-04-05", "seq": 1, "action": "religion", "detail": "Easter, with the storm continuing", "time": null, "people": [], "places": ["sagamore-hill"]}
+{"date": "1915-04-04", "seq": 1, "action": "religion", "detail": "Easter, with the storm continuing", "time": null, "people": [], "places": ["sagamore-hill"]}
+{"date": "1915-04-04", "seq": 2, "action": "family", "detail": "Ethel and Richard Derby's second anniversary", "time": null, "people": ["ethel-roosevelt-derby", "richard-derby"], "places": []}
 {"date": "1915-04-06", "seq": 1, "action": "correspondence", "detail": "Voices frustration with policy on German ships in U.S. harbors", "time": null, "people": ["frederick-w-whitridge"], "places": ["sagamore-hill"]}
 {"date": "1915-04-07", "seq": 1, "action": "speech", "detail": "Lectures on Brazil", "time": null, "people": [], "places": ["philadelphia-pa"]}
 {"date": "1915-04-08", "seq": 1, "action": "other", "detail": "At home at Sagamore Hill with nothing further recorded", "time": null, "people": [], "places": ["sagamore-hill"]}
