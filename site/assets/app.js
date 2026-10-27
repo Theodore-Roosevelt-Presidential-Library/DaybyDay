@@ -18,6 +18,27 @@ const DBD = (() => {
   function personLink(p) { return `<a href="person.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a>`; }
   function placeLink(p) { return `<a href="place.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a>`; }
 
+  // A T.R. quotation with its citation: the original (when it can be tied to one) and the record it was transcribed in.
+  function quoteBlock(q) {
+    const src = q.source || {};
+    const o = src.original;
+    const ext = (u, t) => `<a href="${esc(u)}" target="_blank" rel="noopener">${t}</a>`;
+    const cited = src.cited_in ? `<i>Chronological Record</i>${src.cited_in.pages?.length ? ` (${esc(src.cited_in.pages.join(", "))})` : ""}` : "the <i>Chronological Record</i>";
+    let orig = "", note;
+    if (o?.type === "diary_page") {
+      orig = `<span class="qsrc">${ext(o.url, o.match == null ? "See this day in his diary" : "See the original page")} at the Library of Congress`
+        + (o.explorer ? ` &middot; ${ext(o.explorer, "Read it in the diary explorer")}` : "") + `</span>`;
+      note = `Wording from the ${cited}. Compare it with the page before quoting.`;
+    } else if (o?.type === "letter") {
+      orig = `<span class="qsrc">${ext(o.url, esc(o.title))} at the Theodore Roosevelt Center</span>`;
+      note = `Wording from the ${cited}. Compare it with the letter before quoting.`;
+    } else {
+      note = `As transcribed in the ${cited}. Not yet checked against the original; verify before quoting.`;
+    }
+    const cite = `<cite>Theodore Roosevelt, ${esc(q.kind)}${o?.type === "diary_page" ? `. Library of Congress, Theodore Roosevelt Papers, Series 8${(m => m ? `, Vol. ${m[1]} (${m[2]})` : "")(/Vol\. (\d+), (\d{4})/.exec(o.title || ""))}` : ""}.</cite>`;
+    return `<blockquote class="trq">“${esc(q.text)}”<footer>${cite}${orig}<span class="qnote">${note}</span></footer></blockquote>`;
+  }
+
   function renderDay(d) {
     const loc = d.location;
     const meta = [d.weekday && `${d.weekday}.`, `Age ${d.age}`, loc && `${loc.source === "carried" ? "Probably at " : ""}${placeLink(loc)}`].filter(Boolean).join(" &nbsp;|&nbsp; ");
@@ -32,9 +53,7 @@ const DBD = (() => {
       if (d.events?.length > 1) {
         h += `<ol class="events">` + d.events.map(e => `<li><span class="act">${esc(ACTION_LABEL[e.action] || e.action)}</span>${e.time ? `<b>${esc(e.time)}</b> ` : ""}${esc(e.detail)}</li>`).join("") + `</ol>`;
       }
-      for (const q of d.tr_quotes || []) {
-        h += `<blockquote class="trq">“${esc(q.text)}”<footer>Theodore Roosevelt, ${esc(q.kind)}. Unverified transcription; check the original before quoting.</footer></blockquote>`;
-      }
+      for (const q of d.tr_quotes || []) h += quoteBlock(q);
       if (d.people?.length) h += `<h3>People</h3><ul class="who">` + d.people.map(p => `<li>${personLink(p)} <span class="role">${esc(p.role || "")}</span></li>`).join("") + `</ul>`;
       if (d.letters?.length) {
         h += `<h3 style="margin-top:14px">Letters</h3><ul class="who">` + d.letters.map(l => {

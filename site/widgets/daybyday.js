@@ -85,7 +85,7 @@
       this.paint(`<p class="kicker">${fmt(date)}</p>
         <a class="h" href="${this.dayLink(date)}" target="_top">${esc(x.headline || "No entry in the record")}</a>
         ${x.summary ? `<p class="s">${esc(x.summary)}</p>` : ""}
-        ${q ? `<p class="q">“${esc(q.text)}”</p>` : ""}
+        ${q ? `<p class="q">“${esc(q.text)}”${q.source?.original ? ` <a href="${esc(q.source.original.url)}" target="_blank" rel="noopener" style="font-style:normal;font-size:12px;white-space:nowrap">See the original</a>` : ""}</p>` : ""}
         <div class="m">Age ${x.age}${x.location ? ` | ${esc(x.location.name)}` : ""}</div>`);
     }
   }

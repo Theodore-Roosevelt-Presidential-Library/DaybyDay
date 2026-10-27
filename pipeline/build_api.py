@@ -236,7 +236,10 @@ def main():
                   "compiled by Robert J. Moore Jr., 1985), cited by page on every day. All summaries and "
                   "descriptions are original writing by the Theodore Roosevelt Presidential Library.",
         "quotes_note": "tr_quotes are Theodore Roosevelt's own words as transcribed in the source record. "
-                       "They are marked verified:false until checked against the original document.",
+                       "They are marked verified:false until checked against the original document. Each carries a source: "
+                       "the record page it was transcribed from (cited_in) and, where it can be tied to one, the original "
+                       "(original): the diary page at the Library of Congress for 1878-1884 diary entries, or the letter at "
+                       "the Theodore Roosevelt Center when T.R. wrote only one recorded letter that day.",
         "archive": "Archive links point to the Theodore Roosevelt Center Digital Library at Dickinson State University "
                    "(theodorerooseveltcenter.org). Items are matched by date; letters by date plus correspondent name.",
         "geodata": "Coordinates from OpenStreetMap Nominatim (© OpenStreetMap contributors, ODbL).",

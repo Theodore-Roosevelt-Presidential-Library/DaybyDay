@@ -17,7 +17,7 @@ All dates are ISO `YYYY-MM-DD` in the Gregorian calendar. IDs are lowercase slug
 | `people` | `{id, role}`[] | role: family, companion, host, guest, correspondent, official, colleague, visitor, subject, adversary, other |
 | `events` | object[] | `{seq, action, detail, time, people[], places[]}`; `action` from the controlled list below |
 | `letters` | object[] | `{direction: from_tr \| to_tr, correspondent (person id or name), correspondent_resolved, topic}` |
-| `tr_quotes` | object[] | `{text, kind: diary \| letter \| speech \| remark \| writing, verified: false}` — TR's words as transcribed in the record |
+| `tr_quotes` | object[] | `{text, kind: diary \| letter \| speech \| remark \| writing, verified: false, source}` — TR's words as transcribed in the record. `source.cited_in` is `{work, pages[]}` in the record. `source.original`, when present, is the original document: `{type: diary_page, title, url, holder, explorer, match}` (LOC scan of the 1878–1884 pocket diaries; `explorer` is the same page at diary.labs.trlibrary.com; `match` is the share of the quote's words found in order on the page's transcription, or null when only the page's date is known) or `{type: letter, title, url, holder}` (TRC item, given only when T.R. wrote a single recorded letter that day) |
 | `works` | object[] | `{title, kind: book \| article \| speech \| review \| message \| other}` written, published or delivered that day |
 | `references` | object[] | `{title, pages}` — secondary sources the record points to |
 | `guests` | id[] | Sagamore Hill guest-book names for the day |

@@ -74,7 +74,11 @@ canvas.lifegrid { display: block; cursor: crosshair; image-rendering: pixelated;
 .events li::before { content: ""; position: absolute; left: -6px; top: 13px; width: 10px; height: 10px; border-radius: 50%; background: var(--sand); }
 .events .act { font: 600 12px var(--sans); color: var(--forest); background: #EAF4EB; padding: 1px 7px; border-radius: 99px; margin-right: 6px; white-space: nowrap; }
 blockquote.trq { margin: 0 0 12px; padding: 10px 16px; background: var(--sand-2); border-left: 4px solid var(--forest); font-style: italic; }
-blockquote.trq footer { font: normal 12px var(--sans); color: var(--ink-2); margin-top: 4px; }
+blockquote.trq footer { font: normal 12px/1.5 var(--sans); color: var(--ink-2); margin-top: 6px; }
+blockquote.trq footer cite { font-style: normal; display: block; }
+blockquote.trq footer .qsrc { display: block; font-weight: 600; }
+blockquote.trq footer .qsrc a { color: var(--forest); }
+blockquote.trq footer .qnote { display: block; }
 .taglist { display: flex; gap: 6px; flex-wrap: wrap; margin: 6px 0 0; padding: 0; list-style: none; }
 .taglist a { font: 600 13px var(--sans); background: var(--sand-2); color: var(--ink); padding: 3px 9px; border-radius: 99px; text-decoration: none; }
 .who { list-style: none; padding: 0; margin: 0; columns: 2 220px; }

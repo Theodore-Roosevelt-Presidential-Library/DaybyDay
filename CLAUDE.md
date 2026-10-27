@@ -11,6 +11,7 @@ TR's life, one record per day (1858-10-27 → 1919-01-06), served as a static JS
 - Fix a day: edit its line in `data/enrich/<chunk>.jsonl`, validate, then `python pipeline/build_dataset.py && python pipeline/build_api.py`.
 - Add/merge a person or place alias: edit `data/people.json` / `data/places.json` (aliases), rebuild.
 - New coordinates: add to `data/geocode_cache.json` (or run `pipeline/geocode.py` from a machine Nominatim doesn't throttle), then `python pipeline/geocode.py --apply` and rebuild.
+- Quote source links: `python pipeline/link_diaries.py ../DiaryExplorer` (after a build, since it reads `data/quotes.jsonl`), then rebuild.
 - Preview: `python -m http.server -d site 8000`.
 
 ## Layout

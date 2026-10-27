@@ -21,6 +21,8 @@ import re
 from collections import Counter, defaultdict
 from pathlib import Path
 
+from link_diaries import quote_key
+
 ROOT = Path(__file__).resolve().parent.parent
 BIRTH = dt.date(1858, 10, 27)
 DEATH = dt.date(1919, 1, 6)
@@ -53,6 +55,7 @@ def main():
     periods = json.load(open(ROOT / "data/periods.json"))["periods"]
     pidx = json.load(open(ROOT / "data/places_index.json"))
     place_by_id = {p["id"]: p for p in places}
+    person_by_id = {p["id"]: p for p in people}
 
     # alias maps
     place_alias = {}
@@ -160,6 +163,7 @@ def main():
             trc_day[x["date"]] = x
         trc_letters = json.load(open(ROOT / "data/trc_letters.json"))
     TRC_URL = "https://www.theodorerooseveltcenter.org/digital-library/{}/"
+    diary_links = json.load(open(ROOT / "data/diary_links.json")) if (ROOT / "data/diary_links.json").exists() else {}
 
     unresolved_people, unresolved_places = Counter(), Counter()
     days, last_loc, last_head = [], None, None
@@ -219,8 +223,21 @@ def main():
                     letter["trc"] = [TRC_URL.format(i) for i in hit["trc"]]
                 rec["letters"].append(letter)
                 letters_out.append({"date": ds, **letter})
+            tr_letters = [l for l in rec["letters"] if l["direction"] == "from_tr"]
             for q in r.get("tr_quotes") or []:
-                qq = {"text": q["text"], "kind": q["kind"], "verified": False}
+                qq = {"text": q["text"], "kind": q["kind"], "verified": False,
+                      "source": {"cited_in": {"work": "TRA Chronological Record", "pages": rec["sources"][0]["pages"]}}}
+                dl = diary_links.get(quote_key(ds, q["text"])) if q["kind"] == "diary" else None
+                if dl:
+                    qq["source"]["original"] = {"type": "diary_page", "title": dl["loc_title"], "url": dl["loc"],
+                                                "holder": "Library of Congress, Manuscript Division",
+                                                "explorer": dl["explorer"], "match": dl["match"]}
+                elif q["kind"] == "letter" and len(tr_letters) == 1 and tr_letters[0].get("trc"):
+                    # Only one letter by T.R. is recorded that day, so the quote can be tied to it.
+                    l = tr_letters[0]
+                    qq["source"]["original"] = {"type": "letter", "url": l["trc"][0],
+                                                "holder": "Theodore Roosevelt Center, Dickinson State University",
+                                                "title": "Letter to " + (person_by_id[l["correspondent"]]["name"] if l["correspondent_resolved"] and l["correspondent"] in person_by_id else str(l["correspondent"]))}
                 rec["tr_quotes"].append(qq)
                 quotes_out.append({"date": ds, **qq})
 

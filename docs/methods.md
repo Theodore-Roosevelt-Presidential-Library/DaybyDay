@@ -76,3 +76,7 @@ The TRC Digital Library at Dickinson State University catalogs 141,609 items; 12
 - Person identification is uncertain for bare surnames; those entities carry `uncertain: true`.
 - `significance` is an editorial judgment made chunk by chunk; treat it as a ranking aid, not a fact.
 - TR quotations are unverified transcriptions. Check the original before publishing.
+
+## Linking quotations to the originals
+
+Each quotation cites the record page it was transcribed from. Diary quotations from 1878–1884 also link to the page in T.R.'s pocket diaries (Library of Congress, Theodore Roosevelt Papers, Series 8, Vols. 1–7). `pipeline/link_diaries.py` compares each quotation with the Library's page-by-page transcription in the DiaryExplorer repo: first the pages dated within a day of it (kept when at least 60% of its words appear in order), then the rest of the volume at a stricter 80% bar. The wider search finds catch-up entries and the 1884 Bighorn log, which T.R. kept in his 1883 volume under printed 1883 dates. Of 1,033 such quotations, 1,017 are linked; 9 of those go only to the page for that date. Letter quotations link to the letter at the Theodore Roosevelt Center when T.R. wrote only one recorded letter that day (362). The links are a way to check the wording; they do not mark it verified.
