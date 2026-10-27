@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Was He Here? | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="Type a town or city and see whether Theodore Roosevelt went there, where he went nearby, and every day he spent in the state.">
+<meta property="og:title" content="Was He Here? | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="Did Theodore Roosevelt come to your town? Look it up, day by day.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  .lookup { display: flex; gap: 10px; flex-wrap: wrap; margin: 18px 0 6px; }
+  .lookup input { flex: 1 1 260px; font: 18px var(--sans); padding: 11px 14px; border: 1px solid var(--sand); border-radius: var(--radius, 6px); background: #fff; }
+  .lookup button { cursor: pointer; border: 0; }
+  .verdict { background: #fff; border-top: 6px solid var(--s3); padding: 20px 24px; margin: 22px 0 8px; border-radius: 0 0 var(--radius, 6px) var(--radius, 6px); }
+  .verdict.yes { border-top-color: var(--forest); }
+  .verdict.no { border-top-color: var(--s1); }
+  .verdict h2 { color: var(--night); margin: 0 0 6px; font-size: clamp(26px, 3.4vw, 40px); }
+  .verdict p { margin: 0; max-width: 66ch; }
+  .sect { margin-top: 30px; }
+  .sect h3 { font: 700 13px var(--sans); text-transform: uppercase; letter-spacing: .08em; color: var(--ink-2); border-bottom: 2px solid var(--ink); padding-bottom: 6px; margin-bottom: 0; }
+  .pl { list-style: none; margin: 0; padding: 0; }
+  .pl > li { border-bottom: 1px solid var(--sand); padding: 12px 0; }
+  .pl .top { display: flex; gap: 12px; align-items: baseline; flex-wrap: wrap; }
+  .pl .nm { font: 700 19px/1.3 var(--serif); }
+  .pl .meta { font: 14px var(--sans); color: var(--ink-2); }
+  .pl button.more { all: unset; cursor: pointer; margin-left: auto; font: 600 14px var(--sans); color: var(--forest); text-decoration: underline; text-underline-offset: 2px; }
+  .pl button.more:focus-visible { outline: 2px solid var(--forest); outline-offset: 2px; }
+  .days { list-style: none; margin: 8px 0 0; padding: 0 0 0 14px; border-left: 2px solid var(--sand); }
+  .days li { padding: 3px 0; font-size: 16px; }
+  .days .dt { font: 600 14px var(--sans); color: var(--ink-2); display: inline-block; min-width: 9.5em; }
+  .choices { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+  .choices button { cursor: pointer; font: 600 14px var(--sans); background: var(--sand-2); border: 1px solid var(--sand); color: var(--ink); padding: 6px 12px; border-radius: 999px; }
+  .tries a { margin-right: 10px; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="near.html" aria-current="page">Was he here?</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+
+<main class="wrap" style="padding:36px 20px 60px; max-width: 900px">
+  <h1 style="color:var(--night)">Was he here?</h1>
+  <p style="max-width:62ch">Roosevelt crossed the country by train again and again, speaking from the back platform in towns big and small. Type a town or city to see whether he came, where he went nearby, and every day he spent in the state.</p>
+  <form class="lookup" id="form" role="search">
+    <label for="q" class="small" style="flex-basis:100%">Town or city (add the state if the name is common, like “Springfield, Illinois”)</label>
+    <input id="q" name="q" type="search" autocomplete="off" placeholder="Dallas, Texas" required>
+    <button class="btn" type="submit">Look it up</button>
+  </form>
+  <p class="small tries">Try: <a href="?q=Dallas%2C%20Texas">Dallas</a><a href="?q=Medora%2C%20North%20Dakota">Medora</a><a href="?q=Denver">Denver</a><a href="?q=Boise%2C%20Idaho">Boise</a><a href="?q=Nairobi">Nairobi</a></p>
+  <div id="out" aria-live="polite"></div>
+  <p class="small" style="margin-top:36px">Places come from the Theodore Roosevelt Association's <i>Chronological Record</i>, which follows him closely but not every whistle-stop, so a town missing here is not proof he never passed through. Only days the record puts him in a place count (“probably here” marks days between entries, when he had not been seen to leave); places he only wrote about or acted on from afar, such as bird reservations he created, are left out. When a town isn't in the record, it is located with <a href="https://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a> (© OpenStreetMap contributors). Distances are straight-line miles.</p>
+</main>
+<footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985). <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
+<script src="assets/app.js"></script>
+<script>
+(() => {
+  const { esc, fmtDate } = DBD;
+  const HERE_KM = 15, NEAR_MI = 100;
+  const BROAD = new Set(["state", "country", "region", "continent", "body_of_water", "territory", "province"]);
+  const ST = { AL:"Alabama", AK:"Alaska", AZ:"Arizona", AR:"Arkansas", CA:"California", CO:"Colorado", CT:"Connecticut", DE:"Delaware", DC:"District of Columbia", FL:"Florida", GA:"Georgia", HI:"Hawaii", ID:"Idaho", IL:"Illinois", IN:"Indiana", IA:"Iowa", KS:"Kansas", KY:"Kentucky", LA:"Louisiana", ME:"Maine", MD:"Maryland", MA:"Massachusetts", MI:"Michigan", MN:"Minnesota", MS:"Mississippi", MO:"Missouri", MT:"Montana", NE:"Nebraska", NV:"Nevada", NH:"New Hampshire", NJ:"New Jersey", NM:"New Mexico", NY:"New York", NC:"North Carolina", ND:"North Dakota", OH:"Ohio", OK:"Oklahoma", OR:"Oregon", PA:"Pennsylvania", RI:"Rhode Island", SC:"South Carolina", SD:"South Dakota", TN:"Tennessee", TX:"Texas", UT:"Utah", VT:"Vermont", VA:"Virginia", WA:"Washington", WV:"West Virginia", WI:"Wisconsin", WY:"Wyoming" };
+  const out = document.getElementById("out"), qi = document.getElementById("q");
+  let all = [], visited = [];
+  const norm = s => (s || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\bsaint\b/g, "st").replace(/[^a-z0-9]+/g, " ").trim();
+  const yrs = p => p.visit_first ? (p.visit_first.slice(0, 4) === p.visit_last.slice(0, 4) ? p.visit_first.slice(0, 4) : `${p.visit_first.slice(0, 4)}–${p.visit_last.slice(0, 4)}`) : "";
+  const daysTxt = n => `${n.toLocaleString()} day${n === 1 ? "" : "s"}`;
+  function km(a, b, c, d) {
+    const r = Math.PI / 180, x = Math.sin((c - a) * r / 2) ** 2 + Math.cos(a * r) * Math.cos(c * r) * Math.sin((d - b) * r / 2) ** 2;
+    return 12742 * Math.asin(Math.sqrt(x));
+  }
+  function parse(q) {
+    const parts = q.split(",").map(s => s.trim()).filter(Boolean);
+    let city = parts[0] || "", region = parts.slice(1).join(", ");
+    if (/^[A-Za-z]{2}$/.test(region) && ST[region.toUpperCase()]) region = ST[region.toUpperCase()];
+    return { city, region };
+  }
+  function localMatches({ city, region }) {
+    const c = norm(city), r = norm(region);
+    return visited.filter(p => p.lat != null && norm(p.name).replace(/ (city|ny|dc)$/, "") === c.replace(/ city$/, "")
+      && (!r || norm(p.region) === r || norm(p.country) === r));
+  }
+  async function geocode(q) {
+    const u = `https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&limit=1&accept-language=en&q=${encodeURIComponent(q)}`;
+    const r = await fetch(u, { headers: { "Accept": "application/json" } });
+    if (!r.ok) throw new Error("geocoder " + r.status);
+    const [g] = await r.json();
+    if (!g) return null;
+    const a = g.address || {};
+    return { lat: +g.lat, lon: +g.lon, name: a.city || a.town || a.village || a.hamlet || a.county || g.name || q,
+             region: a.state || a.province || a.region || a.country, country: a.country };
+  }
+  const placeRow = (p, open) => `<li data-id="${esc(p.id)}"><div class="top"><a class="nm" href="place.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a>
+      <span class="meta">${[p._mi != null && p._mi >= 1 ? `${Math.round(p._mi)} mi away` : "", daysTxt(p.visit_days), yrs(p)].filter(Boolean).join(" · ")}</span>
+      <button class="more" type="button" aria-expanded="false">${open ? "Hide days" : "Show days"}</button></div></li>`;
+  async function toggle(li, force) {
+    const btn = li.querySelector("button.more");
+    let ul = li.querySelector("ul.days");
+    const show = force ?? !ul;
+    if (!show) { ul?.remove(); btn.textContent = "Show days"; btn.setAttribute("aria-expanded", "false"); return; }
+    if (ul) return;
+    btn.textContent = "Hide days"; btn.setAttribute("aria-expanded", "true");
+    ul = document.createElement("ul"); ul.className = "days"; ul.innerHTML = `<li class="small">Loading…</li>`; li.appendChild(ul);
+    try {
+      const d = await DBD.get(`places/${encodeURIComponent(li.dataset.id)}.json`);
+      ul.innerHTML = (d.days || []).filter(x => x.here).map(x => `<li><span class="dt">${esc(fmtDate(x.date))}</span><a href="day.html?date=${x.date}">${esc(x.headline || "No entry in the record")}</a>${x.probable ? ` <span class="small">(probably here)</span>` : ""}</li>`).join("") || `<li class="small">No days listed.</li>`;
+    } catch { ul.innerHTML = `<li class="small">Couldn't load the days for this place.</li>`; }
+  }
+  out.addEventListener("click", e => {
+    const b = e.target.closest("button.more"); if (b) return toggle(b.closest("li"));
+    const c = e.target.closest("button[data-pick]"); if (c) { const p = all.find(x => x.id === c.dataset.pick); return show({ lat: p.lat, lon: p.lon, name: p.name, region: p.region, country: p.country }, p); }
+    const g = e.target.closest("button[data-geo]"); if (g) return lookup(qi.value, true);
+  });
+  const sect = (title, list, open = false) => list.length ? `<section class="sect"><h3>${title}</h3><ul class="pl">${list.map(p => placeRow(p, open)).join("")}</ul></section>` : "";
+
+  function show(pt, hit) {
+    const label = pt.region && pt.region !== pt.name ? `${pt.name}, ${pt.region}` : pt.name;
+    const withD = visited.filter(p => p.lat != null).map(p => ({ ...p, _km: km(pt.lat, pt.lon, p.lat, p.lon), _mi: km(pt.lat, pt.lon, p.lat, p.lon) / 1.609 }));
+    let here = withD.filter(p => p._km <= HERE_KM || (hit && (p.id === hit.id || p.parent === hit.id)));
+    here.sort((a, b) => (b.id === hit?.id) - (a.id === hit?.id) || b.visit_days - a.visit_days);
+    const hereIds = new Set(here.map(p => p.id));
+    const near = withD.filter(p => !hereIds.has(p.id) && p._mi <= NEAR_MI && !here.some(h => h.id === p.parent)).sort((a, b) => a._km - b._km);
+    const nearIds = new Set(near.map(p => p.id));
+    const inState = pt.region ? visited.filter(p => p.region === pt.region && !hereIds.has(p.id) && !nearIds.has(p.id)).sort((a, b) => b.visit_days - a.visit_days) : [];
+    const stateTotal = pt.region ? visited.filter(p => p.region === pt.region) : [];
+    let html;
+    if (here.length) {
+      const main = here[0];
+      html = `<div class="verdict yes"><h2>Yes. He was in ${esc(pt.name)}.</h2><p>The record places Roosevelt ${main.id === hit?.id || norm(main.name) === norm(pt.name) ? "here" : `at ${esc(main.name)}, right here,`} on ${daysTxt(main.visit_days)}${main.visit_first ? `, ${main.visit_first === main.visit_last ? `on ${esc(fmtDate(main.visit_first))}` : `between ${main.visit_first.slice(0, 4)} and ${main.visit_last.slice(0, 4)}`}` : ""}. Pick a day to see what he was doing.</p></div>`
+        + sect(`In ${esc(pt.name)}`, here, true);
+    } else if (near.length) {
+      const n = near[0];
+      html = `<div class="verdict"><h2>Not ${esc(pt.name)}, but close.</h2><p>The record doesn't put Roosevelt in ${esc(pt.name)} itself. The nearest place he went is <b>${esc(n.name)}</b>, about ${Math.max(1, Math.round(n._mi))} miles away${n.visit_first ? `, in ${n.visit_first.slice(0, 4)}` : ""}.</p></div>`;
+    } else if (inState.length) {
+      html = `<div class="verdict"><h2>Not nearby, but in ${esc(pt.region)}.</h2><p>The record has no stop within ${NEAR_MI} miles of ${esc(pt.name)}, but Roosevelt spent time elsewhere in ${esc(pt.region)}.</p></div>`;
+    } else {
+      const far = withD.sort((a, b) => a._km - b._km)[0];
+      html = `<div class="verdict no"><h2>No visit on record${pt.region ? ` in ${esc(pt.region)}` : ""}.</h2><p>The record has no stop for Roosevelt within ${NEAR_MI} miles of ${esc(label)}${pt.region ? ` or anywhere in ${esc(pt.region)}` : ""}. The closest place he went is <b>${esc(far.name)}${far.region ? `, ${esc(far.region)}` : ""}</b>, about ${Math.round(far._mi).toLocaleString()} miles away.</p></div>`
+        + sect("Closest places he went", withD.slice(0, 5));
+    }
+    html += sect(`Within ${NEAR_MI} miles`, near.slice(0, 40));
+    if (pt.region && inState.length) html += sect(`Elsewhere in ${esc(pt.region)} (${stateTotal.length} place${stateTotal.length === 1 ? "" : "s"} in all)`, inState.slice(0, 60));
+    out.innerHTML = html;
+    out.querySelectorAll(".pl").forEach(ul => { if (ul.closest(".sect")?.querySelector("h3")?.textContent.startsWith("In ")) ul.querySelectorAll(":scope > li").forEach((li, i) => i < 3 && toggle(li, true)); });
+  }
+
+  async function lookup(q, forceGeo = false) {
+    q = q.trim(); if (!q) return;
+    history.replaceState(null, "", `?q=${encodeURIComponent(q)}`);
+    const parsed = parse(q);
+    const local = forceGeo ? [] : localMatches(parsed);
+    const regions = [...new Set(local.map(p => p.region))];
+    if (local.length && (regions.length === 1 || parsed.region)) {
+      const p = local.sort((a, b) => b.visit_days - a.visit_days)[0];
+      return show({ lat: p.lat, lon: p.lon, name: p.name, region: p.region, country: p.country }, p);
+    }
+    if (local.length) {
+      out.innerHTML = `<div class="verdict"><h2>Which ${esc(parsed.city)}?</h2><p>Roosevelt went to more than one.</p><div class="choices">${local.map(p => `<button type="button" data-pick="${esc(p.id)}">${esc(p.name)}, ${esc(p.region || p.country)}</button>`).join("")}<button type="button" data-geo="1">Somewhere else</button></div></div>`;
+      return;
+    }
+    out.innerHTML = `<p class="small">Finding ${esc(q)}…</p>`;
+    try {
+      const g = await geocode(q);
+      if (!g) { out.innerHTML = `<div class="verdict no"><h2>Couldn't find that place.</h2><p>Check the spelling, or add the state or country.</p></div>`; return; }
+      const hit = localMatches({ city: g.name, region: g.region })[0];
+      show(g, hit && km(g.lat, g.lon, hit.lat, hit.lon) < HERE_KM ? hit : null);
+    } catch {
+      out.innerHTML = `<div class="verdict no"><h2>The map lookup didn't answer.</h2><p>Try again in a moment, or try a larger nearby city.</p></div>`;
+    }
+  }
+
+  document.getElementById("form").addEventListener("submit", e => { e.preventDefault(); lookup(qi.value); });
+  DBD.get("places/index.json").then(x => {
+    all = x; visited = x.filter(p => p.visit_days > 0 && !BROAD.has(p.kind));
+    const q = DBD.param("q"); if (q) { qi.value = q; lookup(q); }
+  });
+})();
+</script>
+</body></html>

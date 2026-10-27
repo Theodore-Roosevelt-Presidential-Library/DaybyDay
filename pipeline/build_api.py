@@ -119,6 +119,12 @@ def build_time_and_place(days, place_by_id, periods):
     dump(OUT / "time-and-place/periods.json", {"groups": [{"id": a, "label": b} for a, b in GROUPS], "periods": out})
 
 
+def visit_stats(entries):
+    """Days the record puts T.R. at a place (entries marked here), as opposed to days it is only named."""
+    ds = sorted(e["date"] for e in entries if e.get("here"))
+    return {"visit_days": len(ds), "visit_first": ds[0] if ds else None, "visit_last": ds[-1] if ds else None}
+
+
 def main():
     if OUT.exists():
         shutil.rmtree(OUT)
@@ -158,8 +164,18 @@ def main():
             by_md[r["date"][5:]].append(c)
         for p in r["people"]:
             by_person[p["id"]].append({"date": r["date"], "headline": r["headline"], "role": p["role"]})
+        # "here": the record puts T.R. at this place that day (the day's location, unless only carried
+        # forward, or a stop the place-names index gives for the date), not just a mention of it.
+        loc = r.get("location") or {}
+        here = set(loc.get("also") or []) | ({loc["id"]} if loc.get("id") and loc.get("source") != "carried" else set())
+        # "probable": he is only carried forward from the last place heading in the record
+        prob = {loc["id"]} if loc.get("id") and loc.get("source", "").startswith("heading-carried") else set()
         for p in r["places"]:
-            by_place[p].append({"date": r["date"], "headline": r["headline"]})
+            by_place[p].append({"date": r["date"], "headline": r["headline"], "here": p in here,
+                                **({"probable": True} if p in prob else {})})
+        for p in here - set(r["places"]):
+            by_place[p].append({"date": r["date"], "headline": r["headline"], "here": True,
+                                **({"probable": True} if p in prob else {})})
         for t in r["tags"]:
             by_tag[t].append(r["date"])
     for k, v in by_month.items():
@@ -182,10 +198,12 @@ def main():
     dump(OUT / "places/index.json", [
         {"id": p["id"], "name": p["name"], "kind": p["kind"], "region": p.get("region"), "country": p.get("country"),
          "lat": p.get("lat"), "lon": p.get("lon"), "days_present": p.get("days_present", 0),
-         "first": p.get("first"), "last": p.get("last"), "parent": p.get("parent")}
+         "first": p.get("first"), "last": p.get("last"), "parent": p.get("parent"),
+         **visit_stats(by_place.get(p["id"], []))}
         for p in sorted(places, key=lambda x: -x.get("days_present", 0))])
     for p in places:
-        dump(OUT / f"places/{p['id']}.json", {**p, "days": by_place.get(p["id"], [])})
+        dump(OUT / f"places/{p['id']}.json", {**p, **visit_stats(by_place.get(p["id"], [])),
+                                              "days": sorted(by_place.get(p["id"], []), key=lambda x: x["date"])})
     pcount = defaultdict(int)
     for r in days:
         for pid in r["periods"]:

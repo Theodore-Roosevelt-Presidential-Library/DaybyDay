@@ -51,3 +51,7 @@ All dates are ISO `YYYY-MM-DD` in the Gregorian calendar. IDs are lowercase slug
 ## Stay (`/api/v1/stays.json`)
 
 `{place, name, lat, lon, kind, precise, start, end, days}` — consecutive days at the same `location`.
+
+## Place visits (`/api/v1/places/index.json`, `/api/v1/places/{id}.json`)
+
+Each place also carries `visit_days`, `visit_first` and `visit_last`: the days the record puts T.R. *at* the place (the day's location, unless only carried forward with no information, or a stop the place-names index gives for that date), as opposed to `days_present`, which also counts days the place is only named. Entries in a place's `days[]` have `here: true` on visit days and `probable: true` when the location is carried forward from the last place heading. The "Was he here?" page (`near.html`) uses visit days only.
