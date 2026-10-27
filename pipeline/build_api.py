@@ -119,10 +119,14 @@ def build_time_and_place(days, place_by_id, periods):
     dump(OUT / "time-and-place/periods.json", {"groups": [{"id": a, "label": b} for a, b in GROUPS], "periods": out})
 
 
+BROAD_KINDS = {"state", "country", "region", "continent", "territory", "province", "body_of_water"}
+
+
 def visit_stats(entries):
     """Days the record puts T.R. at a place (entries marked here), as opposed to days it is only named."""
     ds = sorted(e["date"] for e in entries if e.get("here"))
-    return {"visit_days": len(ds), "visit_first": ds[0] if ds else None, "visit_last": ds[-1] if ds else None}
+    return {"visit_days": len(ds), "visit_first": ds[0] if ds else None, "visit_last": ds[-1] if ds else None,
+            "mention_days": sum(1 for e in entries if not e.get("here"))}
 
 
 def main():
@@ -168,6 +172,19 @@ def main():
         # forward, or a stop the place-names index gives for the date), not just a mention of it.
         loc = r.get("location") or {}
         here = set(loc.get("also") or []) | ({loc["id"]} if loc.get("id") and loc.get("source") != "carried" else set())
+        # A place named that day also counts when it is at the same spot as, inside, or the parent of a place
+        # he was (Camp Wood shares San Antonio's coordinates; Sagamore Hill sits inside Oyster Bay).
+        for p in r["places"]:
+            if p in here:
+                continue
+            pp = place_by_id.get(p, {})
+            for h in list(here):
+                hp = place_by_id.get(h, {})
+                if pp.get("parent") == h or hp.get("parent") == p or (
+                        pp.get("lat") is not None and hp.get("lat") is not None and pp.get("kind") not in BROAD_KINDS
+                        and abs(pp["lat"] - hp["lat"]) < 0.02 and abs(pp["lon"] - hp["lon"]) < 0.02):
+                    here.add(p)
+                    break
         # "probable": he is only carried forward from the last place heading in the record
         prob = {loc["id"]} if loc.get("id") and loc.get("source", "").startswith("heading-carried") else set()
         for p in r["places"]:

@@ -54,7 +54,7 @@
   </form>
   <p class="small tries">Try: <a href="?q=Dallas%2C%20Texas">Dallas</a><a href="?q=Medora%2C%20North%20Dakota">Medora</a><a href="?q=Denver">Denver</a><a href="?q=Boise%2C%20Idaho">Boise</a><a href="?q=Nairobi">Nairobi</a></p>
   <div id="out" aria-live="polite"></div>
-  <p class="small" style="margin-top:36px">Places come from the Theodore Roosevelt Association's <i>Chronological Record</i>, which follows him closely but not every whistle-stop, so a town missing here is not proof he never passed through. Only days the record puts him in a place count (“probably here” marks days between entries, when he had not been seen to leave); places he only wrote about or acted on from afar, such as bird reservations he created, are left out. When a town isn't in the record, it is located with <a href="https://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a> (© OpenStreetMap contributors). Distances are straight-line miles.</p>
+  <p class="small" style="margin-top:36px">Places come from the Theodore Roosevelt Association's <i>Chronological Record</i>, which follows him closely but not every whistle-stop, so a town missing here is not proof he never passed through. Only days the record puts him in a place count (“probably here” marks days between entries, when he had not been seen to leave); places he only wrote about or acted on from afar, such as bird reservations he created, are listed separately under Connected from afar. When a town isn't in the record, it is located with <a href="https://nominatim.openstreetmap.org/">OpenStreetMap Nominatim</a> (© OpenStreetMap contributors). Distances are straight-line miles.</p>
 </main>
 <footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985). <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
 <script src="assets/app.js"></script>
@@ -65,7 +65,7 @@
   const BROAD = new Set(["state", "country", "region", "continent", "body_of_water", "territory", "province"]);
   const ST = { AL:"Alabama", AK:"Alaska", AZ:"Arizona", AR:"Arkansas", CA:"California", CO:"Colorado", CT:"Connecticut", DE:"Delaware", DC:"District of Columbia", FL:"Florida", GA:"Georgia", HI:"Hawaii", ID:"Idaho", IL:"Illinois", IN:"Indiana", IA:"Iowa", KS:"Kansas", KY:"Kentucky", LA:"Louisiana", ME:"Maine", MD:"Maryland", MA:"Massachusetts", MI:"Michigan", MN:"Minnesota", MS:"Mississippi", MO:"Missouri", MT:"Montana", NE:"Nebraska", NV:"Nevada", NH:"New Hampshire", NJ:"New Jersey", NM:"New Mexico", NY:"New York", NC:"North Carolina", ND:"North Dakota", OH:"Ohio", OK:"Oklahoma", OR:"Oregon", PA:"Pennsylvania", RI:"Rhode Island", SC:"South Carolina", SD:"South Dakota", TN:"Tennessee", TX:"Texas", UT:"Utah", VT:"Vermont", VA:"Virginia", WA:"Washington", WV:"West Virginia", WI:"Wisconsin", WY:"Wyoming" };
   const out = document.getElementById("out"), qi = document.getElementById("q");
-  let all = [], visited = [];
+  let all = [], visited = [], mentioned = [];
   const norm = s => (s || "").normalize("NFKD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/\bsaint\b/g, "st").replace(/[^a-z0-9]+/g, " ").trim();
   const yrs = p => p.visit_first ? (p.visit_first.slice(0, 4) === p.visit_last.slice(0, 4) ? p.visit_first.slice(0, 4) : `${p.visit_first.slice(0, 4)}–${p.visit_last.slice(0, 4)}`) : "";
   const daysTxt = n => `${n.toLocaleString()} day${n === 1 ? "" : "s"}`;
@@ -94,8 +94,10 @@
     return { lat: +g.lat, lon: +g.lon, name: a.city || a.town || a.village || a.hamlet || a.county || g.name || q,
              region: a.state || a.province || a.region || a.country, country: a.country };
   }
-  const placeRow = (p, open) => `<li data-id="${esc(p.id)}"><div class="top"><a class="nm" href="place.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a>
-      <span class="meta">${[p._mi != null && p._mi >= 1 ? `${Math.round(p._mi)} mi away` : "", daysTxt(p.visit_days), yrs(p)].filter(Boolean).join(" · ")}</span>
+  const placeRow = (p, open, afar) => `<li data-id="${esc(p.id)}"${afar ? ` data-afar="1"` : ""}><div class="top"><a class="nm" href="place.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a>
+      <span class="meta">${afar
+        ? [p._mi != null && p._mi >= 1 ? `${Math.round(p._mi)} mi away` : "", `named on ${daysTxt(p.mention_days)}`].filter(Boolean).join(" · ")
+        : [p._mi != null && p._mi >= 1 ? `${Math.round(p._mi)} mi away` : "", daysTxt(p.visit_days), yrs(p)].filter(Boolean).join(" · ")}</span>
       <button class="more" type="button" aria-expanded="false">${open ? "Hide days" : "Show days"}</button></div></li>`;
   async function toggle(li, force) {
     const btn = li.querySelector("button.more");
@@ -107,7 +109,8 @@
     ul = document.createElement("ul"); ul.className = "days"; ul.innerHTML = `<li class="small">Loading…</li>`; li.appendChild(ul);
     try {
       const d = await DBD.get(`places/${encodeURIComponent(li.dataset.id)}.json`);
-      ul.innerHTML = (d.days || []).filter(x => x.here).map(x => `<li><span class="dt">${esc(fmtDate(x.date))}</span><a href="day.html?date=${x.date}">${esc(x.headline || "No entry in the record")}</a>${x.probable ? ` <span class="small">(probably here)</span>` : ""}</li>`).join("") || `<li class="small">No days listed.</li>`;
+      const afar = li.dataset.afar === "1";
+      ul.innerHTML = (d.days || []).filter(x => afar ? !x.here : x.here).map(x => `<li><span class="dt">${esc(fmtDate(x.date))}</span><a href="day.html?date=${x.date}">${esc(x.headline || "No entry in the record")}</a>${x.probable && !afar ? ` <span class="small">(probably here)</span>` : ""}</li>`).join("") || `<li class="small">No days listed.</li>`;
     } catch { ul.innerHTML = `<li class="small">Couldn't load the days for this place.</li>`; }
   }
   out.addEventListener("click", e => {
@@ -115,7 +118,7 @@
     const c = e.target.closest("button[data-pick]"); if (c) { const p = all.find(x => x.id === c.dataset.pick); return show({ lat: p.lat, lon: p.lon, name: p.name, region: p.region, country: p.country }, p); }
     const g = e.target.closest("button[data-geo]"); if (g) return lookup(qi.value, true);
   });
-  const sect = (title, list, open = false) => list.length ? `<section class="sect"><h3>${title}</h3><ul class="pl">${list.map(p => placeRow(p, open)).join("")}</ul></section>` : "";
+  const sect = (title, list, open = false, afar = false, intro = "") => list.length ? `<section class="sect"><h3>${title}</h3>${intro}<ul class="pl">${list.map(p => placeRow(p, open, afar)).join("")}</ul></section>` : "";
 
   function show(pt, hit) {
     const label = pt.region && pt.region !== pt.name ? `${pt.name}, ${pt.region}` : pt.name;
@@ -144,6 +147,16 @@
     }
     html += sect(`Within ${NEAR_MI} miles`, near.slice(0, 40));
     if (pt.region && inState.length) html += sect(`Elsewhere in ${esc(pt.region)} (${stateTotal.length} place${stateTotal.length === 1 ? "" : "s"} in all)`, inState.slice(0, 60));
+    // Second-hand connections: places nearby or in the state that turn up in his record on days he wasn't there
+    // (a letter about the town, a reservation he created, people he met who came from there).
+    const NOFAR = new Set(["country", "continent"]);
+    const afar = mentioned.filter(p => !NOFAR.has(p.kind) && ((p.lat != null && km(pt.lat, pt.lon, p.lat, p.lon) / 1.609 <= NEAR_MI) || (pt.region && p.region === pt.region)))
+      .map(p => ({ ...p, _mi: p.lat != null ? km(pt.lat, pt.lon, p.lat, p.lon) / 1.609 : null }))
+      .sort((a, b) => ((a._mi ?? 1e9) > NEAR_MI) - ((b._mi ?? 1e9) > NEAR_MI) || b.mention_days - a.mention_days);
+    const town = afar.find(p => p._mi != null && p._mi * 1.609 <= HERE_KM && norm(p.name) === norm(pt.name));
+    if (!here.length && town) html = html.replace("</p></div>", ` ${esc(pt.name)} does turn up in his record, though, on ${daysTxt(town.mention_days)}; see below.</p></div>`);
+    html += sect("Connected from afar", afar.slice(0, 40), false, true,
+      `<p class="small" style="margin:8px 0 0">Places here${pt.region ? ` and in ${esc(pt.region)}` : ""} that come up in his record on days he wasn't there: letters, laws and orders, reservations he set aside, people he met.</p>`);
     out.innerHTML = html;
     out.querySelectorAll(".pl").forEach(ul => { if (ul.closest(".sect")?.querySelector("h3")?.textContent.startsWith("In ")) ul.querySelectorAll(":scope > li").forEach((li, i) => i < 3 && toggle(li, true)); });
   }
@@ -175,7 +188,7 @@
 
   document.getElementById("form").addEventListener("submit", e => { e.preventDefault(); lookup(qi.value); });
   DBD.get("places/index.json").then(x => {
-    all = x; visited = x.filter(p => p.visit_days > 0 && !BROAD.has(p.kind));
+    all = x; visited = x.filter(p => p.visit_days > 0 && !BROAD.has(p.kind)); mentioned = x.filter(p => p.mention_days > 0);
     const q = DBD.param("q"); if (q) { qi.value = q; lookup(q); }
   });
 })();
