@@ -39,6 +39,13 @@ const DBD = (() => {
     return `<blockquote class="trq">“${esc(q.text)}”<footer>${cite}${orig}<span class="qnote">${note}</span></footer></blockquote>`;
   }
 
+  // Speeches that day, from the Library's speech bank (speeches.labs.trlibrary.com)
+  function speechList(list) {
+    const kind = { message: "Message to Congress", lecture: "Lecture" };
+    return `<h3 style="margin-top:14px">${list.length === 1 ? "Speech" : "Speeches"} that day</h3><ul class="who speeches">` + list.map(s =>
+      `<li><a href="${esc(s.url)}" target="_blank" rel="noopener">${esc(s.title)}</a><br><span class="role">${[kind[s.kind], s.full_text ? "Full text in the speech bank" : "Original at the archive"].filter(Boolean).join(" · ")}</span></li>`).join("") + `</ul>`;
+  }
+
   function renderDay(d) {
     const loc = d.location;
     const meta = [d.weekday && `${d.weekday}.`, `Age ${d.age}`, loc && `${loc.source === "carried" ? "Probably at " : ""}${placeLink(loc)}`].filter(Boolean).join(" &nbsp;|&nbsp; ");
@@ -48,6 +55,7 @@ const DBD = (() => {
       <div class="meta">${meta}</div>`;
     if (!d.has_entry) {
       h += `<p class="empty">The record has no entry for this day.${loc ? ` He was most likely at ${esc(loc.name)}.` : ""}</p>`;
+      if (d.speeches?.length) h += speechList(d.speeches);
     } else {
       h += `<h3 class="headline">${esc(d.headline)}</h3><p class="summary">${esc(d.summary)}</p>`;
       if (d.events?.length > 1) {
@@ -62,6 +70,7 @@ const DBD = (() => {
           return `<li>${l.direction === "from_tr" ? "To" : "From"} ${who}<br><span class="role">${esc(l.topic || "")}</span>${trc ? `<br><span class="role">${trc}</span>` : ""}</li>`;
         }).join("") + `</ul>`;
       }
+      if (d.speeches?.length) h += speechList(d.speeches);
       if (d.tags?.length) h += `<ul class="taglist">` + d.tags.map(t => `<li><a href="index.html?tag=${encodeURIComponent(t)}">${esc(t.replace(/-/g, " "))}</a></li>`).join("") + `</ul>`;
     }
     if (d.archive) {

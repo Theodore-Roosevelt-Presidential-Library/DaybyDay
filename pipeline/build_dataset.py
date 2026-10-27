@@ -164,6 +164,11 @@ def main():
         trc_letters = json.load(open(ROOT / "data/trc_letters.json"))
     TRC_URL = "https://www.theodorerooseveltcenter.org/digital-library/{}/"
     diary_links = json.load(open(ROOT / "data/diary_links.json")) if (ROOT / "data/diary_links.json").exists() else {}
+    loc_fixes = {}
+    for x in json.load(open(ROOT / "data/corrections.json")).get("locations", []):
+        for d in daterange(dt.date.fromisoformat(x["date"]), dt.date.fromisoformat(x.get("to") or x["date"])):
+            loc_fixes[d.isoformat()] = x["place"]
+    speeches = json.load(open(ROOT / "data/speeches_by_day.json")) if (ROOT / "data/speeches_by_day.json").exists() else {}
 
     unresolved_people, unresolved_places = Counter(), Counter()
     days, last_loc, last_head = [], None, None
@@ -184,6 +189,7 @@ def main():
             "sources": [{"work": "TRA Chronological Record (TRC-CR-1)", "pages": tra_pages.get((r or {}).get("moved_from") or ds, [])}],
             "redated_from": (r or {}).get("moved_from"),
             "uncertain": None,
+            "speeches": speeches.get(ds, []),
         }
         day_places = []
         if r:
@@ -275,7 +281,11 @@ def main():
                 loc, loc_source = sorted(cands, key=lambda x: SPECIFIC.get(place_by_id[x]["kind"], 6))[0], "entry"
         if loc is None and last_loc:
             loc, loc_source = last_loc, "carried"
-        if loc:   # refine to a more specific place inside it, named that day or in the index
+        if ds in loc_fixes:   # a checked correction (data/corrections.json "locations") wins
+            loc, loc_source = loc_fixes[ds], "correction"
+            if loc not in day_places:
+                day_places.append(loc)
+        if loc and loc_source != "correction":   # refine to a more specific place inside it, named that day or in the index
             inner = [p for p in day_places + idx_places
                      if p != loc and loc in chain(p)[1:] and place_by_id[p]["kind"] in LOCAL_KINDS]
             if inner:

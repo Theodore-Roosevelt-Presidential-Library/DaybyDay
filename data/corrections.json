@@ -469,5 +469,18 @@
    ],
    "reason": "these items come from the source's October 24 entry, which sits in the run of entries placed one week early."
   }
+ ],
+ "locations": [
+  {
+   "date": "1906-05-30",
+   "place": "portsmouth-va",
+   "reason": "The heading PORTSMOUTH was resolved to Portsmouth, N.H.; that day he spoke at the Portsmouth, Va., navy yard and at Hampton Institute (entry and the speech bank agree)."
+  },
+  {
+   "date": "1905-04-15",
+   "to": "1905-05-05",
+   "place": "newcastle-co",
+   "reason": "The 1905 Colorado bear hunt (camps on East and West Divide Creek, out of Newcastle, Colo.) was carried forward from the Frederick, Okla., wolf hunt heading; the entries, the place index and the speech bank (Apr. 30, Upper Divide Creek) all put him in Colorado."
+  }
  ]
 }
