@@ -6,3 +6,6 @@ __pycache__/
 .DS_Store
 site/api/
 site/data/
+
+# HistorianPanel local config (private)
+historian-panel.config.yaml

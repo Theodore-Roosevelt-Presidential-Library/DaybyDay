@@ -16,7 +16,7 @@
    "start": "1869-05-12",
    "end": "1870-05-25",
    "short": "Ten-year-old Teedie's first trip abroad, kept in his own travel diary.",
-   "summary": "The whole family sails on the Scotia for a year in Europe. Teedie fights asthma in London and at the seaside, walks the Black Forest, writes to Edith Carow, gets homesick, and in Rome finds himself kissing the hand of Pope Pius IX after boasting that no true American would.",
+   "summary": "The whole family sails on the Scotia for a year in Europe. Teedie fights asthma along the way, walks in the woods of the Black Forest near Baden, writes to Edith Carow, gets homesick, and in Rome kisses the hand of Pope Pius IX. His sister Corinne later recalled that he had just whispered to the other American children that no real American believed in popes.",
    "anchor": "1869-05-12 sails on the Scotia; 1870-05-25 home to New York",
    "verified": false
   },
@@ -26,8 +26,8 @@
    "kind": "abroad",
    "start": "1872-10-16",
    "end": "1873-11-05",
-   "short": "A year on the Nile, in the Holy Land and in Dresden that turned a sickly boy into a collector.",
-   "summary": "The Roosevelts sail again, this time for Egypt. Theodore gets his first shotgun on Christmas Day aboard a Nile houseboat, shoots and skins birds all the way upriver, and helps row Ralph Waldo Emerson to lunch. The trip runs on through the Holy Land and ends with a summer living with a family in Dresden before the family comes home to a new house on 57th Street.",
+   "short": "A year on the Nile, in the Holy Land and in Dresden, where a boy who already collected birds did his first serious collecting.",
+   "summary": "The Roosevelts sail again, this time for Egypt. On Christmas Day on the Nile his father gives him a double-barreled shotgun, and he shoots and skins birds all the way upriver. The family calls on Ralph Waldo Emerson, whose boat is moored near theirs. The trip runs on through the Holy Land and ends with the children spending the summer with German families in Dresden before the family comes home to a new house on 57th Street.",
    "anchor": "1872-10-16 sails on the Russia; 1873-11-05 home to 57th Street",
    "verified": false
   },
@@ -37,8 +37,8 @@
    "kind": "hunting",
    "start": "1880-08-16",
    "end": "1880-09-29",
-   "short": "Six weeks of prairie shooting with his brother, from Illinois to the Red River country.",
-   "summary": "Newly engaged to Alice Lee and missing her every day, Roosevelt heads west with Elliott. The brothers shoot prairie chickens on an Illinois farm, ride the Iowa prairie by wagon, and camp on the Buffalo River near Moorhead. Elliott is the better shot, and Roosevelt says so. He tallies 404 head of game, then races home to Alice by way of Niagara Falls.",
+   "short": "Weeks of prairie shooting with his brother, from Illinois to the Red River country.",
+   "summary": "Newly engaged to Alice Lee and missing her every day, Roosevelt heads west with Elliott. The brothers shoot prairie chickens on an Illinois farm, spend a week hunting in Iowa, and finish near Fargo and Moorhead in the Red River valley. His sister Corinne later wrote that he always thought Elliott the better hunter of the two. Then it is home to Alice.",
    "anchor": "1880-08-16 leaves for Chicago with Elliott; 1880-09-29 back in New York",
    "verified": false
   },
@@ -47,10 +47,10 @@
    "title": "Honeymoon in Europe with Alice",
    "kind": "abroad",
    "start": "1881-05-12",
-   "end": "1881-10-03",
-   "short": "A summer honeymoon that took him to the top of the Matterhorn.",
-   "summary": "Married the October before, Roosevelt and Alice sail on the Celtic for five months abroad. They tour Ireland, England and the Continent, and in the Alps he climbs the Jungfrau and the Matterhorn. News that President Garfield has been shot reaches him in the mountains; word that Garfield has died finds him in Liverpool.",
-   "anchor": "1881-05-12 sails on the Celtic; 1881-10-03 met at the pier",
+   "end": "1881-10-02",
+   "short": "A honeymoon abroad that took him to the top of the Matterhorn.",
+   "summary": "Married the October before, Roosevelt and Alice sail on the Celtic for nearly five months abroad. They tour Ireland, England and the Continent, and in the Alps he climbs the Jungfrau and the Matterhorn. News that President Garfield has been shot reaches him in the mountains; Garfield dies in September as the couple are about to sail for home.",
+   "anchor": "1881-05-12 sails on the Celtic; 1881-10-02 home to New York",
    "verified": false
   },
   {
@@ -60,7 +60,7 @@
    "start": "1883-09-03",
    "end": "1883-10-02",
    "short": "The month that brought him to the Badlands and made him a rancher.",
-   "summary": "Roosevelt steps off the train at Little Missouri at two in the morning, hires Joe Ferris as his guide, and spends weeks soaked, thrown and lost in pursuit of a buffalo. Before he gets one, he writes a $14,000 check to go into cattle with Sylvane Ferris and Bill Merrifield at the Maltese Cross. The Badlands chapter of his life begins here.",
+   "summary": "Roosevelt steps off the train at Little Missouri at about three in the morning, hires Joe Ferris as his guide, and spends more than a week soaked, thrown and lost in pursuit of a buffalo before he finally gets one. Before the trip is out he goes into cattle with Sylvane Ferris and Bill Merrifield at the Chimney Butte ranch, known by its brand as the Maltese Cross. The Badlands chapter of his life begins here.",
    "anchor": "1883-09-03 leaves New York; 1883-10-02 last leg home",
    "verified": false
   },
@@ -71,7 +71,7 @@
    "start": "1886-11-06",
    "end": "1887-03-28",
    "short": "Across the Atlantic to marry Edith Carow, and a winter abroad as newlyweds.",
-   "summary": "Roosevelt sails on the Etruria with his sister Bamie, makes a lifelong friend of Cecil Spring Rice on board, and marries Edith at St. George's Church in London on a day so foggy the mist fills the church. The newlyweds spend the winter on the Continent and come home in March to three-year-old Alice, waiting in her best sash.",
+   "summary": "Roosevelt sails with his sister Bamie, makes a lifelong friend of Cecil Spring Rice on board, and marries Edith at St. George's, Hanover Square, in London on a foggy December 2. The newlyweds spend the winter in Italy and France and come home in March to three-year-old Alice.",
    "anchor": "1886-11-06 sails for England; 1887-03-28 home in New York",
    "verified": false
   },
@@ -81,8 +81,8 @@
    "kind": "hunting",
    "start": "1888-08-26",
    "end": "1888-10-04",
-   "short": "A hard hunt in the mountains of Idaho and British Columbia.",
-   "summary": "From the Badlands Roosevelt goes north and west to the Kootenai country with guide John Willis. Most of his companions give up after a week. He stays on, and comes out with a bear and a caribou.",
+   "short": "A hard hunt in the Selkirk Mountains of British Columbia.",
+   "summary": "From the Badlands Roosevelt travels by way of Idaho to Kootenai Lake in British Columbia and hunts the Selkirk Mountains with guide John Willis. After a week without luck the party rests and sets out again, and by his own account he comes out with a black bear and a caribou.",
    "anchor": "1888-08-26 bound for Idaho; 1888-10-04 eastbound for home",
    "verified": false
   },
@@ -91,10 +91,10 @@
    "title": "The Rough Riders: San Antonio, Tampa and Santiago",
    "kind": "military",
    "start": "1898-05-12",
-   "end": "1898-09-14",
-   "short": "From training camp in San Antonio to the charge at San Juan and home by way of Montauk.",
-   "summary": "Days after leaving the Navy Department, Lieutenant Colonel Roosevelt takes the train to San Antonio to help train the 1st U.S. Volunteer Cavalry. The regiment moves to Tampa, seizes a transport to make sure it is not left behind, and lands in Cuba in late June. It comes under fire at Las Guasimas, charges up Kettle Hill and the San Juan Heights on July 1, and holds the trenches outside Santiago until the city surrenders. Worn down by fever, the men sail for Montauk in August, where they give their colonel a Remington bronze before he heads home.",
-   "anchor": "1898-05-12 leaves Washington for San Antonio; 1898-09-14 leaves Montauk for Sagamore Hill",
+   "end": "1898-09-15",
+   "short": "From training camp in San Antonio to the charge up Kettle Hill and home by way of Montauk.",
+   "summary": "Days after leaving the Navy Department, Lieutenant Colonel Roosevelt heads to San Antonio to help train the 1st U.S. Volunteer Cavalry. The regiment moves to Tampa, scrambles aboard the transport Yucatan at Port Tampa so it will not be left behind, and lands in Cuba in late June. It comes under fire at Las Guasimas, charges up Kettle Hill and the San Juan Heights on July 1, and holds the trenches outside Santiago until the city surrenders. Worn down by fever, the men sail for Montauk in August, where they give their colonel a Remington bronze before they are mustered out.",
+   "anchor": "1898-05-12 leaves Washington for San Antonio; 1898-09-15 mustered out at Montauk, home to Sagamore Hill",
    "verified": false
   },
   {
@@ -104,19 +104,19 @@
    "start": "1898-10-17",
    "end": "1898-11-07",
    "short": "The whistle-stop train that carried the Rough Rider to the governor's office.",
-   "summary": "Weeks out of uniform, Roosevelt crosses New York State on a campaign train with Rough Riders and reporters aboard. He takes on Richard Croker and the Tammany machine in town after town, turns 40 giving 14 speeches in a day, and is elected governor the day after his last swing through the Southern Tier.",
-   "anchor": "1898-10-17 whistle-stopping up the Hudson; 1898-11-07 last Southern Tier swing",
+   "summary": "Weeks out of uniform, Roosevelt crosses New York State on a campaign train with Rough Riders and reporters aboard. He takes on Richard Croker and the Tammany machine in town after town, turns 40 on the campaign trail, and is elected governor the day after his last swing through western New York.",
+   "anchor": "1898-10-17 whistle-stopping up the Hudson; 1898-11-07 last swing through western New York",
    "verified": false
   },
   {
    "id": "rough-rider-reunion-1899",
    "title": "West to the First Rough Rider Reunion",
    "kind": "speaking",
-   "start": "1899-06-21",
+   "start": "1899-06-19",
    "end": "1899-06-29",
    "short": "Governor Roosevelt goes to Las Vegas, New Mexico, for the regiment's first reunion.",
-   "summary": "A week on the rails to rejoin his Rough Riders for their first reunion, with a parade and a memorial service for the men they lost. On the way home he speaks in Illinois and Milwaukee, then tells reporters he is not a candidate for President in 1900.",
-   "anchor": "1899-06-21 leaves Ithaca for the West; 1899-06-29 back in Albany",
+   "summary": "Governor Roosevelt travels west to rejoin his Rough Riders for their first reunion. On the way home he speaks in Illinois and Milwaukee, then tells reporters he is not a candidate for President in 1900.",
+   "anchor": "1899-06-19 leaves for the West; 1899-06-29 back in Albany",
    "verified": false
   },
   {
@@ -125,9 +125,9 @@
    "kind": "campaign",
    "start": "1900-09-02",
    "end": "1900-11-03",
-   "short": "Two months on the stump as McKinley's running mate, from Michigan to Montana and back.",
-   "summary": "As the Republican candidate for Vice President, Roosevelt carries the campaign west on a long rail tour: Labor Day in Chicago, eleven speeches in a day in Michigan, an afternoon back in Medora, and a rough reception in Colorado's Cripple Creek mining district. He ends with a rain-soaked rally at Madison Square Garden three days before the election.",
-   "anchor": "1900-09-02 bound for Chicago; 1900-11-03 final rally at Madison Square Garden",
+   "short": "Two months on the stump as McKinley's running mate, across the Midwest and the West.",
+   "summary": "As the Republican candidate for Vice President, Roosevelt carries the campaign west on a long rail tour: Labor Day in Chicago, about ten speeches in a day in Michigan, a brief stop in Medora, and a rough reception at Victor in Colorado's Cripple Creek mining district. Back east, he speaks to a huge Madison Square Garden rally on October 26, and on a rainy November 3, three days before the election, reviews a vast parade in Manhattan.",
+   "anchor": "1900-09-02 bound for Chicago; 1900-11-03 reviews a parade in Manhattan",
    "verified": false
   },
   {
@@ -136,8 +136,8 @@
    "kind": "hunting",
    "start": "1901-01-07",
    "end": "1901-02-23",
-   "short": "The Vice President-elect's winter hunt for mountain lions in the Colorado snow.",
-   "summary": "Before taking office, Roosevelt rides out of Meeker with hunter John Goff and his hounds for five weeks of cougar and lynx hunting in deep snow. Several of the big cats he finishes with a knife while the dogs hold them. The biggest weighs 227 pounds.",
+   "short": "The Vice President-elect's winter hunt for mountain lions in Colorado.",
+   "summary": "Before taking office, Roosevelt rides out of Meeker with hunter John Goff and his hounds for five weeks of cougar and bobcat hunting in midwinter cold and snow. Several of the big cats he finishes with a knife while the dogs hold them. The biggest weighs 227 pounds.",
    "anchor": "1901-01-07 leaves to hunt cougar; 1901-02-23 home to Sagamore Hill",
    "verified": false
   },
@@ -148,7 +148,7 @@
    "start": "1902-08-22",
    "end": "1902-09-03",
    "short": "A swing through all six New England states that ended in a trolley crash.",
-   "summary": "President Roosevelt takes his case against the trusts to New England, speaking from Connecticut to Maine and on through New Hampshire and Vermont. In Pittsfield, Massachusetts, a streetcar slams into his carriage. Secret Service agent William Craig is killed, and Roosevelt's leg is badly hurt.",
+   "summary": "President Roosevelt speaks across New England on regulating the trusts, from Connecticut to Maine and on through New Hampshire and Vermont. In Pittsfield, Massachusetts, a streetcar slams into his carriage. Secret Service agent William Craig is killed, and Roosevelt is thrown out, bruised and cut; a shin injury later becomes infected and needs surgery.",
    "anchor": "1902-08-22 Hartford; 1902-09-03 trolley crash at Pittsfield",
    "verified": false
   },
@@ -159,7 +159,7 @@
    "start": "1902-09-05",
    "end": "1902-09-10",
    "short": "A short trip south only days after the Pittsfield crash.",
-   "summary": "Still bruised, Roosevelt speaks on the trusts at Wheeling, reviews cavalry and walks the battlefield at Chattanooga, addresses the locomotive firemen's convention, and speaks in Asheville and Greensboro on the way home.",
+   "summary": "Still bruised, Roosevelt speaks on the trusts at Wheeling, reviews cavalry at Chickamauga Park and tours the battlefields around Chattanooga by carriage, addresses the locomotive firemen's convention, and speaks in Asheville and Greensboro on the way home.",
    "anchor": "1902-09-05 leaves for Chattanooga; 1902-09-10 back to Oyster Bay",
    "verified": false
   },
@@ -170,7 +170,7 @@
    "start": "1902-09-19",
    "end": "1902-09-24",
    "short": "A tour of the Midwest cut short by surgery in Indianapolis.",
-   "summary": "Roosevelt heads west with the coal strike unresolved, speaking in Cincinnati and Detroit. In Indianapolis doctors find that the leg hurt at Pittsfield needs surgery. The tour is called off, and he is carried into the temporary White House on Jackson Place to rest.",
+   "summary": "Roosevelt heads west with the coal strike unresolved, speaking in Cincinnati and Detroit. In Indianapolis doctors find that the leg hurt at Pittsfield needs surgery. The tour is called off; back in Washington he is lifted into a wheelchair at the station and driven to the temporary White House on Jackson Place to rest.",
    "anchor": "1902-09-19 starts west; 1902-09-23 surgery in Indianapolis; 1902-09-24 resting in Washington",
    "verified": false
   },
@@ -178,11 +178,11 @@
    "id": "mississippi-bear-hunt-1902",
    "title": "The Mississippi Bear Hunt",
    "kind": "hunting",
-   "start": "1902-11-12",
-   "end": "1902-11-20",
+   "start": "1902-11-11",
+   "end": "1902-11-21",
    "short": "The hunt that gave the teddy bear its name.",
-   "summary": "Roosevelt goes after bear in the canebrakes near Smedes, Mississippi. The newspapers carry the story that he would not shoot a bear that had been run down and tied for him, and a cartoon called Drawing the Line in Mississippi spreads it everywhere.",
-   "anchor": "1902-11-12 southbound; 1902-11-20 whistle stops home",
+   "summary": "Roosevelt goes after bear in the canebrakes near Smedes, Mississippi. The newspapers carry the story that he would not shoot a bear that had been run down and tied for him, and Clifford Berryman's cartoon Drawing the Line in Mississippi makes the story widely popular.",
+   "anchor": "1902-11-11 southbound by special train; 1902-11-21 back in Washington",
    "verified": false
   },
   {
@@ -191,8 +191,8 @@
    "kind": "speaking",
    "start": "1903-04-01",
    "end": "1903-06-05",
-   "short": "Nine weeks across the West: the longest trip of his presidency.",
-   "summary": "Roosevelt leaves Washington for the longest trip of his presidency. He stops in the Badlands to see old friends, camps two weeks in Yellowstone with John Burroughs, dedicates the St. Louis World's Fair grounds, stands at the edge of the Grand Canyon, and sleeps under the sequoias and in the snow of Yosemite with John Muir. He rides 65 miles on horseback from Laramie to Cheyenne before heading home.",
+   "short": "Nine weeks crossing the West by train.",
+   "summary": "Roosevelt leaves Washington on a nine-week tour of the West. He stops in the Badlands to see old friends, spends about two weeks in Yellowstone with John Burroughs, dedicates the St. Louis World's Fair, visits the Grand Canyon, and camps with John Muir in Yosemite, one night under the sequoias and another in the snow on the valley's rim. He rides some 62 miles on horseback from Laramie to Cheyenne before heading home.",
    "anchor": "1903-04-01 tour begins; 1903-06-05 home",
    "verified": false
   },
@@ -203,7 +203,7 @@
    "start": "1905-04-03",
    "end": "1905-05-11",
    "short": "A Rough Rider reunion in Texas, a coyote hunt in Oklahoma and a bear hunt in Colorado.",
-   "summary": "Early in his second term, Roosevelt speaks to the Texas Legislature and his Rough Riders in San Antonio, then gallops after coyotes with greyhounds in Oklahoma alongside Jack Abernathy. He finishes with weeks of bear hunting in the Colorado mountains, cutting it short as Japan and Russia move toward peace talks.",
+   "summary": "Early in his second term, Roosevelt addresses the Texas Legislature, speaks in front of the Alamo in San Antonio and spends an afternoon with his Rough Riders at their reunion, then gallops after coyotes with greyhounds in Oklahoma Territory alongside Jack Abernathy. He finishes with weeks of bear hunting in the Colorado mountains, breaking camp about a week earlier than planned.",
    "anchor": "1905-04-03 leaves Washington; 1905-05-11 home by midnight",
    "verified": false
   },
@@ -214,7 +214,7 @@
    "start": "1905-10-18",
    "end": "1905-10-31",
    "short": "Through the South to his mother's girlhood home, and back by sea.",
-   "summary": "With Edith along, Roosevelt speaks his way from Raleigh to Little Rock. He visits Bulloch Hall in Roswell, where his mother grew up, speaks at Tuskegee, and denounces lynching in Little Rock before sailing home from New Orleans on the West Virginia.",
+   "summary": "With Edith along as far as Atlanta, Roosevelt speaks his way through the South from Richmond to New Orleans. He visits Bulloch Hall in Roswell, where his mother grew up, speaks at Tuskegee, and denounces lynching in Little Rock. From New Orleans he goes down the Mississippi and boards the armored cruiser West Virginia in the Gulf for the voyage home.",
    "anchor": "1905-10-18 leaves Washington; 1905-10-31 back at the White House",
    "verified": false
   },
@@ -223,10 +223,10 @@
    "title": "Panama and Puerto Rico",
    "kind": "abroad",
    "start": "1906-11-08",
-   "end": "1906-11-25",
+   "end": "1906-11-26",
    "short": "The first trip abroad by a sitting President: to see the canal being dug.",
-   "summary": "Roosevelt and Edith sail south on the battleship Louisiana to see the Panama Canal works for themselves. In a steady rain he rides across the isthmus, spends eighteen hours on his feet among the workers, and climbs into the cab of a steam shovel at Culebra. They stop in Puerto Rico on the way home.",
-   "anchor": "1906-11-08 sails on the Louisiana; 1906-11-25 last day at sea",
+   "summary": "Roosevelt and Edith leave Washington on the Mayflower and board the battleship Louisiana to see the Panama Canal works for themselves. In steady rain he travels the line of the canal on the Panama Railroad, tramps through the mud of the works on days of twelve to eighteen hours, and climbs into the cab of a steam shovel on the canal works. They stop in Puerto Rico on the way home.",
+   "anchor": "1906-11-08 leaves Washington on the Mayflower; 1906-11-26 back in Washington",
    "verified": false
   },
   {
@@ -236,7 +236,7 @@
    "start": "1907-09-29",
    "end": "1907-10-23",
    "short": "Down the great river by steamboat, into the Louisiana canebrakes, and home to a panic.",
-   "summary": "Roosevelt dedicates the McKinley Memorial in Canton, then boards a stern-wheeler at Keokuk for his first trip down the Mississippi, leading a fleet of steamers and speaking for a deeper waterway. He spends two weeks after bear on the Tensas in Louisiana and gets one on the twelfth day. He reaches Washington as the Panic of 1907 breaks.",
+   "summary": "Roosevelt dedicates the McKinley Memorial in Canton, then boards a stern-wheeler at Keokuk for what he called his first trip on the Mississippi, leading a fleet of steamers and speaking for a deeper waterway. He spends two weeks after bear in the canebrakes of northeastern Louisiana, first on Tensas Bayou and then at Bear Lake, and gets one near the end of the hunt. The Panic of 1907 breaks in New York while he is on his way back to Washington.",
    "anchor": "1907-09-29 leaves for a three-week tour; 1907-10-23 home to the Panic",
    "verified": false
   },
@@ -247,19 +247,19 @@
    "start": "1909-03-23",
    "end": "1910-03-14",
    "short": "A year collecting for the Smithsonian across East Africa and down the Nile.",
-   "summary": "Days out of office, Roosevelt sails with Kermit for British East Africa. From Mombasa they ride the railroad into the game country and spend the year hunting and collecting specimens for the Smithsonian across what are now Kenya and Uganda, then travel down the Nile to Khartoum, where Edith and Ethel are waiting.",
-   "anchor": "1909-03-23 sails on the Hamburg; 1910-03-14 meets Edith at Khartoum",
+   "summary": "Days out of office, Roosevelt sails with Kermit for British East Africa. From Mombasa they ride the railroad into the game country and spend the year hunting and collecting specimens for the Smithsonian across what are now Kenya and Uganda, then travel through the Lado Enclave and down the Nile to Khartoum, where Edith and Ethel join him.",
+   "anchor": "1909-03-23 sails on the Hamburg; 1910-03-14 Edith and Ethel join him at Khartoum",
    "verified": false
   },
   {
    "id": "european-tour-1910",
-   "title": "From Khartoum to London",
+   "title": "From Khartoum to England",
    "kind": "abroad",
    "start": "1910-03-15",
    "end": "1910-06-18",
-   "short": "From Khartoum to London, with the most famous speeches of his life.",
-   "summary": "Reunited with Edith, Roosevelt travels from Egypt through Italy, Austria-Hungary, France, the Low Countries, Scandinavia, Germany and Britain. He gives Citizenship in a Republic at the Sorbonne, delivers his Nobel lecture in Christiania, reviews the German army beside the Kaiser, and speaks his mind on Egypt at London's Guildhall. New York gives him a hero's welcome home.",
-   "anchor": "1910-03-15 speaks at Khartoum; 1910-06-18 welcomed home in New York",
+   "short": "From Khartoum to England, with some of his best-known speeches.",
+   "summary": "Reunited with Edith, Roosevelt travels from Sudan and Egypt through Italy, Austria-Hungary, France, the Low Countries, Scandinavia, Germany and Britain. He gives Citizenship in a Republic at the Sorbonne, delivers his Nobel lecture in Christiania, rides beside the Kaiser to watch German army manoeuvres, and speaks his mind on Egypt at London's Guildhall. He sails from Southampton, and New York gives him a hero's welcome home.",
+   "anchor": "1910-03-15 with Edith and Ethel at Khartoum; 1910-06-18 welcomed home in New York",
    "verified": false
   },
   {
@@ -268,8 +268,8 @@
    "kind": "speaking",
    "start": "1910-08-23",
    "end": "1910-09-11",
-   "short": "Three weeks in the West, and the New Nationalism at Osawatomie.",
-   "summary": "Back from abroad and pulled into politics, Roosevelt heads west in a private car. In Osawatomie, Kansas, he delivers The New Nationalism, the most important speech of his life after the presidency. He also tells a crowd in Sioux Falls that his years on a Dakota ranch were the most important part of his education.",
+   "short": "Nearly three weeks in the West, and the New Nationalism at Osawatomie.",
+   "summary": "Back from abroad and pulled into politics, Roosevelt heads west in a private car. In Osawatomie, Kansas, he delivers The New Nationalism, the speech that set out the program he would carry into 1912.",
    "anchor": "1910-08-23 tour begins; 1910-09-11 home",
    "verified": false
   },
@@ -279,9 +279,9 @@
    "kind": "speaking",
    "start": "1911-03-08",
    "end": "1911-04-16",
-   "short": "Nearly six weeks across the South and the West, with Edith and Ethel.",
-   "summary": "Roosevelt speaks his way from Atlanta through Texas to Arizona, where he rides into the Grand Canyon with Archie and dedicates the dam on the Salt River that bears his name. At Berkeley he gives the Earl Lectures and the speech with his famous line about taking the Isthmus, and comes home through the Pacific Northwest and Montana.",
-   "anchor": "1911-03-08 leaves on a 34-day tour; 1911-04-16 home to Oyster Bay",
+   "short": "Nearly six weeks across the South and the West; Edith and Ethel join him in the Southwest.",
+   "summary": "Roosevelt speaks his way from Atlanta through Texas to the Southwest, where Edith and Ethel join him at Albuquerque. In Arizona he rides down the Bright Angel Trail into the Grand Canyon with Archie and dedicates the dam on the Salt River that bears his name. At Berkeley he gives the Earl Lectures and, in his Charter Day address, makes his famous boast about taking the Canal Zone, then comes home through the Pacific Northwest and Montana.",
+   "anchor": "1911-03-08 leaves for the South and West; 1911-04-16 home to Oyster Bay",
    "verified": false
   },
   {
@@ -291,7 +291,7 @@
    "start": "1912-09-02",
    "end": "1912-10-02",
    "short": "A month crossing the country as the Progressive candidate for President.",
-   "summary": "From Connecticut to California and back through the South, Roosevelt takes the Bull Moose campaign to the whole country. He draws some 50,000 at the Minnesota State Fair, answers Woodrow Wilson's New Freedom in San Francisco, sees crowds line the streets of Los Angeles, and visits his mother's girlhood home in Roswell after hecklers disrupt his speech in Atlanta.",
+   "summary": "From Connecticut to California and back through the South, Roosevelt takes the Bull Moose campaign to the whole country. He draws more than 20,000 at the Minnesota State Fair and, in San Francisco, answers Woodrow Wilson's argument that the history of liberty is a history of limiting government power.",
    "anchor": "1912-09-02 Connecticut kickoff; 1912-10-02 home to Sagamore Hill",
    "verified": false
   },
@@ -302,7 +302,7 @@
    "start": "1912-10-07",
    "end": "1912-10-22",
    "short": "The campaign tour that ended with a bullet in Milwaukee.",
-   "summary": "Roosevelt sets out across Michigan, Minnesota and Wisconsin with his voice wearing out. In Milwaukee, outside the Gilpatrick Hotel, he is shot in the chest by John Schrank. He gives his speech anyway, then spends a week in Chicago's Mercy Hospital before going home to Sagamore Hill.",
+   "summary": "Roosevelt sets out on another campaign swing through the Midwest, by way of Chicago and Wisconsin. In Milwaukee, outside the Gilpatrick Hotel, he is shot in the chest by John Schrank. He gives his speech anyway, then spends nearly a week in Chicago's Mercy Hospital before going home to Sagamore Hill.",
    "anchor": "1912-10-07 leaves on a Great Lakes tour; 1912-10-14 shot in Milwaukee; 1912-10-22 home",
    "verified": false
   },
@@ -313,7 +313,7 @@
    "start": "1913-07-07",
    "end": "1913-08-26",
    "short": "Seven weeks in the canyon country with his sons Archie and Quentin.",
-   "summary": "Roosevelt goes down the Bright Angel Trail and up to the North Rim, hunts cougars along the rim with his sons and cousin Nicholas, rides through the desert to Lees Ferry and Navajo country, camps beneath Rainbow Bridge, and watches the Hopi snake dance at Walpi.",
+   "summary": "Roosevelt crosses the Grand Canyon and climbs to the North Rim by the Bright Angel trail, hunts cougars along the rim with his sons and their cousin Nicholas, rides through the desert to Lees Ferry and Navajo country, camps beneath Rainbow Bridge, and watches the Hopi snake dance at Walpi.",
    "anchor": "1913-07-07 leaves with Archie and Quentin; 1913-08-26 home",
    "verified": false
   },
@@ -323,7 +323,7 @@
    "kind": "expedition",
    "start": "1913-10-04",
    "end": "1914-05-19",
-   "short": "A speaking tour that became the descent of the River of Doubt.",
+   "short": "A lecture tour and museum collecting trip that became the descent of the River of Doubt.",
    "summary": "Roosevelt sails for South America to lecture, then joins Brazilian explorer Cândido Rondon to trace an unmapped river through the Amazon basin. On the River of Doubt the party loses men and canoes, Roosevelt nearly dies of an infected leg and fever, and the river is renamed the Rio Roosevelt.",
    "anchor": "1913-10-04 sails on the Vandyck; 1914-05-19 homecoming",
    "verified": false
@@ -335,7 +335,7 @@
    "start": "1914-05-30",
    "end": "1914-06-24",
    "short": "Across the Atlantic for Kermit's wedding in Madrid.",
-   "summary": "Barely home from Brazil, Roosevelt sails with Alice for Spain. He lunches with King Alfonso XIII, sees Kermit marry Belle Willard in Madrid, and goes on to London to speak to the Royal Geographical Society about the River of Doubt.",
+   "summary": "Barely home from Brazil, Roosevelt sails for Spain with his daughter Alice. He sees Kermit marry Belle Willard in Madrid and goes on to London to speak to the Royal Geographical Society about the River of Doubt.",
    "anchor": "1914-05-30 sails; 1914-06-24 home",
    "verified": false
   },
@@ -346,7 +346,7 @@
    "start": "1915-07-11",
    "end": "1915-08-02",
    "short": "West by the Canadian Rockies to the expositions, preaching preparedness.",
-   "summary": "With war in Europe, Roosevelt crosses Canada to the Pacific and travels down to San Francisco for a Roosevelt Day at the Panama-Pacific International Exposition, then on to San Diego's exposition. At every stop his theme is national preparedness.",
+   "summary": "With war in Europe, Roosevelt crosses Canada to the Pacific and travels down to San Francisco for a Roosevelt Day at the Panama-Pacific International Exposition, then on to San Diego's exposition. National preparedness is the theme of his exposition speeches.",
    "anchor": "1915-07-11 off to California; 1915-08-02 back in New York",
    "verified": false
   },
@@ -356,8 +356,8 @@
    "kind": "abroad",
    "start": "1916-02-11",
    "end": "1916-03-24",
-   "short": "Six weeks in the Caribbean, and a statement from Trinidad.",
-   "summary": "Roosevelt and Edith sail for a holiday in the islands. They call at Guadeloupe, Barbados and Trinidad. From Port of Spain he tells reporters he is not seeking the Republican nomination. He sails home alone on the Matura while Edith stays on.",
+   "short": "About six weeks in the Caribbean, and a statement from Trinidad.",
+   "summary": "Roosevelt and Edith sail for a rest in the Caribbean, calling at islands from St. Thomas to Martinique, spending about a week in British Guiana and ending in Trinidad. From Trinidad he issues a written statement that he will not fight for the Republican nomination. He and Edith sail home together on the Matura.",
    "anchor": "1916-02-11 sails; 1916-03-24 home from Trinidad",
    "verified": false
   },
@@ -368,7 +368,7 @@
    "start": "1916-10-17",
    "end": "1916-10-28",
    "short": "A western swing campaigning for Charles Evans Hughes.",
-   "summary": "With three reporters along for the ride, Roosevelt stumps for the Republican nominee from Kentucky to Arizona and back through Colorado and Chicago, telling stories and pointing out wildlife from the train between stops.",
+   "summary": "With reporters along on his special train, Roosevelt stumps for the Republican nominee from Kentucky to Arizona and New Mexico and back through Colorado and Chicago.",
    "anchor": "1916-10-17 western swing begins; 1916-10-28 Brooklyn",
    "verified": false
   },
@@ -379,7 +379,7 @@
    "start": "1917-03-23",
    "end": "1917-04-03",
    "short": "Harpooning giant rays in the Gulf as the country goes to war.",
-   "summary": "Roosevelt goes to Punta Gorda to hunt devilfish with harpoon expert Russell Coles. On the way home he stops in Washington on the day President Wilson asks Congress to declare war.",
+   "summary": "Roosevelt travels by way of Punta Gorda to a floating camp off Captiva Island to hunt devilfish with Russell Coles, a Virginia amateur who was the leading expert at harpooning them. On the way home he stops in Washington on April 3, the day after President Wilson asks Congress to declare war.",
    "anchor": "1917-03-23 leaves for Florida; 1917-04-03 back in New York",
    "verified": false
   }
