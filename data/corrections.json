@@ -481,6 +481,27 @@
    "to": "1905-05-05",
    "place": "newcastle-co",
    "reason": "The 1905 Colorado bear hunt (camps on East and West Divide Creek, out of Newcastle, Colo.) was carried forward from the Frederick, Okla., wolf hunt heading; the entries, the place index and the speech bank (Apr. 30, Upper Divide Creek) all put him in Colorado."
+  },
+  {
+   "date": "1869-07-22",
+   "place": "frankfurt-germany",
+   "reason": "The heading FRANKFORT was resolved to Frankfort, Ky.; the family was sightseeing in Frankfurt am Main between Mainz and Heidelberg (the entry names Frankfurt)."
+  },
+  {
+   "date": "1873-02-14",
+   "to": "1873-02-15",
+   "place": "memphis-egypt",
+   "reason": "The heading MEMPHIS was resolved to Memphis, Tenn.; the family was on the Nile near Cairo (the entries name ancient Memphis, Egypt)."
+  },
+  {
+   "date": "1916-03-04",
+   "place": "port-of-spain-trinidad",
+   "reason": "The heading SPAIN, TRINIDAD PORT OF was resolved to the country Spain; he was at Port of Spain, Trinidad (the entry names it)."
+  },
+  {
+   "date": "1916-03-06",
+   "place": "port-of-spain-trinidad",
+   "reason": "As 1916-03-04: Port of Spain, Trinidad, not Spain."
   }
  ]
 }

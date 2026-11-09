@@ -53,6 +53,7 @@ const DBD = (() => {
     let h = `<article class="daycard" style="border-top-color: var(${sigColor})">
       <div class="date">${esc(fmtDate(d.date))}</div>
       <div class="meta">${meta}</div>`;
+    for (const t of d.tours || []) h += `<p class="tourbanner">Day ${t.day} of ${t.of} on <a href="tour.html?id=${encodeURIComponent(t.id)}&date=${d.date}">${esc(t.title)}</a></p>`;
     if (!d.has_entry) {
       h += `<p class="empty">The record has no entry for this day.${loc ? ` He was most likely at ${esc(loc.name)}.` : ""}</p>`;
       if (d.speeches?.length) h += speechList(d.speeches);
@@ -93,5 +94,27 @@ const DBD = (() => {
     const note = days.length > n ? `<p class="small">The ${n} biggest of ${days.length} years with an entry on this date, in order.</p>` : `<p class="small">Every year with an entry on this date, in order.</p>`;
     return { items, note };
   }
-  return { API, get, esc, fmtDate, param, renderDay, personLink, placeLink, MONTHS, otdList };
+  // A small route sketch (no base map): [[lon, lat], ...] drawn in an equal-area-ish projection.
+  function routeSvg(line, opts = {}) {
+    const W = opts.w || 300, H = opts.h || 120, P = 10;
+    if (!line?.length) return `<svg class="route" viewBox="0 0 ${W} ${H}" aria-hidden="true"></svg>`;
+    const lat0 = line.reduce((a, p) => a + p[1], 0) / line.length, k = Math.cos(lat0 * Math.PI / 180);
+    const xy = line.map(([lo, la]) => [lo * k, -la]);
+    let [x0, y0, x1, y1] = [Infinity, Infinity, -Infinity, -Infinity];
+    for (const [x, y] of xy) { x0 = Math.min(x0, x); x1 = Math.max(x1, x); y0 = Math.min(y0, y); y1 = Math.max(y1, y); }
+    const span = Math.max(x1 - x0, (y1 - y0) * (W - 2 * P) / (H - 2 * P), 0.5);
+    const sc = (W - 2 * P) / span, cx = (x0 + x1) / 2, cy = (y0 + y1) / 2;
+    const pts = xy.map(([x, y]) => [W / 2 + (x - cx) * sc, H / 2 + (y - cy) * sc].map(v => v.toFixed(1)));
+    const col = opts.color || "#092A4D", end = pts[pts.length - 1];
+    return `<svg class="route" viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(opts.label || "Route sketch")}">` +
+      (pts.length > 1 ? `<polyline points="${pts.map(p => p.join(",")).join(" ")}" fill="none" stroke="${col}" stroke-width="2" stroke-linejoin="round" stroke-linecap="round" opacity=".85"/>` : "") +
+      pts.map(p => `<circle cx="${p[0]}" cy="${p[1]}" r="1.8" fill="${col}"/>`).join("") +
+      `<circle cx="${pts[0][0]}" cy="${pts[0][1]}" r="4.5" fill="#F9D635" stroke="${col}" stroke-width="1.5"/>` +
+      (pts.length > 1 ? `<circle cx="${end[0]}" cy="${end[1]}" r="4.5" fill="${col}"/>` : "") + `</svg>`;
+  }
+  function fmtSpan(a, b) {
+    const [y0] = a.split("-"), [y1] = b.split("-");
+    return y0 === y1 ? `${fmtDate(a, { noYear: true })} to ${fmtDate(b)}` : `${fmtDate(a)} to ${fmtDate(b)}`;
+  }
+  return { API, get, esc, fmtDate, fmtSpan, param, renderDay, personLink, placeLink, MONTHS, otdList, routeSvg };
 })();

@@ -49,6 +49,21 @@ All dates are ISO `YYYY-MM-DD` in the Gregorian calendar. IDs are lowercase slug
 
 `{id, facet, label, start, end, anchor, verified}`. Facets: `life_stage` (every day belongs to exactly one), `office`, `journey`, `campaign`. `verified: false` until an editor confirms the boundary dates against a second source.
 
+## Tour (`data/tours.json`, `/api/v1/tours/index.json`, `/api/v1/tours/{id}.json`)
+
+`data/tours.json`: `{id, title, kind, start, end, short, summary, anchor, verified}`. `kind`: `speaking` (speaking tour), `campaign` (campaign tour), `expedition`, `abroad` (travel abroad), `hunting` (hunting trip). `start` is the day he set out and `end` the day he reached home, or the record's last travel day; `anchor` cites the record's day entries for both. `short` and `summary` are original Library prose. Tours may overlap `journey` periods; they are a separate, fuller list.
+
+`/api/v1/tours/{id}.json` adds `kind_label`, `url` and:
+
+- `stats`: `{days, days_with_entry, stops, distinct_places, states[], countries[], straight_line_km, letters, speeches, tr_quotes, people}`. States and countries come from the route stops; countries are in today's borders. `straight_line_km` sums straight lines between stops, so it is a floor, not the distance traveled.
+- `route`: `{id, name, kind, lat, lon, start, end, days}[]` — runs of consecutive days at one place, using only days whose location the record states or the place-names index gives (not days carried forward from the last known place).
+- `highlights`: the eight most significant days, in date order. `people`: the 24 people named on the most days.
+- `days`: every date in the tour, `{date, n, has_entry, headline, summary, significance, location, location_id, lat, lon, firm, speeches, letters}`; `firm` is false when the location is only carried forward.
+
+`/api/v1/tours/index.json`: `{kinds, tours: [{id, title, kind, kind_label, start, end, short, url, stats: {days, stops, straight_line_km, speeches, states, countries}, bbox, line}]}`, where `line` is the route simplified to at most 60 `[lon, lat]` points for thumbnails.
+
+Each day in `/api/v1/days/{date}.json` also carries `tours`: `{id, title, day, of, prev, next}[]` for any tour that includes it.
+
 ## Stay (`/api/v1/stays.json`)
 
 `{place, name, lat, lon, kind, precise, start, end, days}` — consecutive days at the same `location`.

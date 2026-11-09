@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>A tour | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="One of Theodore Roosevelt's tours and expeditions, mapped and told day by day.">
+<meta property="og:title" content="A tour | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="One of Theodore Roosevelt's tours and expeditions, mapped and told day by day.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+<link rel="stylesheet" href="assets/app.css">
+<style>
+  body.embed .bar, body.embed footer.site, body.embed .overview, body.embed .below { display: none; }
+  body.embed .tourhero { padding: 14px 0 12px; } body.embed .tourhero h1 { font-size: 34px; } body.embed .tourhero .lede { display: none; }
+  body.embed main.wrap { padding: 12px 12px 16px !important; }
+  .embedonly { display: none; } body.embed .embedonly { display: inline; }
+  .tourhero { background: var(--night); color: #fff; padding: 30px 0 26px; }
+  .tourhero h1 { color: #fff; font-size: clamp(36px, 6vw, 72px); max-width: 18ch; margin: 6px 0 10px; }
+  .tourhero .when { font: 17px var(--sans); color: var(--sand); }
+  .tourhero .lede { font: 19px/1.5 var(--serif); color: var(--sand); max-width: 60ch; margin: 10px 0 0; }
+  .tourhero .kind { color: var(--forest-bright); }
+  .tourhero a { color: #fff; }
+  .overview { display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 32px; margin-bottom: 26px; }
+  .overview .summary { font-size: 19px; line-height: 1.6; margin: 0; max-width: 64ch; }
+  @media (max-width: 900px) { .overview { grid-template-columns: 1fr; } }
+  .mapgrid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); gap: 26px; align-items: start; }
+  .mapcol { position: sticky; top: 12px; }
+  #map { height: min(66vh, 600px); min-height: 340px; }
+  @media (max-width: 900px) { .mapgrid { grid-template-columns: 1fr; } .mapcol { position: static; } #map { height: 46vh; } }
+  .stepper { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin: 12px 0 6px; }
+  .stepper .btn { padding: 9px 14px; }
+  .btn.ghost { background: transparent; color: var(--night); border: 1px solid var(--sky); }
+  .btn.ghost:hover { background: var(--sand-2); color: var(--night); }
+  .btn[disabled] { opacity: .4; cursor: default; }
+  .timeline { display: flex; gap: 10px; align-items: center; font: 14px var(--sans); color: var(--ink-2); }
+  .timeline input[type=range] { flex: 1; accent-color: var(--s3); }
+  .stop { background: var(--night); color: #fff; padding: 14px 20px; border-radius: var(--radius) var(--radius) 0 0; }
+  .stop .count { font: 13px var(--sans); color: var(--sky); }
+  .stop .where { font: 700 28px/1.05 var(--display); text-transform: uppercase; margin: 4px 0 0; }
+  .stop .where a { color: #fff; text-decoration: none; } .stop .where a:hover { text-decoration: underline; }
+  #day .daycard { border-radius: 0 0 var(--radius) var(--radius); }
+  #day .tourbanner { display: none; }
+  .keys { font: 13px var(--sans); color: var(--ink-2); margin-top: 8px; }
+  kbd { font: 12px var(--sans); border: 1px solid var(--sky); border-bottom-width: 2px; border-radius: 3px; padding: 0 5px; background: #fff; }
+  .below { margin-top: 40px; display: grid; grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr); gap: 36px; }
+  @media (max-width: 900px) { .below { grid-template-columns: 1fr; } }
+  .below h2 { color: var(--night); }
+  .hlist { list-style: none; margin: 0; padding: 0; }
+  .hlist li { padding: 10px 0 10px 12px; border-bottom: 1px solid var(--sand); border-left: 4px solid var(--s3); }
+  .hlist li.sig5 { border-left-color: var(--s5); } .hlist li.sig4 { border-left-color: var(--s4); } .hlist li.sig2, .hlist li.sig1 { border-left-color: var(--s2); }
+  button.linkish { all: unset; cursor: pointer; font: 700 17px/1.3 var(--serif); color: var(--ink); }
+  button.linkish:hover, button.linkish:focus-visible { text-decoration: underline; }
+  .hlist .d { display: block; font: 600 13px var(--sans); color: var(--s4); }
+  .list-table button.linkish { font: 600 15px var(--sans); color: var(--forest); text-decoration: underline; }
+  .list-table tr[aria-current=true] td { background: #FFF6D6; }
+  .list-table td.n { color: var(--ink-2); white-space: nowrap; }
+  .plist { columns: 2 200px; list-style: none; padding: 0; margin: 0; font-size: 16px; }
+  .plist .c { font: 12px var(--sans); color: var(--ink-2); }
+  .embedbox { margin-top: 30px; }
+</style>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="tours.html" aria-current="page">Tours</a><a href="near.html">Was he here?</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+<section class="tourhero"><div class="wrap" id="hero"></div></section>
+<main class="wrap" style="padding:28px 20px 50px">
+  <div class="overview" id="overview"></div>
+  <div class="mapgrid">
+    <div class="mapcol">
+      <div id="map" role="region" aria-label="Map of the tour route"></div>
+      <div class="stepper">
+        <button class="btn ghost" id="prev">Previous day</button>
+        <button class="btn" id="play" aria-pressed="false">Play</button>
+        <button class="btn ghost" id="next">Next day</button>
+      </div>
+      <div class="timeline"><span id="tStart"></span><input type="range" id="t" min="0" value="0" aria-label="Move through the tour"><span id="tEnd"></span></div>
+      <p class="keys">Keys: <kbd>←</kbd> <kbd>→</kbd> previous or next day, <kbd>Space</kbd> play or pause. Play stops by itself on major days.</p>
+      <p class="small">The line joins the places the record puts him, in order. Map data &copy; OpenStreetMap contributors.</p>
+    </div>
+    <div>
+      <div class="stop" aria-live="polite"><div class="count" id="count"></div><div class="where" id="where"></div></div>
+      <section id="day" aria-live="polite"></section>
+    </div>
+  </div>
+  <div class="below" id="below"></div>
+</main>
+<footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985). <a href="tours.html">All tours</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="assets/app.js"></script>
+<script>
+(async () => {
+  const esc = DBD.esc, EMBED = !!DBD.param("embed"), id = DBD.param("id");
+  if (EMBED) document.body.classList.add("embed");
+  let T;
+  try { T = await DBD.get(`tours/${encodeURIComponent(id)}.json`); }
+  catch (e) {
+    document.getElementById("hero").innerHTML = `<h1>Tour not found</h1><p class="lede">No tour matches “${esc(id)}”. <a href="tours.html">See every tour</a>.</p>`;
+    document.querySelector("main").remove(); return;
+  }
+  const S = T.stats, days = T.days, SITE = new URL("./", document.baseURI).href.replace(/\/$/, "/");
+  document.title = `${T.title} (${T.start.slice(0, 4)}) | Theodore Roosevelt Day by Day`;
+  document.querySelector('meta[name=description]').content = T.short;
+
+  // hero and overview
+  document.getElementById("hero").innerHTML = `
+    <span class="kind">${esc(T.kind_label)}</span>
+    <h1>${esc(T.title)}</h1>
+    <div class="when">${DBD.fmtSpan(T.start, T.end)} · ${S.days.toLocaleString()} days<span class="embedonly"> · <a href="${SITE}tour.html?id=${T.id}" target="_blank" rel="noopener">Open in Day by Day</a></span></div>
+    <p class="lede">${esc(T.short)}</p>`;
+  const where = S.countries.length > 1 ? [`${S.countries.length}`, "countries, in today's borders"] : S.states.length > 1 ? [`${S.states.length}`, "states"] : null;
+  const stat = (n, l) => `<li><b>${n}</b>${l}</li>`;
+  document.getElementById("overview").innerHTML = `
+    <div><p class="summary">${esc(T.summary)}</p>
+      <ul class="statrow">${[stat(S.days.toLocaleString(), "days"), S.stops > 1 && stat(S.distinct_places, "places on the route"), where && stat(...where),
+        S.speeches && stat(S.speeches, S.speeches === 1 ? "speech in the speech bank" : "speeches in the speech bank"), S.letters && stat(S.letters, "letters"),
+        S.straight_line_km > 50 && stat(`${Math.round(S.straight_line_km * 0.621371).toLocaleString()}`, "miles, at least*")].filter(Boolean).join("")}</ul>
+      ${S.straight_line_km > 50 ? `<p class="small">*Measured in straight lines between the places on the route, so the real distance was longer.</p>` : ""}
+    </div>
+    <div>${where ? `<h3>${S.countries.length > 1 ? "Countries" : "States"}</h3><p class="small" style="font-size:16px">${esc((S.countries.length > 1 ? S.countries : S.states).join(", "))}</p>` : ""}
+      <p class="small">Dates follow the <i>Chronological Record</i>: ${esc(T.anchor)}.${T.verified ? "" : " Not yet checked against a second source."}</p></div>`;
+
+  // map
+  const map = L.map("map", { scrollWheelZoom: false, maxZoom: 18 });
+  L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", { attribution: "&copy; <a href=\"https://www.openstreetmap.org/copyright\">OpenStreetMap</a> contributors", maxZoom: 19 }).addTo(map);
+  const R = T.route, ll = R.map(s => [s.lat, s.lon]);
+  const ahead = L.polyline(ll, { color: "#092A4D", weight: 2.5, opacity: .6, dashArray: "5 6" }).addTo(map);
+  const done = L.polyline([], { color: "#E7805D", weight: 3.5, opacity: .9 }).addTo(map);
+  R.forEach((s, k) => L.circleMarker([s.lat, s.lon], { radius: k === 0 || k === R.length - 1 ? 6 : 4, color: "#092A4D", weight: 1.5, fillColor: "#fff", fillOpacity: 1 })
+    .bindTooltip(`${esc(s.name)}, ${DBD.fmtDate(s.start)}${s.days > 1 ? ` (${s.days} days)` : ""}`).on("click", () => { stop(); go(idxOf(s.start)); }).addTo(map));
+  const here = L.circleMarker([0, 0], { radius: 10, color: "#092A4D", weight: 3, fillColor: "#F9D635", fillOpacity: 1 });
+  if (ll.length) map.fitBounds(L.latLngBounds(ll).pad(0.12), { maxZoom: 9 }); else map.setView([40, -95], 4);
+
+  // stepper
+  const slider = document.getElementById("t");
+  slider.max = days.length - 1;
+  document.getElementById("tStart").textContent = DBD.fmtDate(T.start, { noYear: true });
+  document.getElementById("tEnd").textContent = DBD.fmtDate(T.end, { noYear: true });
+  const idxOf = date => Math.max(0, days.findIndex(d => d.date === date));
+  const stopUpTo = date => { let k = -1; R.forEach((s, j) => { if (s.start <= date) k = j; }); return k; };
+  let cur = -1, timer = null;
+  async function go(i, pan = true) {
+    i = Math.max(0, Math.min(days.length - 1, i));
+    cur = i; slider.value = i;
+    const x = days[i];
+    document.getElementById("count").textContent = `Day ${x.n} of ${days.length} · ${DBD.fmtDate(x.date)}`;
+    document.getElementById("where").innerHTML = x.location ? `${x.firm ? "" : "<span style=\"font-size:.6em\">Probably </span>"}<a href="place.html?id=${encodeURIComponent(x.location_id)}">${esc(x.location)}</a>` : "";
+    const k = stopUpTo(x.date);
+    done.setLatLngs(ll.slice(0, k + 1));
+    if (x.lat != null) {
+      here.setLatLng([x.lat, x.lon]).addTo(map);
+      if (pan && !map.getBounds().pad(-0.1).contains([x.lat, x.lon])) map.panTo([x.lat, x.lon]);
+    } else here.remove();
+    document.getElementById("prev").disabled = i === 0;
+    document.getElementById("next").disabled = i === days.length - 1;
+    document.querySelectorAll("#every tr[data-i]").forEach(tr => tr.setAttribute("aria-current", +tr.dataset.i === i));
+    history.replaceState(null, "", `?id=${T.id}&date=${x.date}${EMBED ? "&embed=1" : ""}`);
+    const d = await DBD.get(`days/${x.date}.json`);
+    if (cur !== i) return;
+    document.getElementById("day").innerHTML = DBD.renderDay(d).replace(/<nav class="daynav">[\s\S]*?<\/nav>/, "");
+  }
+  const playBtn = document.getElementById("play");
+  function stop() { if (timer) { clearTimeout(timer); timer = null; } playBtn.textContent = "Play"; playBtn.setAttribute("aria-pressed", "false"); }
+  function tick() {
+    if (cur >= days.length - 1) return stop();
+    let j = cur + 1; while (j < days.length - 1 && !days[j].has_entry) j++;   // skip blank days
+    go(j).then(() => { if (days[j].significance >= 4) return stop(); timer = setTimeout(tick, 4500); });
+  }
+  playBtn.addEventListener("click", () => {
+    if (timer) return stop();
+    playBtn.textContent = "Pause"; playBtn.setAttribute("aria-pressed", "true"); timer = setTimeout(tick, 300);
+  });
+  document.getElementById("prev").addEventListener("click", () => { stop(); go(cur - 1); });
+  document.getElementById("next").addEventListener("click", () => { stop(); go(cur + 1); });
+  slider.addEventListener("input", () => { stop(); go(+slider.value); });
+  document.addEventListener("keydown", e => {
+    if (e.target.closest("input, select, textarea")) return;
+    if (e.key === "ArrowRight") { e.preventDefault(); stop(); go(cur + 1); }
+    else if (e.key === "ArrowLeft") { e.preventDefault(); stop(); go(cur - 1); }
+    else if (e.key === " " && !e.target.closest("button, a")) { e.preventDefault(); playBtn.click(); }
+  });
+
+  // below: highlights, itinerary, people, every day, embed codes
+  const jump = (date, label) => `<button class="linkish" data-date="${date}">${label}</button>`;
+  const sameYear = T.start.slice(0, 4) === T.end.slice(0, 4);
+  const embedSrc = `${SITE}tour.html?id=${T.id}&embed=1`;
+  document.getElementById("below").innerHTML = `
+    <div>
+      <h2>Days worth reading</h2>
+      <ol class="hlist">${T.highlights.map(h => `<li class="sig${h.significance}"><span class="d">${DBD.fmtDate(h.date, { noYear: sameYear })}${h.location ? ` · ${esc(h.location)}` : ""}</span>${jump(h.date, esc(h.headline))}</li>`).join("")}</ol>
+      <h2 style="margin-top:34px">Every day of the tour</h2>
+      <table class="list-table" id="every"><thead><tr><th>Day</th><th>Date</th><th>Where</th><th>What happened</th></tr></thead><tbody>
+      ${days.map((d, i) => `<tr data-i="${i}"><td class="n">${d.n}</td><td class="d">${jump(d.date, DBD.fmtDate(d.date, { noYear: sameYear }))}</td><td>${esc(d.location || "")}${d.location && !d.firm ? " <span class=\"small\">(probably)</span>" : ""}</td><td>${d.has_entry ? esc(d.headline) : `<span class="small">No entry in the record</span>`}</td></tr>`).join("")}
+      </tbody></table>
+    </div>
+    <div>
+      <h2>The route</h2>
+      <table class="list-table"><thead><tr><th>Stop</th><th>Arrived</th></tr></thead><tbody>
+      ${R.map(s => `<tr><td><a href="place.html?id=${encodeURIComponent(s.id)}">${esc(s.name)}</a>${s.days > 1 ? ` <span class="small">${s.days} days</span>` : ""}</td><td class="d">${jump(s.start, DBD.fmtDate(s.start, { noYear: sameYear }))}</td></tr>`).join("") || `<tr><td colspan="2" class="small">No stated places on this tour.</td></tr>`}
+      </tbody></table>
+      ${T.people.length ? `<h2 style="margin-top:34px">Who was there</h2><p class="small">People named most often in the record during the tour.</p><ul class="plist">${T.people.slice(0, 16).map(p => `<li><a href="person.html?id=${encodeURIComponent(p.id)}">${esc(p.name)}</a> <span class="c">${p.days} day${p.days === 1 ? "" : "s"}</span></li>`).join("")}</ul>` : ""}
+      <div class="embedbox" id="embed">
+        <h2>Embed this tour</h2>
+        <p class="small">The full map and day-by-day reader, for any web page:</p>
+        <textarea rows="3" readonly onclick="this.select()">&lt;iframe src="${embedSrc}" width="100%" height="760" style="border:0" title="${esc(T.title)}, Theodore Roosevelt Day by Day" loading="lazy"&gt;&lt;/iframe&gt;</textarea>
+        <p class="small" style="margin-top:14px">Or a light card with the route sketch and the tour's biggest days, which takes the page's fonts:</p>
+        <textarea rows="3" readonly onclick="this.select()">&lt;script src="${SITE}widgets/daybyday.js" defer&gt;&lt;/script&gt;
+&lt;trpl-tour tour="${T.id}"&gt;&lt;/trpl-tour&gt;</textarea>
+        <p class="small"><a href="api.html#tours">More options</a> · <a href="api/v1/tours/${T.id}.json">This tour as JSON</a></p>
+      </div>
+    </div>`;
+  document.getElementById("below").addEventListener("click", e => {
+    const b = e.target.closest("button[data-date]"); if (!b) return;
+    stop(); go(idxOf(b.dataset.date)); document.querySelector(".mapgrid").scrollIntoView({ behavior: matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth" });
+  });
+
+  const want = DBD.param("date");
+  let i0 = want ? idxOf(want) : 0;
+  go(i0, false);
+})();
+</script>
+</body>
+</html>

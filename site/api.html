@@ -25,7 +25,7 @@
 <body>
 <header class="bar">
   <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
-  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="near.html">Was he here?</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html" aria-current="page">API &amp; widgets</a></nav>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="tours.html">Tours</a><a href="near.html">Was he here?</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html" aria-current="page">API &amp; widgets</a></nav>
 </header>
 <main class="wrap doc" style="padding:36px 20px 60px">
   <h1 style="color:var(--night)">Use the data</h1>
@@ -49,6 +49,19 @@
 <pre>&lt;iframe src="https://daybyday.labs.trlibrary.com/map.html?embed=1&amp;date=1884-06-25"
         width="100%" height="640" style="border:0" title="Where Theodore Roosevelt was"&gt;&lt;/iframe&gt;</pre>
 
+  <h2 id="tours">Tours</h2>
+  <p>Every one of Roosevelt's <a href="tours.html">tours, trips and expeditions</a> can go on another page two ways. The full map with the day-by-day reader goes in an iframe; set <code>date</code> to open on a particular day.</p>
+<pre>&lt;iframe src="https://daybyday.labs.trlibrary.com/tour.html?id=great-western-tour-1903&amp;embed=1"
+        width="100%" height="760" style="border:0" title="The Great Western Tour" loading="lazy"&gt;&lt;/iframe&gt;</pre>
+  <p>Or use the widget script for a lighter card: a sketch of the route, the summary and the tour's biggest days, each linking into the day-by-day reader. <code>count</code> sets how many days to list (0 hides them) and <code>summary="off"</code> shows just the one-line description. <code>&lt;trpl-tours&gt;</code> lists every tour, or one kind: <code>speaking</code>, <code>campaign</code>, <code>expedition</code>, <code>abroad</code> or <code>hunting</code>. Tour ids are on each tour's page and in <a href="api/v1/tours/index.json">tours/index.json</a>.</p>
+<pre>&lt;trpl-tour tour="great-western-tour-1903"&gt;&lt;/trpl-tour&gt;
+&lt;trpl-tour tour="south-america-1913" count="3" theme="dark"&gt;&lt;/trpl-tour&gt;
+&lt;trpl-tours kind="campaign"&gt;&lt;/trpl-tours&gt;</pre>
+  <div class="demo" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px">
+    <trpl-tour tour="great-western-tour-1903" count="3"></trpl-tour>
+    <trpl-tour tour="south-america-1913" count="3" theme="dark"></trpl-tour>
+  </div>
+
   <h2>JSON API</h2>
   <p>Base URL: <code>https://daybyday.labs.trlibrary.com/api/v1/</code>. Every endpoint is a static file, cached at the edge and open to cross-site requests.</p>
   <table class="list-table ep">
@@ -66,6 +79,8 @@
       <tr><td><a href="api/v1/stays.json">stays.json</a></td><td>Runs of consecutive days in one place, for maps and journeys</td></tr>
       <tr><td><a href="api/v1/periods.json">periods.json</a></td><td>Life stages, offices, journeys and campaigns, with dates</td></tr>
       <tr><td><a href="api/v1/tags/index.json">tags/index.json</a>, tags/{tag}.json</td><td>Topic tags and the dates carrying each</td></tr>
+      <tr><td><a href="api/v1/tours/index.json">tours/index.json</a></td><td>Every tour, trip and expedition, with dates, kind, stats and a simplified route line</td></tr>
+      <tr><td><a href="api/v1/tours/great-western-tour-1903.json">tours/{id}.json</a></td><td>One tour: summary, route stop by stop, highlights, people, and every day with where he was</td></tr>
       <tr><td><a href="api/v1/highlights.json">highlights.json</a></td><td>The days rated major or history-making</td></tr>
       <tr><td><a href="api/v1/grid.json">grid.json</a>, <a href="api/v1/search.json">search.json</a></td><td>Compact per-day rows for visualizations and client-side search</td></tr>
     </tbody>
@@ -78,7 +93,7 @@
   <ul>
     <li><a href="data/days.csv">days.csv</a>, one row per day, for spreadsheets</li>
     <li><a href="data/days.jsonl">days.jsonl</a>, the full dataset, one JSON day per line</li>
-    <li><a href="data/people.json">people.json</a>, <a href="data/places.json">places.json</a>, <a href="data/periods.json">periods.json</a></li>
+    <li><a href="data/people.json">people.json</a>, <a href="data/places.json">places.json</a>, <a href="data/periods.json">periods.json</a>, <a href="data/tours.json">tours.json</a></li>
     <li><a href="data/events.jsonl">events.jsonl</a>, <a href="data/letters.jsonl">letters.jsonl</a>, <a href="data/quotes.jsonl">quotes.jsonl</a></li>
   </ul>
 

@@ -16,12 +16,16 @@ Endpoints (all GET, all JSON, CORS-open on GitHub Pages):
   /api/v1/grid.json                       one compact row per day for the life-in-days grid
   /api/v1/search.json                     headline + summary per day, for client-side search
   /api/v1/highlights.json                 days with significance >= 4
+  /api/v1/tours/index.json                TR's tours, trips and expeditions (see build_tours.py)
+  /api/v1/tours/{id}.json                 one tour: route, highlights, people, every day
 Bulk downloads are copied to /data/.
 """
 import json
 import shutil
 from collections import defaultdict
 from pathlib import Path
+
+import build_tours
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / "site/api/v1"
@@ -136,6 +140,8 @@ def main():
     people = json.load(open(ROOT / "data/people.json"))
     places = json.load(open(ROOT / "data/places.json"))
     periods = json.load(open(ROOT / "data/periods.json"))
+    tours = build_tours.load(ROOT)
+    tour_days = build_tours.by_date(tours)
     person_by_id = {p["id"]: p for p in people}
     place_by_id = {p["id"]: p for p in places}
 
@@ -160,6 +166,10 @@ def main():
         full["prev"] = days[i - 1]["date"] if i else None
         full["next"] = days[i + 1]["date"] if i + 1 < len(days) else None
         full["url"] = f"{BASE_URL}/day.html?date={r['date']}"
+        full["tours"] = [{"id": t["id"], "title": t["title"], "day": n, "of": total,
+                          "prev": days[i - 1]["date"] if n > 1 else None,
+                          "next": days[i + 1]["date"] if n < total else None}
+                         for t, n, total in tour_days.get(r["date"], [])]
         dump(OUT / f"days/{r['date']}.json", full)
         c = compact(r)
         by_month[r["date"][:7]].append(c)
@@ -255,6 +265,7 @@ def main():
     dump(OUT / "highlights.json", [compact(r) for r in days if r["significance"] >= 4])
 
     build_time_and_place(days, place_by_id, periods)
+    tour_index = build_tours.build(days, tours, place_by_id, person_by_id, dump, OUT, BASE_URL)
 
     meta = {
         "title": "Theodore Roosevelt Day by Day",
@@ -266,7 +277,8 @@ def main():
                    "people": len(people), "places": len(places),
                    "letters": sum(len(r["letters"]) for r in days),
                    "letters_linked_to_trc": sum(1 for r in days for l in r["letters"] if l.get("trc")),
-                   "days_with_archive_items": sum(1 for r in days if r.get("archive")), "tr_quotes": sum(len(r["tr_quotes"]) for r in days)},
+                   "days_with_archive_items": sum(1 for r in days if r.get("archive")), "tr_quotes": sum(len(r["tr_quotes"]) for r in days),
+                   "tours": len(tour_index)},
         "source": "Facts are drawn from the Theodore Roosevelt Association's Chronological Record (TRC-CR-1, "
                   "compiled by Robert J. Moore Jr., 1985), cited by page on every day. All summaries and "
                   "descriptions are original writing by the Theodore Roosevelt Presidential Library.",
@@ -286,14 +298,15 @@ def main():
             "places": "/api/v1/places/index.json", "place": "/api/v1/places/{id}.json",
             "periods": "/api/v1/periods.json", "tags": "/api/v1/tags/index.json", "tag": "/api/v1/tags/{tag}.json",
             "stays": "/api/v1/stays.json", "grid": "/api/v1/grid.json", "search": "/api/v1/search.json",
-            "highlights": "/api/v1/highlights.json"},
+            "highlights": "/api/v1/highlights.json", "tours": "/api/v1/tours/index.json",
+            "tour": "/api/v1/tours/{id}.json"},
         "downloads": ["/data/days.jsonl", "/data/days.csv", "/data/people.json", "/data/places.json",
-                      "/data/periods.json", "/data/letters.jsonl", "/data/quotes.jsonl", "/data/events.jsonl"],
+                      "/data/periods.json", "/data/tours.json", "/data/letters.jsonl", "/data/quotes.jsonl", "/data/events.jsonl"],
     }
     dump(OUT / "index.json", meta)
     dl = ROOT / "site/data"
     dl.mkdir(parents=True, exist_ok=True)
-    for f in ["days.jsonl", "days.csv", "people.json", "places.json", "periods.json", "letters.jsonl",
+    for f in ["days.jsonl", "days.csv", "people.json", "places.json", "periods.json", "tours.json", "letters.jsonl",
               "quotes.jsonl", "events.jsonl"]:
         shutil.copy(ROOT / "data" / f, dl / f)
     n = sum(1 for _ in OUT.rglob("*.json"))

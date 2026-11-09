@@ -1,0 +1,70 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tours and expeditions | Theodore Roosevelt Day by Day</title>
+<meta name="description" content="Theodore Roosevelt's tours, trips and expeditions, from a boyhood Grand Tour to the River of Doubt. Follow each one day by day.">
+<meta property="og:title" content="Tours and expeditions | Theodore Roosevelt Day by Day">
+<meta property="og:description" content="Theodore Roosevelt's tours, trips and expeditions, from a boyhood Grand Tour to the River of Doubt. Follow each one day by day.">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Theodore Roosevelt Presidential Library">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@600;700&family=Lora:ital,wght@0,400;0,700;1,400&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="assets/app.css">
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><b>Day by Day</b>Theodore Roosevelt Presidential Library</a>
+  <nav><a href="index.html">Explore</a><a href="map.html">Where he was</a><a href="tours.html" aria-current="page">Tours</a><a href="near.html">Was he here?</a><a href="timeplace.html">Time and place</a><a href="people.html">People</a><a href="places.html">Places</a><a href="api.html">API &amp; widgets</a></nav>
+</header>
+
+<main class="wrap" style="padding:36px 20px 60px">
+  <h1 style="color:var(--night)">Tours and expeditions</h1>
+  <p style="font-size:20px;max-width:62ch">Roosevelt was almost always going somewhere. Here are his big journeys, from a homesick ten-year-old's Grand Tour of Europe to the River of Doubt: whistle-stop campaigns, presidential speaking tours, hunting trips and expeditions. Open any one to see its route and read it day by day.</p>
+  <div class="tourline" id="line" aria-label="Tours on a timeline of his life, 1858 to 1919"></div>
+  <div class="filters chips-light" id="kinds" style="margin-top:30px"></div>
+  <div class="tourcards" id="cards" aria-live="polite"></div>
+  <p class="small" style="margin-top:26px">Each tour runs from the day he set out to the day he reached home (or the last day the <i>Chronological Record</i> has him traveling). Routes connect the places the record puts him, in order; days with no stated place are left off the line. <a href="api.html#tours">Embed a tour on your site</a>.</p>
+</main>
+<footer class="site"><div class="wrap">Written by the Theodore Roosevelt Presidential Library from the Theodore Roosevelt Association's <i>Chronological Record</i> (compiled by Robert J. Moore Jr., 1985). <a href="api.html">Use the data</a> &nbsp;|&nbsp; <a href="https://www.trlibrary.com/visit">Plan your visit to the Library in Medora</a></div></footer>
+<script src="assets/app.js"></script>
+<script>
+(async () => {
+  const { kinds, tours } = await DBD.get("tours/index.json");
+  const esc = DBD.esc;
+  const t0 = Date.UTC(1858, 9, 27), t1 = Date.UTC(1919, 0, 6), pct = iso => 100 * (Date.parse(iso + "T00:00:00Z") - t0) / (t1 - t0);
+  const line = document.getElementById("line");
+  line.innerHTML = tours.map(t => `<a class="kind-${t.kind}" href="tour.html?id=${t.id}" style="left:${pct(t.start)}%;width:${Math.max(.35, pct(t.end) - pct(t.start))}%" title="${esc(t.title)}, ${t.start.slice(0, 4)}" aria-label="${esc(t.title)}, ${t.start.slice(0, 4)}"></a>`).join("")
+    + [1860, 1870, 1880, 1890, 1900, 1910].map(y => `<span class="yr" style="left:${pct(y + "-01-01")}%">${y}</span>`).join("");
+  let kind = DBD.param("kind") || "";
+  const counts = {}; tours.forEach(t => counts[t.kind] = (counts[t.kind] || 0) + 1);
+  const chips = document.getElementById("kinds");
+  function drawChips() {
+    chips.innerHTML = [["", `All ${tours.length}`], ...Object.entries(kinds).map(([k, v]) => [k, `${v}s (${counts[k] || 0})`.replace("Travel abroads", "Travel abroad")])]
+      .map(([k, l]) => `<button class="chip" data-k="${k}" aria-pressed="${k === kind}">${esc(l)}</button>`).join("");
+  }
+  function nums(t) {
+    const s = t.stats, where = s.countries > 1 ? `${s.countries} countries` : s.states > 1 ? `${s.states} states` : "";
+    return [`${s.days.toLocaleString()} days`, s.stops > 1 && `${s.stops} stops`, where].filter(Boolean).join(" · ");
+  }
+  function draw() {
+    drawChips();
+    document.getElementById("cards").innerHTML = tours.filter(t => !kind || t.kind === kind).map(t => `
+      <a class="tourcard kind-${t.kind}" href="tour.html?id=${t.id}">
+        ${DBD.routeSvg(t.line, { label: `Route of ${t.title}` })}
+        <span class="kind">${esc(t.kind_label)} · ${t.start.slice(0, 4)}</span>
+        <span class="t">${esc(t.title)}</span>
+        <span class="when">${DBD.fmtSpan(t.start, t.end)}</span>
+        <p class="s">${esc(t.short)}</p>
+        <span class="nums">${nums(t)}</span>
+      </a>`).join("");
+  }
+  chips.addEventListener("click", e => {
+    const b = e.target.closest("button[data-k]"); if (!b) return;
+    kind = b.dataset.k; history.replaceState(null, "", kind ? `?kind=${kind}` : location.pathname); draw();
+  });
+  draw();
+})();
+</script>
+</body></html>

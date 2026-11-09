@@ -13,6 +13,7 @@ Every day of Theodore Roosevelt's life — 21,986 of them, from his birth on Oct
 | Archive | 127,873 dated TRC Digital Library items attached to 8,296 days |
 | TR's own words | 3,179 diary, letter and speech passages (unverified transcriptions) |
 | Life periods | 30 periods across four facets: life stage, office, journey, campaign |
+| Tours | 33 tours, trips and expeditions, each with a route, a profile page and a day-by-day reader |
 
 ## What's in a day
 
@@ -44,6 +45,7 @@ data/                 canonical dataset (committed; contains no TRA text)
   days.jsonl/.csv     assembled day records (built)
   people.json         people registry        places.json   places registry + coordinates
   periods.json        editorial life periods places_index.json  TRA place-names index (place → dates)
+  tours.json          tours, trips and expeditions (dates, kind, original summaries)
   people_seed.json    canonical names for recurring people
   geocode_cache.json  geocoder results (GeoNames + OpenStreetMap)
 pipeline/             scripts that build everything (see below)
