@@ -20236,11 +20236,11 @@
   "days_present": 2,
   "first": "1898-07-11",
   "last": "1898-07-18",
-  "lat": 21.3,
-  "lon": -78.48333,
-  "coord_source": "geonames",
+  "lat": 20.05583,
+  "lon": -75.76667,
+  "coord_source": "wikipedia",
   "osm": null,
-  "coord_precision": "exact"
+  "coord_precision": "approximate"
  },
  {
   "id": "el-capitan-ca",
@@ -59770,13 +59770,14 @@
   ],
   "index_ids": [],
   "uncertain": false,
-  "days_present": 6,
+  "days_present": 21,
   "first": "1898-06-30",
   "last": "1907-06-26",
-  "lat": null,
-  "lon": null,
-  "coord_source": null,
-  "coord_precision": null
+  "lat": 20.017,
+  "lon": -75.8,
+  "coord_source": "wikipedia",
+  "coord_precision": "approximate",
+  "osm": null
  },
  {
   "id": "san-juan-national-forest",
@@ -62262,11 +62263,11 @@
   "days_present": 2,
   "first": "1898-06-22",
   "last": "1898-06-23",
-  "lat": 23.05,
-  "lon": -82.25,
-  "coord_source": "geonames",
+  "lat": 19.9608,
+  "lon": -75.7076,
+  "coord_source": "wikipedia",
   "osm": null,
-  "coord_precision": "exact"
+  "coord_precision": "approximate"
  },
  {
   "id": "sidney-ny",

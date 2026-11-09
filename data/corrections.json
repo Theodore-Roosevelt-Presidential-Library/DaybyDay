@@ -502,6 +502,37 @@
    "date": "1916-03-06",
    "place": "port-of-spain-trinidad",
    "reason": "As 1916-03-04: Port of Spain, Trinidad, not Spain."
+  },
+  {
+   "date": "1898-06-23",
+   "place": "siboney-cuba",
+   "reason": "Santiago campaign, 1898: the heading gives only CUBA (mapped to the middle of the island); the entry names the march to Siboney."
+  },
+  {
+   "date": "1898-06-24",
+   "place": "las-guasimas",
+   "reason": "Santiago campaign, 1898: the heading gives only CUBA (mapped to the middle of the island); the entry names the fight at Las Guasimas."
+  },
+  {
+   "date": "1898-06-30",
+   "place": "el-pozo-cuba",
+   "reason": "Santiago campaign, 1898: the heading gives only CUBA (mapped to the middle of the island); the entry names the night march to El Pozo below the San Juan Heights."
+  },
+  {
+   "date": "1898-07-01",
+   "place": "kettle-hill",
+   "reason": "Santiago campaign, 1898: the heading gives only CUBA (mapped to the middle of the island); the entry names the charge up Kettle Hill and the San Juan Heights."
+  },
+  {
+   "date": "1898-07-02",
+   "to": "1898-07-17",
+   "place": "san-juan-hill-cuba",
+   "reason": "Santiago campaign, 1898: the heading gives only CUBA (mapped to the middle of the island); the entry names the regiment holding the San Juan Heights trenches outside Santiago until the surrender of July 17."
+  },
+  {
+   "date": "1898-08-08",
+   "place": "santiago-de-cuba",
+   "reason": "Santiago campaign, 1898: the heading gives only CUBA (mapped to the middle of the island); the entry names leaving Santiago on the transport Miami."
   }
  ]
 }

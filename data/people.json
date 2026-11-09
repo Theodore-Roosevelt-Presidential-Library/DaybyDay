@@ -1816,7 +1816,7 @@
    "washington-dc",
    "newcastle-co",
    "white-house",
-   "cuba"
+   "san-juan-hill-cuba"
   ],
   "top_companions": [
    "mrs-alexander-lambert",
@@ -3090,7 +3090,7 @@
   "first": "1898-06-24",
   "last": "1898-06-24",
   "top_places": [
-   "cuba"
+   "las-guasimas"
   ],
   "top_companions": [
    "hamilton-fish",
@@ -8979,7 +8979,7 @@
    "washington-dc",
    "white-house",
    "new-york-ny",
-   "cuba"
+   "san-juan-hill-cuba"
   ],
   "top_companions": [
    "edith-kermit-roosevelt",
@@ -25275,7 +25275,7 @@
   "first": "1898-06-24",
   "last": "1900-11-07",
   "top_places": [
-   "cuba",
+   "las-guasimas",
    "sagamore-hill"
   ],
   "top_companions": [
@@ -40755,7 +40755,7 @@
   "first": "1898-07-01",
   "last": "1898-07-01",
   "top_places": [
-   "cuba"
+   "kettle-hill"
   ],
   "top_companions": [
    "leonard-wood",
@@ -42061,7 +42061,7 @@
   "top_places": [
    "washington-dc",
    "sagamore-hill",
-   "cuba",
+   "las-guasimas",
    "white-house"
   ],
   "top_companions": [
@@ -44493,7 +44493,8 @@
   "first": "1898-06-23",
   "last": "1901-06-17",
   "top_places": [
-   "cuba",
+   "siboney-cuba",
+   "kettle-hill",
    "sagamore-hill"
   ],
   "top_companions": [
@@ -46333,7 +46334,7 @@
   "first": "1898-06-23",
   "last": "1907-05-30",
   "top_places": [
-   "cuba",
+   "siboney-cuba",
    "indianapolis-in"
   ],
   "top_companions": [
@@ -52595,7 +52596,7 @@
    "oyster-bay-ny",
    "new-york-ny",
    "washington-dc",
-   "cuba"
+   "san-juan-hill-cuba"
   ],
   "top_companions": [
    "emlen-roosevelt",
@@ -53340,7 +53341,7 @@
   "first": "1898-07-01",
   "last": "1898-07-01",
   "top_places": [
-   "cuba"
+   "kettle-hill"
   ],
   "top_companions": [
    "leonard-wood",
@@ -63843,11 +63844,11 @@
   "first": "1898-06-23",
   "last": "1906-01-29",
   "top_places": [
-   "cuba",
    "sagamore-hill",
    "white-house",
-   "albany-ny",
-   "us-senate"
+   "siboney-cuba",
+   "las-guasimas",
+   "el-pozo-cuba"
   ],
   "top_companions": [
    "henry-bardshar",
@@ -71433,7 +71434,7 @@
   "last": "1907-03-30",
   "top_places": [
    "washington-dc",
-   "cuba",
+   "siboney-cuba",
    "albany-ny"
   ],
   "top_companions": [
@@ -74441,7 +74442,7 @@
   "first": "1898-07-05",
   "last": "1898-07-05",
   "top_places": [
-   "cuba"
+   "san-juan-hill-cuba"
   ],
   "top_companions": [
    "henry-cabot-lodge",
@@ -76778,7 +76779,7 @@
   "top_places": [
    "sagamore-hill",
    "washington-dc",
-   "cuba"
+   "san-juan-hill-cuba"
   ],
   "top_companions": [
    "alexander-lambert",
@@ -89982,7 +89983,7 @@
    "washington-dc",
    "sagamore-hill",
    "white-house",
-   "cuba",
+   "las-guasimas",
    "new-york-state"
   ],
   "top_companions": [
@@ -90471,7 +90472,7 @@
   "first": "1898-07-01",
   "last": "1898-12-30",
   "top_places": [
-   "cuba",
+   "kettle-hill",
    "sagamore-hill"
   ],
   "top_companions": [
@@ -92502,8 +92503,9 @@
   "first": "1896-07-26",
   "last": "1898-07-11",
   "top_places": [
-   "cuba",
-   "sagamore-hill"
+   "sagamore-hill",
+   "las-guasimas",
+   "san-juan-hill-cuba"
   ],
   "top_companions": [
    "avery-d-andrews",
@@ -105008,7 +105010,7 @@
   "first": "1898-07-01",
   "last": "1898-07-01",
   "top_places": [
-   "cuba"
+   "kettle-hill"
   ],
   "top_companions": [
    "leonard-wood",
@@ -105471,10 +105473,11 @@
   "first": "1898-06-15",
   "last": "1899-03-09",
   "top_places": [
-   "cuba",
    "tampa-fl",
+   "san-juan-hill-cuba",
+   "cuba",
    "las-guasimas",
-   "albany-ny"
+   "el-pozo-cuba"
   ],
   "top_companions": [
    "edith-kermit-roosevelt",
@@ -106200,7 +106203,7 @@
   "last": "1902-05-09",
   "top_places": [
    "washington-dc",
-   "cuba",
+   "san-juan-hill-cuba",
    "brooklyn-bridge",
    "white-house"
   ],
@@ -107113,7 +107116,7 @@
   "last": "1902-02-19",
   "top_places": [
    "washington-dc",
-   "cuba",
+   "san-juan-hill-cuba",
    "force-school",
    "white-house"
   ],

@@ -3713,13 +3713,12 @@
 "ambiguous": false
 },
 "El Caney, Cuba": {
-"lat": 21.3,
-"lon": -78.48333,
+"lat": 20.05583,
+"lon": -75.76667,
 "osm_type": null,
 "osm_id": null,
-"display_name": "El Caney (CU/05)",
-"source": "geonames",
-"geonames_id": 3561667,
+"display_name": "El Caney, Santiago de Cuba (Wikipedia; the earlier GeoNames hit was an El Caney in central Cuba)",
+"source": "wikipedia",
 "ambiguous": false
 },
 "El Dorado, Kansas, USA": {
@@ -10303,13 +10302,12 @@
 "ambiguous": false
 },
 "Siboney, Santiago de Cuba, Cuba": {
-"lat": 23.05,
-"lon": -82.25,
+"lat": 19.9608,
+"lon": -75.7076,
 "osm_type": null,
 "osm_id": null,
-"display_name": "Vedado del Cotorro (CU/02)",
-"source": "geonames",
-"geonames_id": 3534597,
+"display_name": "Siboney, Santiago de Cuba (Wikipedia; the earlier GeoNames hit was Siboney, Havana)",
+"source": "wikipedia",
 "ambiguous": false
 },
 "Sidney, New York": {
@@ -16224,7 +16222,15 @@
 "osm_id": 359278086,
 "display_name": "San Francisco Peaks Natural Area, Coconino County, Arizona, United States"
 },
-"San Juan Hill, Santiago de Cuba, Cuba": null,
+"San Juan Hill, Santiago de Cuba, Cuba": {
+"lat": 20.017,
+"lon": -75.8,
+"osm_type": null,
+"osm_id": null,
+"display_name": "San Juan Hill (San Juan Heights), Santiago de Cuba (Wikipedia)",
+"source": "wikipedia",
+"ambiguous": false
+},
 "San Luis Province, Argentina": {
 "lat": -41.12327,
 "lon": -71.24285,

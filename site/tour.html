@@ -81,7 +81,7 @@
       </div>
       <div class="timeline"><span id="tStart"></span><input type="range" id="t" min="0" value="0" aria-label="Move through the tour"><span id="tEnd"></span></div>
       <p class="keys">Keys: <kbd>←</kbd> <kbd>→</kbd> previous or next day, <kbd>Space</kbd> play or pause. Play stops by itself on major days.</p>
-      <p class="small">The line joins the places the record puts him, in order. Map data &copy; OpenStreetMap contributors.</p>
+      <p class="small"><span id="sparse"></span>The line joins the places the record puts him, in order. Map data &copy; OpenStreetMap contributors.</p>
     </div>
     <div>
       <div class="stop" aria-live="polite"><div class="count" id="count"></div><div class="where" id="where"></div></div>
@@ -113,16 +113,22 @@
     <h1>${esc(T.title)}</h1>
     <div class="when">${DBD.fmtSpan(T.start, T.end)} · ${S.days.toLocaleString()} days<span class="embedonly"> · <a href="${SITE}tour.html?id=${T.id}" target="_blank" rel="noopener">Open in Day by Day</a></span></div>
     <p class="lede">${esc(T.short)}</p>`;
-  const where = S.countries.length > 1 ? [`${S.countries.length}`, "countries, in today's borders"] : S.states.length > 1 ? [`${S.states.length}`, "states"] : null;
+  const terr = new Set(S.territories);
+  const stLabel = terr.size ? (S.states.length > 1 ? "states and territories" : "territory") : "states";
+  const stList = S.states.map(x => terr.has(x) ? `${x} (then a territory)` : x);
+  const showStates = S.states.length > 1 || terr.size, showAbroad = S.abroad.length > 0;
   const stat = (n, l) => `<li><b>${n}</b>${l}</li>`;
   document.getElementById("overview").innerHTML = `
     <div><p class="summary">${esc(T.summary)}</p>
-      <ul class="statrow">${[stat(S.days.toLocaleString(), "days"), S.stops > 1 && stat(S.distinct_places, "places on the route"), where && stat(...where),
+      <ul class="statrow">${[stat(S.days.toLocaleString(), "days"), S.stops > 1 && stat(S.distinct_places, "places on the route"), showStates && stat(S.states.length, stLabel),
+        S.abroad.length > 1 && stat(S.abroad.length, "countries abroad"),
         S.speeches && stat(S.speeches, S.speeches === 1 ? "speech in the speech bank" : "speeches in the speech bank"), S.letters && stat(S.letters, "letters"),
         S.straight_line_km > 50 && stat(`${Math.round(S.straight_line_km * 0.621371).toLocaleString()}`, "miles, at least*")].filter(Boolean).join("")}</ul>
       ${S.straight_line_km > 50 ? `<p class="small">*Measured in straight lines between the places on the route, so the real distance was longer.</p>` : ""}
     </div>
-    <div>${where ? `<h3>${S.countries.length > 1 ? "Countries" : "States"}</h3><p class="small" style="font-size:16px">${esc((S.countries.length > 1 ? S.countries : S.states).join(", "))}</p>` : ""}
+    <div>${showStates ? `<h3>${stLabel[0].toUpperCase() + stLabel.slice(1)}</h3><p class="small" style="font-size:16px">${esc(stList.join(", "))}</p>` : ""}
+      ${showAbroad ? `<h3>${S.abroad.length > 1 ? "Countries" : "Abroad"}</h3><p class="small" style="font-size:16px">${esc(S.abroad.join(", "))} <span style="font-size:13px">(in today's borders)</span></p>` : ""}
+      <p class="small">Days count the day he set out and the day he got home. States leave out his homes at Oyster Bay, New York City and Washington.</p>
       <p class="small">Dates follow the <i>Chronological Record</i>: ${esc(T.anchor)}.${T.verified ? "" : " Not yet checked against a second source."}</p></div>`;
 
   // map
@@ -135,6 +141,8 @@
     .bindTooltip(`${esc(s.name)}, ${DBD.fmtDate(s.start)}${s.days > 1 ? ` (${s.days} days)` : ""}`).on("click", () => { stop(); go(idxOf(s.start)); }).addTo(map));
   const here = L.circleMarker([0, 0], { radius: 10, color: "#092A4D", weight: 3, fillColor: "#F9D635", fillOpacity: 1 });
   if (ll.length) map.fitBounds(L.latLngBounds(ll).pad(0.12), { maxZoom: 9 }); else map.setView([40, -95], 4);
+
+  if (S.distinct_places <= 3 && S.days > 14) document.getElementById("sparse").textContent = `The Chronological Record names only ${S.distinct_places === 1 ? "one place" : S.distinct_places + " places"} for this trip, so the map is thin. `;
 
   // stepper
   const slider = document.getElementById("t");
@@ -152,7 +160,7 @@
     document.getElementById("where").innerHTML = x.location ? `${x.firm ? "" : "<span style=\"font-size:.6em\">Probably </span>"}<a href="place.html?id=${encodeURIComponent(x.location_id)}">${esc(x.location)}</a>` : "";
     const k = stopUpTo(x.date);
     done.setLatLngs(ll.slice(0, k + 1));
-    if (x.lat != null) {
+    if (x.lat != null && !x.broad) {
       here.setLatLng([x.lat, x.lon]).addTo(map);
       if (pan && !map.getBounds().pad(-0.1).contains([x.lat, x.lon])) map.panTo([x.lat, x.lon]);
     } else here.remove();

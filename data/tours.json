@@ -5,7 +5,8 @@
   "campaign": "Campaign tour",
   "expedition": "Expedition",
   "abroad": "Travel abroad",
-  "hunting": "Hunting trip"
+  "hunting": "Hunting trip",
+  "military": "War service"
  },
  "tours": [
   {
@@ -36,8 +37,8 @@
    "kind": "hunting",
    "start": "1880-08-16",
    "end": "1880-09-29",
-   "short": "Six weeks of bird shooting across Illinois, Iowa and Minnesota with his brother.",
-   "summary": "Newly engaged to Alice Lee and missing her every day, Roosevelt heads west with Elliott. The brothers shoot prairie chickens on an Illinois farm, ride the Iowa prairie by wagon, and camp on the Buffalo River near Moorhead. Elliott is the better shot, and Roosevelt says so. He tallies 404 head of game, then races home to Alice.",
+   "short": "Six weeks of prairie shooting with his brother, from Illinois to the Red River country.",
+   "summary": "Newly engaged to Alice Lee and missing her every day, Roosevelt heads west with Elliott. The brothers shoot prairie chickens on an Illinois farm, ride the Iowa prairie by wagon, and camp on the Buffalo River near Moorhead. Elliott is the better shot, and Roosevelt says so. He tallies 404 head of game, then races home to Alice by way of Niagara Falls.",
    "anchor": "1880-08-16 leaves for Chicago with Elliott; 1880-09-29 back in New York",
    "verified": false
   },
@@ -83,6 +84,17 @@
    "short": "A hard hunt in the mountains of Idaho and British Columbia.",
    "summary": "From the Badlands Roosevelt goes north and west to the Kootenai country with guide John Willis. Most of his companions give up after a week. He stays on, and comes out with a bear and a caribou.",
    "anchor": "1888-08-26 bound for Idaho; 1888-10-04 eastbound for home",
+   "verified": false
+  },
+  {
+   "id": "rough-riders-1898",
+   "title": "The Rough Riders: San Antonio, Tampa and Santiago",
+   "kind": "military",
+   "start": "1898-05-12",
+   "end": "1898-09-14",
+   "short": "From training camp in San Antonio to the charge at San Juan and home by way of Montauk.",
+   "summary": "Days after leaving the Navy Department, Lieutenant Colonel Roosevelt takes the train to San Antonio to help train the 1st U.S. Volunteer Cavalry. The regiment moves to Tampa, seizes a transport to make sure it is not left behind, and lands in Cuba in late June. It comes under fire at Las Guasimas, charges up Kettle Hill and the San Juan Heights on July 1, and holds the trenches outside Santiago until the city surrenders. Worn down by fever, the men sail for Montauk in August, where they give their colonel a Remington bronze before he heads home.",
+   "anchor": "1898-05-12 leaves Washington for San Antonio; 1898-09-14 leaves Montauk for Sagamore Hill",
    "verified": false
   },
   {
@@ -135,7 +147,7 @@
    "kind": "speaking",
    "start": "1902-08-22",
    "end": "1902-09-03",
-   "short": "A swing through six New England states that ended in a trolley crash.",
+   "short": "A swing through all six New England states that ended in a trolley crash.",
    "summary": "President Roosevelt takes his case against the trusts to New England, speaking from Connecticut to Maine and on through New Hampshire and Vermont. In Pittsfield, Massachusetts, a streetcar slams into his carriage. Secret Service agent William Craig is killed, and Roosevelt's leg is badly hurt.",
    "anchor": "1902-08-22 Hartford; 1902-09-03 trolley crash at Pittsfield",
    "verified": false
@@ -157,7 +169,7 @@
    "kind": "speaking",
    "start": "1902-09-19",
    "end": "1902-09-24",
-   "short": "A western tour that lasted five days.",
+   "short": "A tour of the Midwest cut short by surgery in Indianapolis.",
    "summary": "Roosevelt heads west with the coal strike unresolved, speaking in Cincinnati and Detroit. In Indianapolis doctors find that the leg hurt at Pittsfield needs surgery. The tour is called off, and he is carried into the temporary White House on Jackson Place to rest.",
    "anchor": "1902-09-19 starts west; 1902-09-23 surgery in Indianapolis; 1902-09-24 resting in Washington",
    "verified": false
@@ -186,7 +198,7 @@
   },
   {
    "id": "southwest-hunt-1905",
-   "title": "Texas, Oklahoma and Colorado Hunt",
+   "title": "Hunting the Southwest",
    "kind": "hunting",
    "start": "1905-04-03",
    "end": "1905-05-11",
@@ -202,7 +214,7 @@
    "start": "1905-10-18",
    "end": "1905-10-31",
    "short": "Through the South to his mother's girlhood home, and back by sea.",
-   "summary": "With Edith along, Roosevelt speaks his way through Virginia, the Carolinas, Georgia, Florida, Alabama, Arkansas and Louisiana. He visits Bulloch Hall in Roswell, where his mother grew up, speaks at Tuskegee, and denounces lynching in Little Rock before sailing home from New Orleans on the West Virginia.",
+   "summary": "With Edith along, Roosevelt speaks his way from Raleigh to Little Rock. He visits Bulloch Hall in Roswell, where his mother grew up, speaks at Tuskegee, and denounces lynching in Little Rock before sailing home from New Orleans on the West Virginia.",
    "anchor": "1905-10-18 leaves Washington; 1905-10-31 back at the White House",
    "verified": false
   },
@@ -256,18 +268,18 @@
    "kind": "speaking",
    "start": "1910-08-23",
    "end": "1910-09-11",
-   "short": "A sixteen-state tour and the New Nationalism.",
+   "short": "Three weeks in the West, and the New Nationalism at Osawatomie.",
    "summary": "Back from abroad and pulled into politics, Roosevelt heads west in a private car. In Osawatomie, Kansas, he delivers The New Nationalism, the most important speech of his life after the presidency. He also tells a crowd in Sioux Falls that his years on a Dakota ranch were the most important part of his education.",
    "anchor": "1910-08-23 tour begins; 1910-09-11 home",
    "verified": false
   },
   {
    "id": "western-tour-1911",
-   "title": "The 34-Day Tour of 1911",
+   "title": "Across the South and West, 1911",
    "kind": "speaking",
    "start": "1911-03-08",
    "end": "1911-04-16",
-   "short": "Thirty-four days across the South and the West, with Edith and Ethel.",
+   "short": "Nearly six weeks across the South and the West, with Edith and Ethel.",
    "summary": "Roosevelt speaks his way from Atlanta through Texas to Arizona, where he rides into the Grand Canyon with Archie and dedicates the dam on the Salt River that bears his name. At Berkeley he gives the Earl Lectures and the speech with his famous line about taking the Isthmus, and comes home through the Pacific Northwest and Montana.",
    "anchor": "1911-03-08 leaves on a 34-day tour; 1911-04-16 home to Oyster Bay",
    "verified": false
@@ -356,7 +368,7 @@
    "start": "1916-10-17",
    "end": "1916-10-28",
    "short": "A western swing campaigning for Charles Evans Hughes.",
-   "summary": "With three reporters along for the ride, Roosevelt stumps for the Republican nominee through Kentucky, Indiana, Kansas, Arizona, New Mexico, Colorado and Illinois, telling stories and pointing out wildlife from the train between stops.",
+   "summary": "With three reporters along for the ride, Roosevelt stumps for the Republican nominee from Kentucky to Arizona and back through Colorado and Chicago, telling stories and pointing out wildlife from the train between stops.",
    "anchor": "1916-10-17 western swing begins; 1916-10-28 Brooklyn",
    "verified": false
   },

@@ -155,7 +155,7 @@
       const kind = this.getAttribute("kind");
       const x = await get(this.api, "tours/index.json");
       const list = x.tours.filter(t => !kind || t.kind === kind);
-      this.paint(`<p class="kicker">${kind && x.kinds[kind] ? esc(kind === "abroad" ? "Travels abroad" : x.kinds[kind] + "s") : "Theodore Roosevelt's tours"}</p><ul>${list.map(t =>
+      this.paint(`<p class="kicker">${kind && x.kinds[kind] ? esc(kind === "abroad" ? "Travels abroad" : kind === "military" ? "War service" : x.kinds[kind] + "s") : "Theodore Roosevelt's tours"}</p><ul>${list.map(t =>
         `<li><span class="yr">${t.start.slice(0, 4)}</span><a class="h" href="${SITE}tour.html?id=${t.id}" target="_top">${esc(t.title)}</a><div class="m">${esc(t.short)}</div></li>`).join("")}</ul>`);
     }
   }

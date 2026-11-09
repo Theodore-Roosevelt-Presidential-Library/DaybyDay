@@ -114,10 +114,10 @@ footer.site a { color: #fff; }
 .dnote b { font-weight: 700; color: var(--night); }
 
 /* tours */
-:root { --k-speaking: #FC924E; --k-campaign: #F36079; --k-expedition: #1B4532; --k-abroad: #3B5F86; --k-hunting: #C9A227; }
+:root { --k-speaking: #FC924E; --k-campaign: #F36079; --k-expedition: #1B4532; --k-abroad: #3B5F86; --k-hunting: #C9A227; --k-military: #8B5A2B; }
 .kind { font: 700 12px var(--sans); text-transform: uppercase; letter-spacing: .06em; color: var(--k, var(--ink-2)); }
 .kind-speaking { --k: var(--k-speaking); } .kind-campaign { --k: var(--k-campaign); } .kind-expedition { --k: var(--k-expedition); }
-.kind-abroad { --k: var(--k-abroad); } .kind-hunting { --k: var(--k-hunting); }
+.kind-abroad { --k: var(--k-abroad); } .kind-hunting { --k: var(--k-hunting); } .kind-military { --k: var(--k-military); }
 .tourline { position: relative; height: 46px; margin: 18px 0 6px; background: var(--sand-2); border-radius: var(--radius); }
 .tourline a { position: absolute; top: 8px; height: 30px; min-width: 4px; background: var(--k); border-radius: 2px; opacity: .85; }
 .tourline a:hover, .tourline a:focus-visible { opacity: 1; outline: 2px solid var(--night); outline-offset: 1px; }

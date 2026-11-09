@@ -41,12 +41,15 @@
   const counts = {}; tours.forEach(t => counts[t.kind] = (counts[t.kind] || 0) + 1);
   const chips = document.getElementById("kinds");
   function drawChips() {
-    chips.innerHTML = [["", `All ${tours.length}`], ...Object.entries(kinds).map(([k, v]) => [k, `${v}s (${counts[k] || 0})`.replace("Travel abroads", "Travel abroad")])]
+    const plural = { abroad: "Travel abroad", military: "War service" };
+    chips.innerHTML = [["", `All ${tours.length}`], ...Object.entries(kinds).map(([k, v]) => [k, `${plural[k] || v + "s"} (${counts[k] || 0})`])]
       .map(([k, l]) => `<button class="chip" data-k="${k}" aria-pressed="${k === kind}">${esc(l)}</button>`).join("");
   }
   function nums(t) {
-    const s = t.stats, where = s.countries > 1 ? `${s.countries} countries` : s.states > 1 ? `${s.states} states` : "";
-    return [`${s.days.toLocaleString()} days`, s.stops > 1 && `${s.stops} stops`, where].filter(Boolean).join(" · ");
+    const s = t.stats;
+    const st = s.states > 1 || s.territories ? `${s.states} ${s.territories ? (s.states > 1 ? "states and territories" : "territory") : "states"}` : "";
+    const ab = s.abroad.length === 1 ? s.abroad[0] : s.abroad.length > 1 ? `${s.abroad.length} countries` : "";
+    return [`${s.days.toLocaleString()} days`, s.stops > 1 && `${s.stops} stops`, st, ab].filter(Boolean).join(" · ");
   }
   function draw() {
     drawChips();
