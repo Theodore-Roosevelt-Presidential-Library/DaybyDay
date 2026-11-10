@@ -58,7 +58,7 @@
         ${DBD.routeSvg(t.line, { label: `Route of ${t.title}` })}
         <span class="kind">${esc(t.kind_label)} · ${t.start.slice(0, 4)}</span>
         <span class="t">${esc(t.title)}</span>
-        <span class="when">${DBD.fmtSpan(t.start, t.end)}</span>
+        <span class="when">${DBD.fmtSpan(t.start, t.end)}${(t.approx_dates || []).length ? ' <span class="small">(approx.)</span>' : ""}</span>
         <p class="s">${esc(t.short)}</p>
         <span class="nums">${nums(t)}</span>
       </a>`).join("");

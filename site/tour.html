@@ -111,7 +111,7 @@
   document.getElementById("hero").innerHTML = `
     <span class="kind">${esc(T.kind_label)}</span>
     <h1>${esc(T.title)}</h1>
-    <div class="when">${DBD.fmtSpan(T.start, T.end)} · ${S.days.toLocaleString()} days<span class="embedonly"> · <a href="${SITE}tour.html?id=${T.id}" target="_blank" rel="noopener">Open in Day by Day</a></span></div>
+    <div class="when">${DBD.fmtSpan(T.start, T.end)}${(T.approx_dates || []).length ? ` <span class="small" title="${(T.approx_dates || []).join(' and ')} date not confirmed by two independent sources">(${T.approx_dates.length > 1 ? "dates" : T.approx_dates[0] + " date"} approximate)</span>` : ""} · ${S.days.toLocaleString()} days<span class="embedonly"> · <a href="${SITE}tour.html?id=${T.id}" target="_blank" rel="noopener">Open in Day by Day</a></span></div>
     <p class="lede">${esc(T.short)}</p>`;
   const terr = new Set(S.territories);
   const stLabel = terr.size ? (S.states.length > 1 ? "states and territories" : "territory") : "states";

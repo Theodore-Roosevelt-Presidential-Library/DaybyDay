@@ -147,7 +147,7 @@ def build(days, tours, place_by_id, person_by_id, dump, out_dir, base_url):
         dump(out_dir / f"tours/{t['id']}.json", record)
         lats = [s["lat"] for s in stops] or [0]
         lons = [s["lon"] for s in stops] or [0]
-        index.append({**{k: t[k] for k in ("id", "title", "kind", "start", "end", "short")},
+        index.append({**{k: t[k] for k in ("id", "title", "kind", "start", "end", "short")}, "approx_dates": t.get("approx_dates", []),
                       "kind_label": record["kind_label"], "url": url,
                       "stats": {k: stats[k] for k in ("days", "stops", "straight_line_km", "speeches")}
                       | {"states": len(states), "territories": len(territories), "countries": len(countries),

@@ -1615,8 +1615,7 @@
 {"date": "1873-02-11", "seq": 1, "action": "hunting", "detail": "Shoots near Beni Hasan", "time": null, "people": [], "places": ["beni-hasan-egypt"]}
 {"date": "1873-02-12", "seq": 1, "action": "other", "detail": "Visits the tombs of Beni Hasan", "time": null, "people": [], "places": ["beni-hasan-egypt"]}
 {"date": "1873-02-12", "seq": 2, "action": "hunting", "detail": "Shoots an owl", "time": null, "people": [], "places": []}
-{"date": "1873-02-12", "seq": 3, "action": "social", "detail": "The Roosevelts invite Ralph Waldo Emerson and his daughter Ellen to lunch", "time": null, "people": ["ralph-waldo-emerson", "ellen-emerson"], "places": ["ibis-dahabeah"]}
-{"date": "1873-02-12", "seq": 4, "action": "other", "detail": "Rows the Emersons over in the children's small boat", "time": null, "people": ["ralph-waldo-emerson", "ellen-emerson"], "places": []}
+{"date": "1873-02-12", "seq": 3, "action": "social", "detail": "The family calls on Ralph Waldo Emerson aboard his boat", "time": null, "people": ["ralph-waldo-emerson"], "places": []}
 {"date": "1873-02-13", "seq": 1, "action": "hunting", "detail": "Shoots with his father", "time": null, "people": ["theodore-roosevelt-sr"], "places": ["beni-suef-egypt"]}
 {"date": "1873-02-13", "seq": 2, "action": "travel", "detail": "The Ibis collides with the Moorkat, damaging its front cabin", "time": null, "people": [], "places": ["ibis-dahabeah", "moorkat-boat"]}
 {"date": "1873-02-14", "seq": 1, "action": "travel", "detail": "Sails all day; rough in the afternoon", "time": null, "people": [], "places": ["memphis-egypt"]}
@@ -4904,8 +4903,8 @@
 {"date": "1883-09-04", "seq": 2, "action": "correspondence", "detail": "Writes his mother from Chicago", "time": null, "people": ["martha-bulloch-roosevelt"], "places": ["chicago-il"]}
 {"date": "1883-09-05", "seq": 1, "action": "travel", "detail": "Traveling by train toward the Badlands", "time": null, "people": [], "places": ["dakota-territory"]}
 {"date": "1883-09-06", "seq": 1, "action": "travel", "detail": "Transfers to the St. Paul Express", "time": null, "people": [], "places": ["st-paul-express"]}
-{"date": "1883-09-07", "seq": 1, "action": "arrival", "detail": "Arrives at Little Missouri, Dakota Territory", "time": "2:00 AM", "people": [], "places": ["little-missouri-nd"]}
-{"date": "1883-09-07", "seq": 2, "action": "other", "detail": "Wakes the Pyramid Park Hotel's owner and takes a bed in a shared 14-bed room", "time": "2:00 AM", "people": [], "places": ["pyramid-park-hotel"]}
+{"date": "1883-09-07", "seq": 1, "action": "arrival", "detail": "Arrives at Little Missouri, Dakota Territory", "time": "about 3:00 AM", "people": [], "places": ["little-missouri-nd"]}
+{"date": "1883-09-07", "seq": 2, "action": "other", "detail": "Wakes the Pyramid Park Hotel's owner and takes a bed in a shared 14-bed room", "time": null, "people": [], "places": ["pyramid-park-hotel"]}
 {"date": "1883-09-08", "seq": 1, "action": "hunting", "detail": "Hires Joe Ferris as his hunting guide", "time": null, "people": ["joe-ferris"], "places": ["little-missouri-nd"]}
 {"date": "1883-09-08", "seq": 2, "action": "travel", "detail": "Puts up overnight at the Maltese Cross Ranch", "time": null, "people": ["sylvane-ferris", "bill-merrifield"], "places": ["maltese-cross-ranch"]}
 {"date": "1883-09-08", "seq": 3, "action": "correspondence", "detail": "Writes to his mother", "time": null, "people": ["martha-bulloch-roosevelt"], "places": []}
@@ -6268,7 +6267,7 @@
 {"date": "1887-03-24", "seq": 1, "action": "travel", "detail": "At sea", "time": null, "people": ["edith-kermit-roosevelt"], "places": ["ss-etruria"]}
 {"date": "1887-03-25", "seq": 1, "action": "travel", "detail": "At sea", "time": null, "people": ["edith-kermit-roosevelt"], "places": ["ss-etruria"]}
 {"date": "1887-03-26", "seq": 1, "action": "travel", "detail": "At sea", "time": null, "people": ["edith-kermit-roosevelt"], "places": ["ss-etruria"]}
-{"date": "1887-03-27", "seq": 1, "action": "travel", "detail": "At sea", "time": null, "people": ["edith-kermit-roosevelt"], "places": ["ss-etruria"]}
+{"date": "1887-03-27", "seq": 1, "action": "arrival", "detail": "Lands in New York from the Etruria", "time": "11:00 AM", "people": ["edith-kermit-roosevelt"], "places": []}
 {"date": "1887-03-28", "seq": 1, "action": "arrival", "detail": "Lands in New York with Edith", "time": null, "people": ["edith-kermit-roosevelt"], "places": ["new-york-ny"]}
 {"date": "1887-03-28", "seq": 2, "action": "family", "detail": "Greeted by Alice at 689 Madison Avenue", "time": null, "people": ["alice-roosevelt-longworth", "edith-kermit-roosevelt"], "places": ["689-madison-avenue-new-york"]}
 {"date": "1887-03-29", "seq": 1, "action": "other", "detail": "In New York City", "time": null, "people": [], "places": ["new-york-ny"]}
@@ -9202,7 +9201,7 @@
 {"date": "1898-09-13", "seq": 2, "action": "honor", "detail": "Troopers present Remington's bronze The Bronco Buster", "time": null, "people": ["frederic-remington"], "places": ["montauk-ny"]}
 {"date": "1898-09-13", "seq": 3, "action": "family", "detail": "Ted's 11th birthday", "time": null, "people": ["theodore-roosevelt-jr"], "places": []}
 {"date": "1898-09-13", "seq": 4, "action": "correspondence", "detail": "Writes Preble Tucker and Douglas Robinson", "time": null, "people": ["preble-tucker", "douglas-robinson"], "places": []}
-{"date": "1898-09-14", "seq": 1, "action": "travel", "detail": "Leaves Montauk for Sagamore Hill with troopers, horse and eagle", "time": null, "people": [], "places": ["sagamore-hill"]}
+{"date": "1898-09-14", "seq": 1, "action": "military", "detail": "At Camp Wikoff as the Rough Riders muster out", "time": null, "people": [], "places": []}
 {"date": "1898-09-15", "seq": 1, "action": "guest", "detail": "Former troopers visit Sagamore Hill", "time": null, "people": ["gordon-johnston", "john-a-mcilhenny", "john-c-greenway", "david-goodrich", "hal-sayre", "charles-ballard", "bob-ferguson"], "places": ["sagamore-hill"]}
 {"date": "1898-09-16", "seq": 1, "action": "family", "detail": "At home", "time": null, "people": [], "places": ["sagamore-hill"]}
 {"date": "1898-09-17", "seq": 1, "action": "travel", "detail": "Goes to New York City", "time": null, "people": [], "places": ["new-york-ny"]}
@@ -10559,7 +10558,8 @@
 {"date": "1900-11-02", "seq": 1, "action": "speech", "detail": "Speech at Owego", "time": null, "people": [], "places": ["owego-ny"]}
 {"date": "1900-11-03", "seq": 1, "action": "social", "detail": "Breakfast at the Lawyers Club", "time": null, "people": [], "places": ["new-york-ny"]}
 {"date": "1900-11-03", "seq": 2, "action": "ceremony", "detail": "Reception at the Produce Exchange", "time": null, "people": [], "places": ["produce-exchange"]}
-{"date": "1900-11-03", "seq": 3, "action": "campaign", "detail": "Parade, then a mass meeting and fireworks at the Garden", "time": null, "people": ["edith-kermit-roosevelt", "alice-roosevelt-longworth", "kermit-roosevelt"], "places": ["madison-square-garden"]}
+{"date": "1900-11-03", "seq": 3, "action": "campaign", "detail": "Reviews the Sound Money Parade at Madison Square in the rain", "time": null, "people": [], "places": []}
+{"date": "1900-11-03", "seq": 4, "action": "travel", "detail": "Home to Oyster Bay that night", "time": null, "people": [], "places": []}
 {"date": "1900-11-04", "seq": 1, "action": "other", "detail": "Police Chief Devery orders officers to disregard Roosevelt's election instructions", "time": null, "people": ["william-s-devery"], "places": ["sagamore-hill", "new-york-ny"]}
 {"date": "1900-11-05", "seq": 1, "action": "speech", "detail": "Speaks at a reception", "time": null, "people": [], "places": ["sagamore-hill"]}
 {"date": "1900-11-05", "seq": 2, "action": "correspondence", "detail": "Demands that Devery's order be revoked", "time": null, "people": ["asa-bird-gardiner", "robert-a-van-wyck", "william-s-devery"], "places": []}
@@ -22360,7 +22360,7 @@
 {"date": "1912-09-03", "seq": 1, "action": "speech", "detail": "One stop each in three Midwestern states", "time": null, "people": [], "places": ["mattoon-il", "indianapolis-in", "st-louis-mo"]}
 {"date": "1912-09-04", "seq": 1, "action": "speech", "detail": "Six Iowa speeches from Keokuk to Des Moines", "time": null, "people": [], "places": ["keokuk-ia", "ottumwa-ia", "des-moines-ia"]}
 {"date": "1912-09-04", "seq": 2, "action": "conference", "detail": "Meets Cummins", "time": null, "people": ["albert-b-cummins"], "places": ["des-moines-ia"]}
-{"date": "1912-09-05", "seq": 1, "action": "speech", "detail": "Addresses a crowd of roughly 50,000 at the fairgrounds", "time": null, "people": [], "places": ["st-paul-mn"]}
+{"date": "1912-09-05", "seq": 1, "action": "speech", "detail": "Addresses a huge crowd at the fairgrounds", "time": null, "people": [], "places": ["st-paul-mn"]}
 {"date": "1912-09-05", "seq": 2, "action": "ceremony", "detail": "Rides in a parade in Minneapolis", "time": null, "people": [], "places": ["minneapolis-mn"]}
 {"date": "1912-09-05", "seq": 3, "action": "conference", "detail": "Meets Minnesota Progressives", "time": null, "people": [], "places": ["minneapolis-mn"]}
 {"date": "1912-09-05", "seq": 4, "action": "election", "detail": "Straus nominated for New York governor", "time": null, "people": ["oscar-straus"], "places": ["syracuse-ny"]}
@@ -24360,8 +24360,7 @@
 {"date": "1916-03-14", "seq": 1, "action": "travel", "detail": "Stays in Port of Spain", "time": null, "people": [], "places": ["port-of-spain-trinidad"]}
 {"date": "1916-03-15", "seq": 1, "action": "travel", "detail": "Stays in Port of Spain", "time": null, "people": [], "places": ["port-of-spain-trinidad"]}
 {"date": "1916-03-16", "seq": 1, "action": "travel", "detail": "Stays in Port of Spain", "time": null, "people": [], "places": ["port-of-spain-trinidad"]}
-{"date": "1916-03-17", "seq": 1, "action": "departure", "detail": "Leaves Trinidad aboard the steamer Matura for New York", "time": null, "people": [], "places": ["port-of-spain-trinidad"]}
-{"date": "1916-03-17", "seq": 2, "action": "family", "detail": "Edith stays behind in the Caribbean", "time": null, "people": ["edith-kermit-roosevelt"], "places": ["west-indies"]}
+{"date": "1916-03-17", "seq": 1, "action": "travel", "detail": "At sea on the Matura, bound for New York", "time": null, "people": ["edith-kermit-roosevelt"], "places": []}
 {"date": "1916-03-18", "seq": 1, "action": "travel", "detail": "At sea on the voyage home", "time": null, "people": [], "places": []}
 {"date": "1916-03-19", "seq": 1, "action": "travel", "detail": "At sea on the voyage home", "time": null, "people": [], "places": []}
 {"date": "1916-03-20", "seq": 1, "action": "travel", "detail": "At sea on the voyage home", "time": null, "people": [], "places": []}
@@ -24905,9 +24904,10 @@
 {"date": "1917-04-01", "seq": 2, "action": "speech", "detail": "Speaks in Lakeland", "time": null, "people": [], "places": ["lakeland-fl"]}
 {"date": "1917-04-01", "seq": 3, "action": "departure", "detail": "Starts the trip home", "time": null, "people": [], "places": []}
 {"date": "1917-04-02", "seq": 1, "action": "speech", "detail": "Wilson asks Congress for a declaration of war", "time": null, "people": ["woodrow-wilson"], "places": []}
-{"date": "1917-04-02", "seq": 2, "action": "travel", "detail": "Stops in Washington and tries to see Wilson, who is meeting his Cabinet", "time": null, "people": ["woodrow-wilson"], "places": ["white-house"]}
-{"date": "1917-04-02", "seq": 3, "action": "press", "detail": "Releases a statement applauding Wilson's war message", "time": null, "people": ["woodrow-wilson"], "places": []}
-{"date": "1917-04-03", "seq": 1, "action": "arrival", "detail": "Arrives back in New York and Oyster Bay", "time": null, "people": [], "places": ["new-york-ny", "sagamore-hill"]}
+{"date": "1917-04-02", "seq": 2, "action": "travel", "detail": "On the train north from Florida", "time": null, "people": [], "places": []}
+{"date": "1917-04-03", "seq": 1, "action": "travel", "detail": "Stops in Washington and calls at the White House", "time": null, "people": ["woodrow-wilson"], "places": []}
+{"date": "1917-04-03", "seq": 2, "action": "press", "detail": "Releases a statement applauding Wilson's war message", "time": null, "people": ["woodrow-wilson"], "places": []}
+{"date": "1917-04-03", "seq": 3, "action": "arrival", "detail": "Arrives back in New York and Oyster Bay", "time": null, "people": [], "places": ["new-york-ny", "sagamore-hill"]}
 {"date": "1917-04-04", "seq": 1, "action": "family", "detail": "Ethel and Richard Derby's fourth anniversary", "time": null, "people": ["ethel-roosevelt-derby", "richard-derby"], "places": []}
 {"date": "1917-04-05", "seq": 1, "action": "press", "detail": "Statement urging immediate dispatch of troops to France", "time": null, "people": [], "places": []}
 {"date": "1917-04-05", "seq": 2, "action": "press", "detail": "Off-the-record meeting with newsmen", "time": null, "people": [], "places": []}
