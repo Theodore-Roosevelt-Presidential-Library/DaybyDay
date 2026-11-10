@@ -109,7 +109,11 @@ def build(days, tours, place_by_id, person_by_id, dump, out_dir, base_url):
             reg, c = region_country(pid)
             if c:
                 countries.add(c)
-            if c == US and reg and reg not in NOT_STATES and not HOME & set(ancestors(pid)):
+            if c == US and reg == "Puerto Rico":
+                # A U.S. territory, never a state: listed with the territories so it shows on the tour.
+                states.add(reg)
+                territories.add(reg)
+            elif c == US and reg and reg not in NOT_STATES and not HOME & set(ancestors(pid)):
                 states.add(reg)
                 if r["date"] < ADMITTED.get(reg, "0000"):
                     territories.add(reg)

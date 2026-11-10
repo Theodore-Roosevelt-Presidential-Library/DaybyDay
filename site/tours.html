@@ -47,7 +47,7 @@
   }
   function nums(t) {
     const s = t.stats;
-    const st = s.states > 1 || s.territories ? `${s.states} ${s.territories ? (s.states > 1 ? "states and territories" : "territory") : "states"}` : "";
+    const st = s.states ? `${s.states} ${s.territories ? (s.territories === s.states ? (s.states > 1 ? "territories" : "territory") : "states and territories") : (s.states > 1 ? "states" : "state")}` : "";
     const ab = s.abroad.length === 1 ? s.abroad[0] : s.abroad.length > 1 ? `${s.abroad.length} countries` : "";
     return [`${s.days.toLocaleString()} days`, s.stops > 1 && `${s.stops} stops`, st, ab].filter(Boolean).join(" · ");
   }

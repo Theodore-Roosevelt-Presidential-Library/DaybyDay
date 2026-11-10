@@ -114,9 +114,9 @@
     <div class="when">${DBD.fmtSpan(T.start, T.end)}${(T.approx_dates || []).length ? ` <span class="small" title="${(T.approx_dates || []).join(' and ')} date not confirmed by two independent sources">(${T.approx_dates.length > 1 ? "dates" : T.approx_dates[0] + " date"} approximate)</span>` : ""} · ${S.days.toLocaleString()} days<span class="embedonly"> · <a href="${SITE}tour.html?id=${T.id}" target="_blank" rel="noopener">Open in Day by Day</a></span></div>
     <p class="lede">${esc(T.short)}</p>`;
   const terr = new Set(S.territories);
-  const stLabel = terr.size ? (S.states.length > 1 ? "states and territories" : "territory") : "states";
-  const stList = S.states.map(x => terr.has(x) ? `${x} (then a territory)` : x);
-  const showStates = S.states.length > 1 || terr.size, showAbroad = S.abroad.length > 0;
+  const stLabel = terr.size ? (terr.size === S.states.length ? (terr.size > 1 ? "territories" : "territory") : "states and territories") : (S.states.length > 1 ? "states" : "state");
+  const stList = S.states.map(x => terr.has(x) ? (x === "Puerto Rico" ? `${x} (U.S. territory)` : `${x} (then a territory)`) : x);
+  const showStates = S.states.length > 0, showAbroad = S.abroad.length > 0;
   const stat = (n, l) => `<li><b>${n}</b>${l}</li>`;
   document.getElementById("overview").innerHTML = `
     <div><p class="summary">${esc(T.summary)}</p>

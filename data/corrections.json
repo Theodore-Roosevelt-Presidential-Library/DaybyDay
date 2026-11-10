@@ -533,6 +533,16 @@
    "date": "1898-08-08",
    "place": "santiago-de-cuba",
    "reason": "Santiago campaign, 1898: the heading gives only CUBA (mapped to the middle of the island); the entry names leaving Santiago on the transport Miami."
+  },
+  {
+   "date": "1906-11-24",
+   "place": "uss-louisiana",
+   "reason": "The heading LOUISIANA names the battleship he was aboard, not the state; he was at sea between Puerto Rico and the Virginia capes (NHHC DANFS, Louisiana BB-19)."
+  },
+  {
+   "date": "1906-11-26",
+   "place": "washington-dc",
+   "reason": "He left the Louisiana at Piney Point and reached Washington that night (NHHC DANFS; Washington dispatch of Nov 27, 1906); the carried Puerto Rico location was stale."
   }
  ]
 }
